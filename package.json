@@ -1,0 +1,11 @@
+{
+  "name": "safeprompt",
+  "version": "1.0.0",
+  "description": "Prompt Security for Generative AI",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Rick Markowitz, Matt Allen, Russ Apolonio, Christian Magorrian",
+  "license": "MIT"
+}
