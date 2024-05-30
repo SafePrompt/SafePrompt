@@ -1,4 +1,4 @@
-import express from 'express';
+import express, {Request, Response} from 'express';
 
 const router =  express.Router();
 
@@ -16,8 +16,8 @@ const phone = require('../Controllers/Validation/phone');
 const queryStore = require('../Controllers/queryStore');
 
 
-router.post('/', (req,res)=>{
-    res.send({})
+router.post('/', (req: Request, res: Response)=>{
+    res.send("hello")
 })
 
 
