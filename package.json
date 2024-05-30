@@ -4,8 +4,19 @@
   "description": "Prompt Security for Generative AI",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "build": "webpack",
+    "start": "node dist/bundle.js",
+    "server": "ts-node src/Server/server.ts"
   },
   "author": "Rick Markowitz, Matt Allen, Russ Apolonio, Christian Magorrian",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.12.13",
+    "ts-loader": "^9.5.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5",
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4"
+  }
 }
