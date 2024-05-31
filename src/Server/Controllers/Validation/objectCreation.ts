@@ -2,14 +2,14 @@ import {Request, Response, NextFunction} from 'express'
 
 import middleware from '../../Types/middleware'
 
-const objectCreation: middleware = (req,res,next)=>{
+const objectCreation: middleware = (req, res, next)=>{
 
  try{
 
     const { prompt, id, user } = req.body as { prompt: string; id: string; user: string };
 
     if (typeof id !== 'string' || typeof prompt !== 'string' || typeof user !== 'string'){
-        res.status(400).send('Invalid request body');
+        return res.status(400).send('Invalid request body');
     }
 
 
