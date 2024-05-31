@@ -3,9 +3,10 @@ import {isPossiblePhoneNumber, isValidPhoneNumber, validatePhoneNumberLength} fr
 import middleware from '../../Types/middleware'
 
 
+
 const phone: middleware = (req,res,next)=>{
 
-    const { prompt, object } = res.locals as { prompt: string, object: object};
+    const prompt: string = res.locals.prompt;
 
     let failed:string[] = [];
 
@@ -19,10 +20,8 @@ const phone: middleware = (req,res,next)=>{
             for(let characters:number = 10; characters<=17; characters++){
  
                 digits = prompt.slice(i,i+characters);
-                console.log(digits)
              
                 if(isValidPhoneNumber(digits, 'US')){
-                    console.log('passed number test')
          
                     failed.push(digits);
                     i = i+characters;
@@ -35,8 +34,6 @@ const phone: middleware = (req,res,next)=>{
     }
 
     let badIndex: number[];
-
-    console.log(failed)
 
     if (failed.length > 0){
 
@@ -78,7 +75,7 @@ const phone: middleware = (req,res,next)=>{
         })
 
         //if there are still phone numbers that exist at this point, place them on object
-       if (failed.length > 0) res.locals.object = {...object, phone: failed}
+       if (failed.length > 0) res.locals.object = {...res.locals.object, phone: failed}
     }
    
     return next()

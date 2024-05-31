@@ -12,13 +12,10 @@ const objectCreation: middleware = (req, res, next)=>{
         return res.status(400).send('Invalid request body');
     }
 
-
     res.locals.object = {}
     res.locals.user = user
     res.locals.id = id
     res.locals.prompt = prompt
-
-    console.log(res.locals.object, res.locals.id, res.locals.prompt, res.locals.user)
 
     return next()
 
@@ -26,12 +23,6 @@ const objectCreation: middleware = (req, res, next)=>{
         return next(error)
     }
 }
-
-
-       
-
-
-    
 
 
 export default objectCreation;
