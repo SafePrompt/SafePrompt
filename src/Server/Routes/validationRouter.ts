@@ -4,6 +4,8 @@ const router =  express.Router();
 
 
 //validation checks
+import objectCreation from '../Controllers/Validation/objectCreation'
+
 const address = require('../Controllers/Validation/address');
 const code = require('../Controllers/Validation/code');
 const currency = require('../Controllers/Validation/currency');
@@ -16,7 +18,9 @@ const phone = require('../Controllers/Validation/phone');
 const queryStore = require('../Controllers/queryStore');
 
 
-router.post('/', (req: Request, res: Response)=>{
+router.post('/', 
+    objectCreation,
+    (req: Request, res: Response)=>{
     res.send("hello")
 })
 
