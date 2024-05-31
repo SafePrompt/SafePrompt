@@ -7,7 +7,7 @@ const phone: middleware = (req,res,next)=>{
 
     const { prompt, object } = res.locals as { prompt: string, object: object};
 
-    let failed : string[] = [];
+    let failed:string[] = [];
 
     let digits:string = '';
 
