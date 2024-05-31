@@ -16,11 +16,13 @@ const phone: middleware = (req,res,next)=>{
         digits = '';
 
         if (!isNaN(Number(prompt[i])) && prompt[i]!==' ' || prompt[i] === '(' || prompt[i] === '+'){
-            for(let characters:number = 7; characters<=17; characters++){
+            for(let characters:number = 10; characters<=17; characters++){
  
                 digits = prompt.slice(i,i+characters);
+                console.log(digits)
              
                 if(isValidPhoneNumber(digits, 'US')){
+                    console.log('passed number test')
          
                     failed.push(digits);
                     i = i+characters;
@@ -33,6 +35,8 @@ const phone: middleware = (req,res,next)=>{
     }
 
     let badIndex: number[];
+
+    console.log(failed)
 
     if (failed.length > 0){
 
