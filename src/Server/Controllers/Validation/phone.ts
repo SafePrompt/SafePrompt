@@ -2,7 +2,6 @@ import {isPossiblePhoneNumber, isValidPhoneNumber, validatePhoneNumberLength} fr
 
 import middleware from '../../Types/middleware'
 
-//still need to conditionally check for periods or dashes in wrong spots
 
 const phone: middleware = (req,res,next)=>{
 
