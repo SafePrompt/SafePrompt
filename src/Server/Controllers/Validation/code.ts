@@ -1,3 +1,7 @@
-const code:{} = {};
+import middleware from '../../Types/middleware'
 
-module.exports = code;
+const code: middleware = (req, res, next) => {
+
+}
+
+export default code;

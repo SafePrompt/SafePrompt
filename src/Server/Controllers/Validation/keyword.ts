@@ -1,3 +1,16 @@
-const keyword:{} = {};
+import db from '../../Models/db';
 
-module.exports = keyword;
+import Middleware from "../../Types/middleware";
+
+const keyword: Middleware = (req,res,next)=>{
+    try{
+
+        return next()
+    }
+    catch(error){
+
+        return next(error);
+    }
+}
+
+export default keyword

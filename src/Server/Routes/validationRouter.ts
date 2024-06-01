@@ -3,28 +3,30 @@ import express, {Request, Response} from 'express';
 const router =  express.Router();
 
 
-//validation checks
-import objectCreation from '../Controllers/Validation/objectCreation'
+//place in beginning of route to pull req.body and create response object
+import objectCreation from '../Controllers/Validation/objectCreation';
 
-const address = require('../Controllers/Validation/address');
-const code = require('../Controllers/Validation/code');
-const currency = require('../Controllers/Validation/currency');
-const dictionary = require('../Controllers/Validation/dictionary');
-const email = require('../Controllers/Validation/email');
-const keyword = require('../Controllers/Validation/keyword');
-const phone = require('../Controllers/Validation/phone');
+//validation middleware
+import phone from '../Controllers/Validation/phone';
+import email from '../Controllers/Validation/email';
+import keyword from '../Controllers/Validation/keyword';
+import address from '../Controllers/Validation/address';
+import code from '../Controllers/Validation/code';
+import currency from '../Controllers/Validation/currency';
+import dictionary from '../Controllers/Validation/dictionary';
 
-//query storage 
-const queryStore = require('../Controllers/queryStore');
+//query storage
 
+import queryStore from '../Controllers/queryStore';
 
 router.post('/', 
     objectCreation,
+    phone,
+    email,
+    keyword,
+
     (req: Request, res: Response)=>{
-    res.send("hello")
+    res.send(res.locals.object)
 })
 
-
-
-
-module.exports = router;
+export default router
