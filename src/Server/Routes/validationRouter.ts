@@ -6,7 +6,7 @@ const router =  express.Router();
 //place in beginning of route to pull req.body and create response object
 import objectCreation from '../Controllers/Validation/objectCreation';
 
-
+//validation middleware
 import phone from '../Controllers/Validation/phone';
 import email from '../Controllers/Validation/email';
 import keyword from '../Controllers/Validation/keyword';
