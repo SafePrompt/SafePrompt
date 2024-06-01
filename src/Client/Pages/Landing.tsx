@@ -1,8 +1,8 @@
-import React from 'react';
+// import React from 'react';
 
-const Landing: React.FunctionComponent = () => {
+// const Landing: React.FunctionComponent = () => {
 
-  return ()
-}
+//   return ()
+// }
 
-export default Landing;
+// export default Landing;
