@@ -22,7 +22,7 @@ describe('phone middleware', () => {
 
     it('should not modify res.locals.object when no phone number is found', () =>{
         res.locals!.prompt = 'a string sans numbers';
-        phone (req as Request, res as Response, next);
+        phone (req as Request, res as Response, next as unknown as NextFunction);
         expect(res.locals!.object).toEqual({});
         expect(next).toHaveBeenCalled();
     })
