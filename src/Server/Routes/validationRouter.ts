@@ -3,21 +3,21 @@ import express, {Request, Response} from 'express';
 const router =  express.Router();
 
 
-//validation checks
+//place in beginning of route to pull req.body and create response object
 import objectCreation from '../Controllers/Validation/objectCreation';
+
 
 import phone from '../Controllers/Validation/phone';
 import email from '../Controllers/Validation/email';
-import keyword from '../Controllers/Validation/keyword'
+import keyword from '../Controllers/Validation/keyword';
+import address from '../Controllers/Validation/address';
+import code from '../Controllers/Validation/code';
+import currency from '../Controllers/Validation/currency';
+import dictionary from '../Controllers/Validation/dictionary';
 
-const address = require('../Controllers/Validation/address');
-const code = require('../Controllers/Validation/code');
-const currency = require('../Controllers/Validation/currency');
-const dictionary = require('../Controllers/Validation/dictionary');
+//query storage
 
-//query storage 
-const queryStore = require('../Controllers/queryStore');
-
+import queryStore from '../Controllers/queryStore';
 
 router.post('/', 
     objectCreation,

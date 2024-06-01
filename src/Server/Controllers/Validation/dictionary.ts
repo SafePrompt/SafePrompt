@@ -1,3 +1,7 @@
-const dictionary:{} = {};
+import middleware from '../../Types/middleware'
 
-module.exports = dictionary;
+const dictionary: middleware = (req, res, next) => {
+
+}
+
+export default dictionary;

@@ -1,3 +1,7 @@
-const currency:{} = {};
+import middleware from '../../Types/middleware'
 
-module.exports = currency;
+const currency: middleware = (req, res, next) => {
+
+}
+
+export default currency;

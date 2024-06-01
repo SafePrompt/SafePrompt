@@ -1,3 +1,7 @@
-const address:{} = {};
+import middleware from '../../Types/middleware'
 
-module.exports = address;
+const address: middleware = (req, res, next) => {
+
+}
+
+export default address;

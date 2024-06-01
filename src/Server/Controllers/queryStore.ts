@@ -1,3 +1,7 @@
-const queryStore:{} = {};
+import middleware from '../Types/middleware'
 
-module.exports = queryStore;
+const queryStore: middleware = (req, res, next) => {
+
+}
+
+export default queryStore;
