@@ -8,7 +8,8 @@
     "build": "webpack",
     "start": "node dist/bundle.js",
     "dev": "webpack serve --open",
-    "server": "ts-node src/Server/server.ts"
+    "server": "ts-node src/Server/server.ts",
+    "both": "concurrently \"npm run dev\" \"npm run server\""
   },
   "author": "Rick Markowitz, Matt Allen, Russ Apolonio, Christian Magorrian",
   "license": "MIT",
@@ -17,6 +18,7 @@
     "@types/node": "^20.12.13",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
+    "concurrently": "^8.2.2",
     "html-webpack-plugin": "^5.6.0",
     "ts-loader": "^9.5.1",
     "ts-node": "^10.9.2",
@@ -27,12 +29,11 @@
   },
   "dependencies": {
     "@types/pg": "^8.11.6",
+    "bootstrap": "^3.4.1",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "libphonenumber-js": "^1.11.2",
     "pg": "^8.11.5",
-    "bootstrap": "^3.4.1",
-    "express": "^4.19.2",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.2",
     "react-dom": "^18.3.1"
