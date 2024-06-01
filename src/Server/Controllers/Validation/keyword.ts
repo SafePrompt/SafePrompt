@@ -51,11 +51,15 @@ const keyword:AsyncMiddleware = async (req, res, next) =>{
                         break
                     }
 
+                    //adds any failed keywords to failed array in case sensativity of the original prompt
+
                     const failedKeyword:string = prompt.slice(ind, ind + keywords[i].length);
                     failed.push(failedKeyword);
                 }
             }
 
+            //if there are any failed characters, add them to response object
+            
             if(failed.length > 0){
                 res.locals.object = {...res.locals.object, keyword: failed};    
             }
