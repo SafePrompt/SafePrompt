@@ -12,7 +12,7 @@ const objectCreation: middleware = (req, res, next)=>{
         return res.status(400).send('Invalid request body');
     }
 
-    res.locals.object = {}
+    res.locals.object = {prompt: prompt}
     res.locals.user = user
     res.locals.id = id
     res.locals.prompt = prompt
