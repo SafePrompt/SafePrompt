@@ -23,7 +23,7 @@ const keyword:AsyncMiddleware = async (req, res, next) =>{
         const failed: string[] = [];
         const prompt: string = res.locals.prompt;
 
-        const key:string = res.locals.id;
+        const key:string = res.locals.key;
         
         //query database for keywords
         const results = await db.query(`SELECT * FROM keyword WHERE key = $1`, [key]);
