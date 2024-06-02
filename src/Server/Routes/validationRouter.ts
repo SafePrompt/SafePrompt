@@ -27,6 +27,8 @@ router.post('/',
     phone,
     email,
     currency,
+    ssn,
+    ein,
     
     keyword,
 

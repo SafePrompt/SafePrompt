@@ -3,6 +3,17 @@ import {isPossiblePhoneNumber, isValidPhoneNumber, validatePhoneNumberLength} fr
 import middleware from '../../Types/middleware'
 
 
+/*
+Edge cases currently failing:
+
++1(585)752-5306
+
++1 (585)752-5306
+
+asdf1 1(585)752-5306
+
+*/
+
 
 const phone: middleware = (req,res,next)=>{
 
