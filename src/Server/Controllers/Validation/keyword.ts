@@ -11,9 +11,6 @@ NOTE: we still need to build functionality to populate an organization's keyword
 database finds organization specific keywords by organization key.
 
 hardcoded organization key:  "awef23fsdf28$123r",
-
-
-
 */
 
 const keyword:AsyncMiddleware = async (req, res, next) =>{
@@ -40,7 +37,6 @@ const keyword:AsyncMiddleware = async (req, res, next) =>{
 
         const keywords:mappedObj[] = keywordsFull.map((obj:Keyword): mappedObj=>{
 
-            
             return {found: obj.keyword, type: obj.type};
         })
 
@@ -49,7 +45,6 @@ const keyword:AsyncMiddleware = async (req, res, next) =>{
 
             for(let i:number = 0; i<keywords.length; i++){
 
-                
                     //checks if prompt has organizations keywords
                     if(prompt.toLowerCase().indexOf(keywords[i].found.toLowerCase()) !== -1){
 
@@ -74,12 +69,10 @@ const keyword:AsyncMiddleware = async (req, res, next) =>{
             if(failed.length > 0){
                 res.locals.object = {...res.locals.object, keyword: failed};    
             }
-
-            return next();
-
-        }else {
-            return next();
+            
         }
+        
+        return next();
   
     }
     catch(error){
