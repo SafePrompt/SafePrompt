@@ -14,15 +14,20 @@ import address from '../Controllers/Validation/address';
 import code from '../Controllers/Validation/code';
 import currency from '../Controllers/Validation/currency';
 import dictionary from '../Controllers/Validation/dictionary';
+import ssn from '../Controllers/Validation/ssn';
+import ein from '../Controllers/Validation/ein';
 
 //query storage
 
 import queryStore from '../Controllers/queryStore';
 
 router.post('/', 
+
     objectCreation,
     phone,
     email,
+    currency,
+    
     keyword,
 
     (req: Request, res: Response)=>{
