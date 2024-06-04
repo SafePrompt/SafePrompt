@@ -3,6 +3,8 @@ import express, {Request, Response} from 'express';
 import validationRouter from './Routes/validationRouter';
 import adminRouter from './Routes/adminRouter';
 import workerRouter from  './Routes/workerRouter';
+import configRouter from './Routes/configRouter';
+
 import db from './Models/db';
 
 
@@ -15,6 +17,11 @@ app.use('/admin', adminRouter);
 app.use('/worker', workerRouter)
 
 app.use('/validate', validationRouter);
+
+app.use('/config',configRouter);
+
+
+
 
 //use this route to query database via postman
 app.post('/db', async (req: Request, res: Response): Promise<Response> =>{
