@@ -3,6 +3,8 @@ import db from '../../Models/db';
 
 import AsyncMiddleware from '../../Types/asyncMiddleware';
 import Keyword from '../../Types/db'
+import {Query, QueryResult} from 'pg'
+
 
 
 /*
@@ -23,7 +25,7 @@ const keyword:AsyncMiddleware = async (req, res, next) =>{
         const key:string = res.locals.key;
         
         //query database for keywords
-        const results = await db.query(`SELECT * FROM keyword WHERE key = $1`, [key]);
+        const results: QueryResult = await db.query(`SELECT * FROM keyword WHERE key = $1`, [key]);
         const keywordsFull:Keyword[] = results.rows;
 
         //remove all unnecessary data

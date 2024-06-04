@@ -1,15 +1,18 @@
 import express, {Request, Response} from 'express';
 
 import validationRouter from './Routes/validationRouter';
-import authRouter from './Routes/authRouter';
-import db from './Models/db'
+import adminRouter from './Routes/adminRouter';
+import workerRouter from  './Routes/workerRouter';
+import db from './Models/db';
 
 
 const app = express();
 
 app.use(express.json());
 
-app.use('/auth', authRouter);
+app.use('/admin', adminRouter);
+
+app.use('/worker', workerRouter)
 
 app.use('/validate', validationRouter);
 
