@@ -1,8 +1,12 @@
-// import React from 'react';
+import React from 'react';
 
-// const Landing: React.FunctionComponent = () => {
+const Landing: React.FunctionComponent = () => {
 
-//   return ()
-// }
+  return (
+    <div>
+        <h1>Hello, this is the landing Page!</h1>
+    </div>
+  )
+}
 
-// export default Landing;
+export default Landing;

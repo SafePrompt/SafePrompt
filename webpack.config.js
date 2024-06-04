@@ -10,6 +10,10 @@ module.exports = {
         use: 'ts-loader',
         exclude: /node_modules/,
       },
+      {
+        test: /\.css$/, 
+        use: ['style-loader', 'css-loader'],
+      },
     ],
   },
   resolve: {
@@ -23,7 +27,7 @@ module.exports = {
 plugins: [
     new HtmlWebpackPlugin({
       title: 'SafePrompt',
-      template: path.join(__dirname, 'index.html', ),
+      template: path.join(__dirname, 'index.html'),
     }),
   ],
   devServer: {
