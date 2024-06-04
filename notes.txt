@@ -1,0 +1,18 @@
+
+
+
+Test Prompt:
+http://localhost:3000/validate
+**MAKE SURE TO KEEP KEY CONSISTANT UNTIL WE ADD ADDITIONAL FUNCTIONALITY**
+
+{"user":"mattAllen",
+"key": "awef23fsdf28$123r",
+"prompt": "Hello, my name Dogg is rick my email is rick@fastcasual.ci and my phone number is 585-752-5302 and my favorite food is (585) 752 5306 and my other email is di,c@hello.com  "
+}
+
+
+
+db Query
+http://localhost:3000/db
+{"query":"SELECT * FROM keyword"
+}
