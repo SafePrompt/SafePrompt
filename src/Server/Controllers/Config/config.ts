@@ -7,8 +7,8 @@ const config = {
         const {address, currency, ein, email, keyword, phone, ssn} : {address: string, currency: string, ein: string, email: string, keyword: string, phone: string, ssn: string} = req.body;
 
         const keywords: string[] = keyword.split(',').map((word:string):string=>word.trim());
-
-
+        console.log(keywords)
+        return next()
 
 
 
