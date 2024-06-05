@@ -14,17 +14,17 @@ const config = {
 
     },
 
-    pull: async (req,res,next) => {
+    // pull: async (req,res,next) => {
 
 
 
-    }
+    // }
 
 
 
 } as {
     submit: AsyncMiddleware,
-    pull: AsyncMiddleware
+    // pull: AsyncMiddleware
 }
 
 export default config;
