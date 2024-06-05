@@ -9,7 +9,9 @@ import db from './Models/db';
 
 
 const app = express();
+const cors = require("cors");
 
+app.use(cors());
 app.use(express.json());
 
 app.use('/admin', adminRouter);
@@ -44,6 +46,6 @@ app.post('/db', async (req: Request, res: Response): Promise<Response> =>{
 
 
 
-app.listen(3000, () => { 
+app.listen(3000, () => {
     console.log('Server running on port 3000')
 })
