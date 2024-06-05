@@ -3,7 +3,7 @@ import express, {Request, Response} from 'express';
 import validationRouter from './Routes/validationRouter';
 import authRouter from './Routes/authRouter';
 import db from './Models/db'
-
+import GPT from './Routes/GPT'
 
 const app = express();
 
@@ -12,6 +12,8 @@ app.use(express.json());
 app.use('/auth', authRouter);
 
 app.use('/validate', validationRouter);
+
+app.use('/GPT', GPT)
 
 //use this route to query database via postman
 app.post('/db', async (req: Request, res: Response): Promise<Response> =>{

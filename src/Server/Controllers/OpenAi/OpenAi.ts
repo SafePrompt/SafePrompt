@@ -1,29 +1,22 @@
 import middleware from '../../Types/middleware'
+import {Request, Response} from 'express'
 import openai from '../../Models/openaiModel'
 
 const query: middleware = (req, res, next) => {
-    const {prompt: string} = req.body
+    const prompt: string|undefined = req.body.prompt
 
-    // async function main() {
-    //     const completion = await openAi.chat.completions.create({
-    //       messages: [{ role: "system", content: 'test string to be replaced by prompt'}],
-    //       model: "gpt-3.5-turbo",
-    //     });
-      
-    //     console.log(completion.choices[0]);
-    //   }
-
-    // main()
+    console.log('reached GPT query middleware with prompt: ', prompt)
 
     openai.chat.completions.create({
-        messages: [{ role: "system", content: 'TBD' }],
+        messages: [{ role: "system", content: prompt }],
         model: "gpt-3.5-turbo",
     })
-    .then((response) => {
-        res.locals.response = response
+    .then((response: any) => {
+        console.log('reached response from chatGPT. Response: ', response.choices[0].message.content)
+        res.locals.response = response.choices[0].message.content
         return next()
     })
-    .catch((err) => {
+    .catch((err: Error) => {
         console.log('error with openAI controller')
         return next(err)
     })
