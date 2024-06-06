@@ -3,10 +3,16 @@ import "./Main.css";
 import MenuBar from "../Components/MenuBar";
 import axios from "axios";
 
+interface Redact {
+  prompt: string;
+  phone: string[];
+  email: string[];
+}
+
 const Main: React.FC = () => {
   const [inputText, setInputText] = useState("");
   const [outputText, setOutputText] = useState("");
-  const [redact, setRedact] = useState({});
+  const [redact, setRedact] = useState<Redact | null>(null);
 
   const validatePrompt = async () => {
     console.log("Submitting validation for prompt");
@@ -26,20 +32,17 @@ const Main: React.FC = () => {
 
       console.log("Response:", response.data);
       setRedact(response.data);
-      console.log("redact after assignment:", redact);
     } catch (err) {
       console.log("Error fetching data:", err);
     }
   };
 
-  const handleCheckPrompt = async () => {
-    await validatePrompt();
-  // const [keywords, setKeywords] = useState(['Christian Magorrian', '17 Winding Lane']); // example keywords
-
   useEffect(() => {
     setOutputText(inputText);
   }, [inputText]);
 
+  const handleCheckPrompt = async () => {
+    await validatePrompt();
     setOutputText(inputText);
     console.log(inputText);
   };
@@ -54,17 +57,20 @@ const Main: React.FC = () => {
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLSpanElement>, redact: string) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       e.preventDefault(); // Prevent the default behavior of Enter key
       const newText = (e.target as HTMLSpanElement).innerText;
       handleEdit(newText, redact);
     }
   };
 
-  const renderTextWithHighlights = (text: string) => {
-    const parts = text.split(new RegExp(`(${redact.join('|')})`, 'gi'));
+  const renderTextWithHighlights = (text: string, redact: Redact) => {
+    const keywords = [...redact.phone, ...redact.email];
+    console.log(keywords)
+    const parts = text.split(new RegExp(`(${keywords.join("|")})`, "gi"));
+
     return parts.map((part, index) => {
-      if (redact.includes(part)) {
+      if (keywords.includes(part)) {
         return (
           <span
             key={index}
@@ -77,7 +83,7 @@ const Main: React.FC = () => {
         );
       }
       return <span key={index}>{part}</span>;
-    });;
+    });
   };
 
   return (
@@ -96,7 +102,7 @@ const Main: React.FC = () => {
         </button>
         <div className="box output-box">
           <div className="editable-output">
-            {renderTextWithHighlights(outputText)}
+            {redact && renderTextWithHighlights(outputText, redact)}
           </div>
         </div>
       </div>
