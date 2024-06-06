@@ -26,7 +26,7 @@ const config = {
 
         const key = res.locals.key;
 
-        const response = await db.query('INSERT INTO config (currency, email, ein, ssn, phone, keyword, key) VALUES ($1, $2, $3, $4, $5, $6) returning * ;', [false, false, false, false, false, false, key])
+        const response = await db.query('INSERT INTO config (currency, email, ein, ssn, phone, keyword, key) VALUES ($1, $2, $3, $4, $5, $6, $7) returning * ;', [false, false, false, false, false, false, key])
 
 
     }
