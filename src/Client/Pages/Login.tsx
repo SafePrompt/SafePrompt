@@ -5,9 +5,10 @@ import './Login.css';
 
 interface LoginProps {
     orgFunc: (org: string) => void;
+    configFunc: (conf: any) => void;
 }
 
-const Login: React.FunctionComponent<LoginProps> = ({orgFunc}) => {
+const Login: React.FunctionComponent<LoginProps> = ({orgFunc, configFunc}) => {
 
     const navigate = useNavigate();
 
@@ -43,7 +44,8 @@ const Login: React.FunctionComponent<LoginProps> = ({orgFunc}) => {
               });
 
               if (response.status === 200) {
-                orgFunc(response.data);
+                orgFunc(response.data.key);
+                configFunc(response.data.config);
                 setMessage('')
                 navigate('/adminview')
                 
@@ -70,7 +72,8 @@ const Login: React.FunctionComponent<LoginProps> = ({orgFunc}) => {
 
 
               if (response.status === 200) {
-                orgFunc(response.data);
+                orgFunc(response.data.key);
+                configFunc(response.data.config);
                 setMessage('')
                 navigate('/main')
                

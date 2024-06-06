@@ -13,25 +13,29 @@ const App: React.FunctionComponent = () => {
     
     const [inputText, setInputText] = useState('');
     const [outputText, setOutputText] = useState('');
-    const [orgKey, setOrgKey] = useState('')
+    const [orgKey, setOrgKey] = useState('');
+    const [config, setConfig] = useState({});
 
     function setOrg (org:string){
         setOrgKey(org)
     }
 
-    console.log('org key: ', orgKey)
+    function setConfiguration (conf:any){
+        setConfig(conf)
+    }
+
 
 
 
     return (
         <Router>
             <Routes>
-                <Route path="/" element={<Login orgFunc={setOrg}/>} />
+                <Route path="/" element={<Login configFunc = {setConfiguration} orgFunc={setOrg}/>} />
                 <Route path="/main" element={<Main />} />
                 <Route path="/settings" element={<Settings />} />
                 <Route path="/prompts" element={<Prompts />} />
                 <Route path="/signup" element={<Signup orgFunc={setOrg} />} />
-                <Route path="/adminview" element={<AdminView org = {orgKey}/>}/>
+                <Route path="/adminview" element={<AdminView config = {config} org = {orgKey}/>}/>
             </Routes>
         </Router>
     )

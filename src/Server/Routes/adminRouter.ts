@@ -14,10 +14,12 @@ router.post('/signup',
 
 router.post('/login', 
     admin.login,
+    config.request,
+    
 
 
     (req,res)=>{
-    res.status(200).json(res.locals.key)
+    res.status(200).json({key: res.locals.key, config: res.locals.config})
    
 })
 

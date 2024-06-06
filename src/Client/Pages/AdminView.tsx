@@ -1,18 +1,111 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import './AdminView.css'; 
+import axios from 'axios';
+import AsyncMiddleware from "../../Server/Types/asyncMiddleware";
 
 interface AdminViewProps {
   org: string;
+  config: any;
 }
 
-const AdminView: React.FunctionComponent<AdminViewProps> = ({ org }) => {
+interface entries {
+  keyword: string,
+  type: string
+}
+
+interface submitObj {
+  currency: boolean,
+  email: boolean,
+  ein: boolean,
+  ssn: boolean,
+  phone: boolean,
+  keyword: boolean
+  key: string
+  entries: entries[]
+}
+
+const AdminView: React.FunctionComponent<AdminViewProps> = ({ org, config }) => {
     const filters: string[] = ['Currency', 'Email', 'EIN', 'SSN', 'Phone', 'Keyword(s)'];
     const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
     const [keyword, setKeyword] = useState('');
     const [type, setType] = useState('');
     const [entries, setEntries] = useState<{ keyword: string; type: string }[]>([]);
 
-    console.log('selected filters: ', selectedFilters);
+    let initialize:boolean = true;
+
+    console.log('config from admin view: ', config)
+
+    // useEffect(()=>{
+
+    //   async function getInitialConfig(){
+
+    //     console.log('orggg key: ', org)
+
+    //     interface paramRequest {
+    //       params: {
+    //         key: string
+    //       }
+    //     }
+
+    //     const initial: paramRequest = {
+    //       params: {
+    //         key: org
+    //       }
+    //     }
+
+    //     const response = await axios.get('http://localhost:3000/config/request', initial)
+    //     console.log('initial query response: ', response.data)
+    //     initialize = false;
+    //   }
+
+    //   getInitialConfig()
+
+    // }, [org])
+
+
+
+
+
+
+
+
+    useEffect(()=>{
+
+      async function submitConfig(){
+
+      const initial: submitObj = {
+        currency: false,
+        email: false,
+        ein: false,
+        ssn: false,
+        phone: false,
+        keyword: false,
+        key: org,
+        entries: entries
+      }
+
+      if (selectedFilters.includes('Currency')) initial.currency = true;
+      if (selectedFilters.includes('Email')) initial.email = true;
+      if (selectedFilters.includes('EIN')) initial.ein = true;
+      if (selectedFilters.includes('SSN')) initial.ssn = true;
+      if (selectedFilters.includes('Phone')) initial.phone = true;
+      if (selectedFilters.includes('Keyword(s)')) initial.keyword = true;
+
+      const response = axios.post('http://localhost:3000/config/submit', initial)
+
+      
+
+    }
+
+    !initialize && submitConfig()
+
+
+
+
+
+
+
+    }, [selectedFilters, entries])
 
     const handleFilterChange = (filter: string) => {
       setSelectedFilters((prev) =>

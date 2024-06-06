@@ -7,9 +7,11 @@ const config = {
 
     submit: async (req,res,next)=>{
 
+        console.log('request body', req.body)
+
         const {address, currency, ein, email, keyword, phone, ssn, key} : {address: string, currency: string, ein: string, email: string, keyword: string, phone: string, ssn: string, key:string} = req.body;
-        const response = await db.query('INSERT INTO config (currency, email, ein, ssn, phone, keyword) VALUES ($1, $2, $3, $4, $5, $6) returning * ;', [currency, email, ein, ssn, phone, keyword])
-        console.log(response)
+        const response = await db.query('UPDATE config SET currency = $1, email = $2, ein = $3, ssn = $4, phone = $5, keyword = $6 WHERE key= $7 returning *;', [currency, email, ein, ssn, phone, keyword, key])
+        console.log('response from database: ' , response.rows[0])
         
         return next()
 
@@ -17,11 +19,25 @@ const config = {
 
     },
 
-    getConfig: async (req,res,next)=>{
+    request: async (req,res,next)=>{
 
+        const key:string = res.locals.key;
+        const configResponse = await db.query('SELECT * FROM config WHERE key = $1;',[key])
+        const keywordsResponse = await db.query('SELECT * FROM keyword WHERE key = $1', [key]);
 
+        interface dbResponse {
+            keyword: string;
+            type: string;
+        }
+
+        const entries = keywordsResponse.rows.map((obj) : dbResponse =>{
+            return {keyword: obj.keyword, type: obj.type}});
+
+        res.locals.config = {...configResponse.rows[0], entries: entries};
         return next()
     },
+
+
     initialize: async(req,res,next)=>{
 
         const key = res.locals.key;
@@ -36,7 +52,7 @@ const config = {
 
 } as {
     submit: AsyncMiddleware,
-    getConfig: AsyncMiddleware,
+    request: AsyncMiddleware,
     initialize: AsyncMiddleware
 }
 
