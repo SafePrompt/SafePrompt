@@ -19,6 +19,8 @@ const App: React.FunctionComponent = () => {
         setOrgKey(org)
     }
 
+    console.log('org key: ', orgKey)
+
 
 
     return (
