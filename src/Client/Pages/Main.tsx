@@ -64,13 +64,20 @@ const Main: React.FC = () => {
     }
   };
 
+  const escapeRegExp = (string: string) => {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  };
+
   const renderTextWithHighlights = (text: string, redact: Redact) => {
-    const keywords = [...redact.phone, ...redact.email];
-    console.log(keywords)
-    const parts = text.split(new RegExp(`(${keywords.join("|")})`, "gi"));
+    const keywords = [...redact.phone, ...redact.email].map(escapeRegExp);
+    console.log("Escaped Keywords:", keywords);
+    const regexPattern = `(${keywords.join("|")})`;
+    console.log("Regex Pattern:", regexPattern);
+    const parts = text.split(new RegExp(regexPattern, "gi"));
 
     return parts.map((part, index) => {
-      if (keywords.includes(part)) {
+      const escapedPart = escapeRegExp(part);
+      if (keywords.includes(escapedPart)) {
         return (
           <span
             key={index}
@@ -85,6 +92,7 @@ const Main: React.FC = () => {
       return <span key={index}>{part}</span>;
     });
   };
+
 
   return (
     <div className="main-container">
