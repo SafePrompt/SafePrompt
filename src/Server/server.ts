@@ -4,13 +4,14 @@ import validationRouter from './Routes/validationRouter';
 import adminRouter from './Routes/adminRouter';
 import workerRouter from  './Routes/workerRouter';
 import configRouter from './Routes/configRouter';
-import GPT from './Routes/GPT'
+import GPT from './Routes/GPT';
 
 import db from './Models/db';
 
+import cors from 'cors';
 
 const app = express();
-const cors = require("cors");
+
 
 app.use(cors());
 app.use(express.json());
