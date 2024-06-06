@@ -26,7 +26,7 @@ const App: React.FunctionComponent = () => {
     return (
         <Router>
             <Routes>
-                <Route path="/" element={<Login />} />
+                <Route path="/" element={<Login orgFunc={setOrg}/>} />
                 <Route path="/main" element={<Main />} />
                 <Route path="/settings" element={<Settings />} />
                 <Route path="/prompts" element={<Prompts />} />

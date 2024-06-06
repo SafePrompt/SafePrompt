@@ -18,8 +18,6 @@ const Signup: React.FunctionComponent<SignupProps> = ({orgFunc}) => {
 
     const handleAdmin = ()=>{
         setAdmin((adminState)=>!adminState)
-        
-
     }
   
 
@@ -47,7 +45,7 @@ const Signup: React.FunctionComponent<SignupProps> = ({orgFunc}) => {
 
               if (response.status === 200) {
                 orgFunc(response.data);
-        
+                navigate('/adminview')
               }
             
 

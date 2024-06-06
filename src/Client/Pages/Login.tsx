@@ -1,8 +1,13 @@
 import React, {useState} from 'react';
 import {useNavigate} from 'react-router-dom'
+import axios from 'axios';
 import './Login.css';
 
-const Login: React.FunctionComponent = () => {
+interface LoginProps {
+    orgFunc: (org: string) => void;
+}
+
+const Login: React.FunctionComponent<LoginProps> = ({orgFunc}) => {
 
     const navigate = useNavigate();
 
@@ -14,9 +19,68 @@ const Login: React.FunctionComponent = () => {
 
     const handleAdmin = ()=>{
         setAdmin((adminState)=>!adminState)
+    }
+
+
+    const handleLogin = async () =>{
+        try{
+
+        let response;
+
+        if (admin){
+
+                response = await axios({
+                method: "post",
+                url: "http://localhost:3000/admin/login",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                data: {
+                  username: username,
+                  password: password,
+                },
+              });
+
+              if (response.status === 200) {
+                orgFunc(response.data);
+                navigate('/adminview')
+                
         
+              }
+            
+
+        }else{
+
+            response = await axios({
+                method: "post",
+                url: "http://localhost:3000/worker/login",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                data: {
+                  username: username,
+                  password: password,
+                },
+              });
+
+
+              if (response.status === 200) {
+                orgFunc(response.data);
+                navigate('/main')
+        
+              }
+
+        }
+
+    }catch(error){
+        console.log(error)
+    }
 
     }
+
+
+
+
 
   return (
 
@@ -47,7 +111,7 @@ const Login: React.FunctionComponent = () => {
                 </div>
             </div>
             <div className = 'buttonSection'>
-                <button>Login</button>
+                <button onClick = {handleLogin}>Login</button>
                 <button onClick = {handleSignup}>Create Account</button>
 
             </div>
