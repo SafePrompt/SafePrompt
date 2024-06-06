@@ -1,16 +1,49 @@
-import express from 'express'
+import express, {Request, Response} from 'express';
 
-const validationRouter = require('./Routes/validationRouter')
-const authRouter = require('./Routes/authRouter')
+import validationRouter from './Routes/validationRouter';
+import adminRouter from './Routes/adminRouter';
+import workerRouter from  './Routes/workerRouter';
+import configRouter from './Routes/configRouter';
+import GPT from './Routes/GPT';
 
+import db from './Models/db';
+
+import cors from 'cors';
 
 const app = express();
 
+
+app.use(cors());
 app.use(express.json());
 
-app.use('/auth', authRouter)
+app.use('/admin', adminRouter);
 
-app.use('/validate', validationRouter)
+app.use('/worker', workerRouter)
+
+app.use('/validate', validationRouter);
+
+app.use('/config',configRouter);
+
+app.use('/GPT', GPT);
+
+
+//use this route to query database via postman
+app.post('/db', async (req: Request, res: Response): Promise<Response> =>{
+
+    try{
+
+        const query:string = req.body.query;
+
+        const response:any = await db.query(query);
+
+        return res.status(200).send(response);
+
+    }catch(error){
+
+        return res.status(400).send(error);
+    }
+
+})
 
 
 

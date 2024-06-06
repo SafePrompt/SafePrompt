@@ -7,16 +7,15 @@
  * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
  */
 /******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/index.ts":
-/*!**********************!*\
-  !*** ./src/index.ts ***!
-  \**********************/
+/***/ "./src/index.tsx":
+/*!***********************!*\
+  !*** ./src/index.tsx ***!
+  \***********************/
 /***/ (() => {
 
-eval("\nvar dog = 'hello';\nconsole.log(dog);\n\n\n//# sourceURL=webpack://safeprompt/./src/index.ts?");
+eval("throw new Error(\"Module build failed (from ./node_modules/ts-loader/index.js):\\nError: TypeScript emitted no output for /Users/christianmagorrian/Documents/Github_Local/Monolith test repos/SafePrompt/src/index.tsx.\\n    at makeSourceMapAndFinish (/Users/christianmagorrian/Documents/Github_Local/Monolith test repos/SafePrompt/node_modules/ts-loader/dist/index.js:55:18)\\n    at successLoader (/Users/christianmagorrian/Documents/Github_Local/Monolith test repos/SafePrompt/node_modules/ts-loader/dist/index.js:42:5)\\n    at Object.loader (/Users/christianmagorrian/Documents/Github_Local/Monolith test repos/SafePrompt/node_modules/ts-loader/dist/index.js:23:5)\");\n\n//# sourceURL=webpack://safeprompt/./src/index.tsx?");
 
 /***/ })
 
@@ -25,9 +24,9 @@ eval("\nvar dog = 'hello';\nconsole.log(dog);\n\n\n//# sourceURL=webpack://safep
 /******/ 	
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
-/******/ 	// This entry module can't be inlined because the eval devtool is used.
+/******/ 	// This entry module doesn't tell about it's top-level declarations so it can't be inlined
 /******/ 	var __webpack_exports__ = {};
-/******/ 	__webpack_modules__["./src/index.ts"]();
+/******/ 	__webpack_modules__["./src/index.tsx"]();
 /******/ 	
 /******/ })()
 ;
