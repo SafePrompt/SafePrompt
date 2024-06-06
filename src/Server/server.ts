@@ -1,19 +1,30 @@
 import express, {Request, Response} from 'express';
 
 import validationRouter from './Routes/validationRouter';
-import authRouter from './Routes/authRouter';
-import db from './Models/db'
+import adminRouter from './Routes/adminRouter';
+import workerRouter from  './Routes/workerRouter';
+import configRouter from './Routes/configRouter';
 import GPT from './Routes/GPT'
 
-const app = express();
+import db from './Models/db';
 
+
+const app = express();
+const cors = require("cors");
+
+app.use(cors());
 app.use(express.json());
 
-app.use('/auth', authRouter);
+app.use('/admin', adminRouter);
+
+app.use('/worker', workerRouter)
 
 app.use('/validate', validationRouter);
 
-app.use('/GPT', GPT)
+app.use('/config',configRouter);
+
+app.use('/GPT', GPT);
+
 
 //use this route to query database via postman
 app.post('/db', async (req: Request, res: Response): Promise<Response> =>{
@@ -36,6 +47,6 @@ app.post('/db', async (req: Request, res: Response): Promise<Response> =>{
 
 
 
-app.listen(3000, () => { 
+app.listen(3000, () => {
     console.log('Server running on port 3000')
 })
