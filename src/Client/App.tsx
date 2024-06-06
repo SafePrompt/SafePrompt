@@ -31,7 +31,7 @@ const App: React.FunctionComponent = () => {
                 <Route path="/settings" element={<Settings />} />
                 <Route path="/prompts" element={<Prompts />} />
                 <Route path="/signup" element={<Signup orgFunc={setOrg} />} />
-                <Route path="/adminview" element={<AdminView />}/>
+                <Route path="/adminview" element={<AdminView org = {orgKey}/>}/>
             </Routes>
         </Router>
     )

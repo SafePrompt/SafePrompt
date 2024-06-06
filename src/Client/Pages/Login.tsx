@@ -16,6 +16,7 @@ const Login: React.FunctionComponent<LoginProps> = ({orgFunc}) => {
     const [admin, setAdmin] = useState(false);
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const [message, setMessage] = useState('')
 
     const handleAdmin = ()=>{
         setAdmin((adminState)=>!adminState)
@@ -43,9 +44,13 @@ const Login: React.FunctionComponent<LoginProps> = ({orgFunc}) => {
 
               if (response.status === 200) {
                 orgFunc(response.data);
+                setMessage('')
                 navigate('/adminview')
                 
+                
         
+              } else {
+                setMessage('Invalid Username/Password')
               }
             
 
@@ -66,14 +71,19 @@ const Login: React.FunctionComponent<LoginProps> = ({orgFunc}) => {
 
               if (response.status === 200) {
                 orgFunc(response.data);
+                setMessage('')
                 navigate('/main')
+               
         
+              }else {
+                setMessage('Invalid Username/Password')
               }
 
         }
 
     }catch(error){
-        console.log(error)
+        setMessage('Invalid Username/Password')
+        
     }
 
     }
@@ -110,6 +120,7 @@ const Login: React.FunctionComponent<LoginProps> = ({orgFunc}) => {
                 <label htmlFor='admin'>Admin</label>
                 </div>
             </div>
+            <p>{message}</p>
             <div className = 'buttonSection'>
                 <button onClick = {handleLogin}>Login</button>
                 <button onClick = {handleSignup}>Create Account</button>

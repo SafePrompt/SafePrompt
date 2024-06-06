@@ -1,18 +1,18 @@
-// √ checkbox for each filter field
-// submit button
-// keyword entry option (Keyword/type)
-
 import React, { useState } from "react";
 import './AdminView.css'; 
 
-const AdminView: React.FunctionComponent = () => {
-    const filters: string[] = ['Currency', 'Email', 'EIN', 'SSN', 'Phone', 'Keyword(s)']
-    const [selectedFilters, setSelectedFilters] = useState<string[]>([])
+interface AdminViewProps {
+  org: string;
+}
+
+const AdminView: React.FunctionComponent<AdminViewProps> = ({ org }) => {
+    const filters: string[] = ['Currency', 'Email', 'EIN', 'SSN', 'Phone', 'Keyword(s)'];
+    const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
     const [keyword, setKeyword] = useState('');
     const [type, setType] = useState('');
     const [entries, setEntries] = useState<{ keyword: string; type: string }[]>([]);
 
-    console.log('selected filters: ', selectedFilters)
+    console.log('selected filters: ', selectedFilters);
 
     const handleFilterChange = (filter: string) => {
       setSelectedFilters((prev) =>
@@ -22,7 +22,7 @@ const AdminView: React.FunctionComponent = () => {
       );
     };
 
-    console.log('entries state: ', entries)
+    console.log('entries state: ', entries);
 
     const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
@@ -33,10 +33,15 @@ const AdminView: React.FunctionComponent = () => {
       }
     };
 
+    const handleDelete = (index: number) => {
+      setEntries(entries.filter((_, i) => i !== index));
+    };
+
     return (
       <div>
         <h2>Admin View</h2>
-  
+        <h3>Organization Key</h3>
+        <input className='orgKey' value={org} readOnly></input>
         <h3>Filters:</h3>
         <ul className="no-bullets">
           {filters.map((filter) => (
@@ -89,6 +94,7 @@ const AdminView: React.FunctionComponent = () => {
               {entries.map((entry, index) => (
                 <li key={index} className="entry-item">
                   Keyword: <strong>{entry.keyword}</strong>, Type: <strong>{entry.type}</strong>
+                  <button onClick={() => handleDelete(index)}>Delete</button>
                 </li>
               ))}
             </ul>
@@ -96,6 +102,6 @@ const AdminView: React.FunctionComponent = () => {
         )}
       </div>
     );
-  };
+};
 
 export default AdminView;
