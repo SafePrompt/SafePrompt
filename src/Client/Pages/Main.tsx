@@ -56,7 +56,10 @@ const Main: React.FC = () => {
     setOutputText(updatedText);
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLSpanElement>, redact: string) => {
+  const handleKeyDown = (
+    e: React.KeyboardEvent<HTMLSpanElement>,
+    redact: string
+  ) => {
     if (e.key === "Enter") {
       e.preventDefault(); // Prevent the default behavior of Enter key
       const newText = (e.target as HTMLSpanElement).innerText;
@@ -68,16 +71,25 @@ const Main: React.FC = () => {
     return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   };
 
-  const renderTextWithHighlights = (text: string, redact: Redact) => {
-    const keywords = [...redact.phone, ...redact.email].map(escapeRegExp);
-    console.log("Escaped Keywords:", keywords);
-    const regexPattern = `(${keywords.join("|")})`;
-    console.log("Regex Pattern:", regexPattern);
+  const renderTextWithHighlights = (redact: Redact) => {
+    const text = redact.prompt;
+    let replacements: { [key: string]: string } = {};
+
+    redact.phone.forEach((phone, index) => {
+      replacements[phone] = `[Phone ${index + 1}]`;
+    });
+
+    redact.email.forEach((email, index) => {
+      replacements[email] = `[Email ${index + 1}]`;
+    });
+
+    const escapedKeywords = Object.keys(replacements).map(escapeRegExp);
+    const regexPattern = `(${escapedKeywords.join("|")})`;
     const parts = text.split(new RegExp(regexPattern, "gi"));
 
     return parts.map((part, index) => {
-      const escapedPart = escapeRegExp(part);
-      if (keywords.includes(escapedPart)) {
+      const replacement = replacements[part];
+      if (replacement) {
         return (
           <span
             key={index}
@@ -85,14 +97,13 @@ const Main: React.FC = () => {
             onKeyDown={(e) => handleKeyDown(e, part)}
             className="highlight editable"
           >
-            {part}
+            {replacement}
           </span>
         );
       }
       return <span key={index}>{part}</span>;
     });
   };
-
 
   return (
     <div className="main-container">
@@ -110,7 +121,7 @@ const Main: React.FC = () => {
         </button>
         <div className="box output-box">
           <div className="editable-output">
-            {redact && renderTextWithHighlights(outputText, redact)}
+            {redact && renderTextWithHighlights(redact)}
           </div>
         </div>
       </div>
