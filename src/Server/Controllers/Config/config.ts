@@ -7,11 +7,8 @@ const config = {
 
     submit: async (req,res,next)=>{
 
-        console.log('request body', req.body)
-
         const {address, currency, ein, email, keyword, phone, ssn, key} : {address: string, currency: string, ein: string, email: string, keyword: string, phone: string, ssn: string, key:string} = req.body;
         const response = await db.query('UPDATE config SET currency = $1, email = $2, ein = $3, ssn = $4, phone = $5, keyword = $6 WHERE key= $7 returning *;', [currency, email, ein, ssn, phone, keyword, key])
-        console.log('response from database: ' , response.rows[0])
         
         return next()
 

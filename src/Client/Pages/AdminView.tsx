@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from "react";
 import './AdminView.css'; 
 import axios from 'axios';
-import AsyncMiddleware from "../../Server/Types/asyncMiddleware";
 
-interface AdminViewProps {
-  org: string;
-  config: any;
-}
+
 
 interface entries {
   keyword: string,
   type: string
+}
+
+interface AdminViewProps {
+  org: string;
+  config: any;
+  settings: string[],
+  initialEntries: entries[]
 }
 
 interface submitObj {
@@ -24,50 +27,12 @@ interface submitObj {
   entries: entries[]
 }
 
-const AdminView: React.FunctionComponent<AdminViewProps> = ({ org, config }) => {
+const AdminView: React.FunctionComponent<AdminViewProps> = ({ org, config, settings, initialEntries }) => {
     const filters: string[] = ['Currency', 'Email', 'EIN', 'SSN', 'Phone', 'Keyword(s)'];
-    const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
+    const [selectedFilters, setSelectedFilters] = useState<string[]>(settings);
     const [keyword, setKeyword] = useState('');
     const [type, setType] = useState('');
-    const [entries, setEntries] = useState<{ keyword: string; type: string }[]>([]);
-
-    let initialize:boolean = true;
-
-    console.log('config from admin view: ', config)
-
-    // useEffect(()=>{
-
-    //   async function getInitialConfig(){
-
-    //     console.log('orggg key: ', org)
-
-    //     interface paramRequest {
-    //       params: {
-    //         key: string
-    //       }
-    //     }
-
-    //     const initial: paramRequest = {
-    //       params: {
-    //         key: org
-    //       }
-    //     }
-
-    //     const response = await axios.get('http://localhost:3000/config/request', initial)
-    //     console.log('initial query response: ', response.data)
-    //     initialize = false;
-    //   }
-
-    //   getInitialConfig()
-
-    // }, [org])
-
-
-
-
-
-
-
+    const [entries, setEntries] = useState<{ keyword: string; type: string }[]>(initialEntries);
 
     useEffect(()=>{
 
@@ -97,7 +62,7 @@ const AdminView: React.FunctionComponent<AdminViewProps> = ({ org, config }) => 
 
     }
 
-    !initialize && submitConfig()
+    submitConfig()
 
 
 
