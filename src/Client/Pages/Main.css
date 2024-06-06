@@ -60,4 +60,14 @@
     padding: 10px 20px;
   }
   
-      
+  .highlight {
+    background-color: rgb(255, 30, 0);
+  }
+  
+  .editable {
+    display: inline;
+  }
+  
+  .editable-output {
+    white-space: pre-wrap; 
+  }
