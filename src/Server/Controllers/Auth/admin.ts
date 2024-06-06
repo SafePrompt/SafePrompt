@@ -28,6 +28,7 @@ const admin = {
 
             } else {
 
+                console.log('failed')
                 return res.status(409).json("Username Already Exists");
 
             }
