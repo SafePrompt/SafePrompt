@@ -21,7 +21,7 @@ const Signup: React.FunctionComponent<SignupProps> = ({orgFunc}) => {
         
 
     }
-    console.log('admin', admin)
+  
 
   
 

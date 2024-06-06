@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useNavigate} from 'react-router-dom'
 import './Login.css';
 
@@ -6,23 +6,45 @@ const Login: React.FunctionComponent = () => {
 
     const navigate = useNavigate();
 
-    const handleSignup = ()=>navigate('/signup')
+    const handleSignup = ()=>navigate('/signup');
+
+    const [admin, setAdmin] = useState(false);
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+
+    const handleAdmin = ()=>{
+        setAdmin((adminState)=>!adminState)
+        
+
+    }
 
   return (
 
         
         <div className = 'container'>
-             <h2>Login</h2>
+            
         <div className = 'inputSection'>
+        <h2>Login</h2>
         {/* <h2>Login</h2> */}
         {/* <div className = 'nav'>Admin</div> */}
             <div className = 'inputField'>
                 <h3>Username</h3>
-                <input></input>
+                <input value =  {username} onChange = {(e)=>setUsername(e.target.value)}></input>
             </div>
             <div className = 'inputField'>
                 <h3>Password</h3>
-                <input></input>
+                <input value = {password} onChange = {(e)=>setPassword(e.target.value)}></input>
+            </div>
+            <div className = 'radioField'>
+                <h3>Type:</h3>
+                <div>
+                    <input type = 'radio' name='adminSelect' id = 'worker' checked = {!admin} onChange = {handleAdmin}></input>
+                    <label htmlFor='worker' >Employee</label>
+                </div>
+                <div>
+                <input type = 'radio' name='adminSelect' id = 'admin' checked = {admin} onChange = {handleAdmin}></input>
+                <label htmlFor='admin'>Admin</label>
+                </div>
             </div>
             <div className = 'buttonSection'>
                 <button>Login</button>
