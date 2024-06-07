@@ -9,6 +9,11 @@ interface entries {
   type: string
 }
 
+interface Entry {
+  keyword: string,
+  type: string
+}
+
 interface AdminViewProps {
   org: string;
   config: any;
@@ -82,7 +87,7 @@ const AdminView: React.FunctionComponent<AdminViewProps> = ({ org, config, setti
     const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
       if (keyword.trim() && type.trim()) {
-        setEntries([...entries, { keyword, type }]);
+        setEntries([...entries.filter((entr)=>entr.keyword !== keyword), { keyword, type }]);
         setKeyword('');
         setType('');
       }
