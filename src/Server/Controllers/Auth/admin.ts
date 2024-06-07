@@ -53,6 +53,7 @@ const admin = {
             const responseArr: response[] = queryResponse.rows;
 
             if (responseArr.length === 1 && bcrypt.compareSync(password, responseArr[0].password) && responseArr[0].admin){
+                res.locals.key = responseArr[0].key
                return next();
             } else {
                 res.status(401).json('Invalid Username/Password')

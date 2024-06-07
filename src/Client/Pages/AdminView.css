@@ -1,0 +1,36 @@
+.no-bullets {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .filter-item, .entry-item {
+    margin-bottom: 8px;
+  }
+  
+  form div {
+    margin-bottom: 10px;
+  }
+  
+  input[type="text"] {
+    margin-left: 8px;
+    padding: 4px;
+  }
+
+  .orgKey{
+    margin-left: 8px;
+    padding: 4px;
+    width: 270px;
+  }
+  
+  button {
+    padding: 6px 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }

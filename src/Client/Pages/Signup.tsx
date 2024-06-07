@@ -1,30 +1,30 @@
 import React, {useState} from 'react';
-import {useNavigate} from 'react-router-dom'
-import axios from 'axios';
 import './Login.css';
+import axios from 'axios';
+import {useNavigate} from 'react-router-dom';
 
-interface LoginProps {
+interface SignupProps {
     orgFunc: (org: string) => void;
-    configFunc: (conf: any) => void;
 }
 
-const Login: React.FunctionComponent<LoginProps> = ({orgFunc, configFunc}) => {
+const Signup: React.FunctionComponent<SignupProps> = ({orgFunc}) => {
 
     const navigate = useNavigate();
 
-    const handleSignup = ()=>navigate('/signup');
-
     const [admin, setAdmin] = useState(false);
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
-    const [message, setMessage] = useState('')
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [org, setOrg] = useState("");
 
     const handleAdmin = ()=>{
         setAdmin((adminState)=>!adminState)
     }
+  
 
+  
 
-    const handleLogin = async () =>{
+  
+    const handleSignup = async () =>{
         try{
 
         let response;
@@ -33,7 +33,7 @@ const Login: React.FunctionComponent<LoginProps> = ({orgFunc, configFunc}) => {
 
                 response = await axios({
                 method: "post",
-                url: "http://localhost:3000/admin/login",
+                url: "http://localhost:3000/admin/signup",
                 headers: {
                   "Content-Type": "application/json",
                 },
@@ -44,15 +44,8 @@ const Login: React.FunctionComponent<LoginProps> = ({orgFunc, configFunc}) => {
               });
 
               if (response.status === 200) {
-                orgFunc(response.data.key);
-                configFunc(response.data.config);
-                setMessage('')
+                orgFunc(response.data);
                 navigate('/adminview')
-                
-                
-        
-              } else {
-                setMessage('Invalid Username/Password')
               }
             
 
@@ -60,38 +53,33 @@ const Login: React.FunctionComponent<LoginProps> = ({orgFunc, configFunc}) => {
 
             response = await axios({
                 method: "post",
-                url: "http://localhost:3000/worker/login",
+                url: "http://localhost:3000/worker/signup",
                 headers: {
                   "Content-Type": "application/json",
                 },
                 data: {
                   username: username,
                   password: password,
+                  key: org
                 },
               });
 
 
               if (response.status === 200) {
-                orgFunc(response.data.key);
-                configFunc(response.data.config);
-                setMessage('')
+                orgFunc(response.data);
                 navigate('/main')
-               
         
-              }else {
-                setMessage('Invalid Username/Password')
               }
 
         }
 
     }catch(error){
-        setMessage('Invalid Username/Password')
-        
+        console.log(error)
     }
 
     }
 
-
+    console.log('admin', admin)
 
 
 
@@ -99,17 +87,16 @@ const Login: React.FunctionComponent<LoginProps> = ({orgFunc, configFunc}) => {
 
         
         <div className = 'container'>
-            
+           
         <div className = 'inputSection'>
-        <h2>Login</h2>
-        {/* <h2>Login</h2> */}
+        <h2>Create Account</h2>
         {/* <div className = 'nav'>Admin</div> */}
             <div className = 'inputField'>
-                <h3>Username</h3>
-                <input value =  {username} onChange = {(e)=>setUsername(e.target.value)}></input>
+                <h3>Username:</h3>
+                <input value = {username} onChange = {(e)=>setUsername(e.target.value)}></input>
             </div>
             <div className = 'inputField'>
-                <h3>Password</h3>
+                <h3>Password:</h3>
                 <input value = {password} onChange = {(e)=>setPassword(e.target.value)}></input>
             </div>
             <div className = 'radioField'>
@@ -123,15 +110,16 @@ const Login: React.FunctionComponent<LoginProps> = ({orgFunc, configFunc}) => {
                 <label htmlFor='admin'>Admin</label>
                 </div>
             </div>
-            <p>{message}</p>
+            {!admin && <div className = 'inputOrg'>
+                <h3>Organization Key:</h3>
+                <input value = {org} onChange = {(e)=>setOrg(e.target.value)}></input>
+            </div>}
             <div className = 'buttonSection'>
-                <button onClick = {handleLogin}>Login</button>
                 <button onClick = {handleSignup}>Create Account</button>
-
             </div>
         </div>
     </div>
   )
 }
 
-export default Login;
+export default Signup;
