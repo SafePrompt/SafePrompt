@@ -57,9 +57,6 @@ const AdminView: React.FunctionComponent<AdminViewProps> = ({ org, config, setti
       if (selectedFilters.includes('Keyword(s)')) initial.keyword = true;
 
       const response = axios.post('http://localhost:3000/config/submit', initial)
-
-      
-
     }
 
     submitConfig()

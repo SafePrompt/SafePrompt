@@ -7,6 +7,11 @@ const phone: middleware = (req,res,next)=>{
 
     try{
 
+        const config = req.body.config;
+        if (!config.phone) return next();
+
+        console.log('this is the config from req.body.config', req.body.config)
+
         let prompt: string = res.locals.prompt;
         const failed: string[] = [];
 

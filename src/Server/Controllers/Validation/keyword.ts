@@ -19,6 +19,9 @@ const keyword:AsyncMiddleware = async (req, res, next) =>{
 
     try{
 
+        const config = req.body.config;
+        if (!config.keyword) return next();
+
         
         const prompt: string = res.locals.prompt;
 

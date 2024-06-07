@@ -1,18 +1,39 @@
 import AsyncMiddleware from "../../Types/asyncMiddleware";
 import db from "../../Models/db";
 
+interface entries {
+    keyword: string,
+    type: string
+}
+
 const config = {
 
 
 
     submit: async (req,res,next)=>{
 
-        const {address, currency, ein, email, keyword, phone, ssn, key} : {address: string, currency: string, ein: string, email: string, keyword: string, phone: string, ssn: string, key:string} = req.body;
-        const response = await db.query('UPDATE config SET currency = $1, email = $2, ein = $3, ssn = $4, phone = $5, keyword = $6 WHERE key= $7 returning *;', [currency, email, ein, ssn, phone, keyword, key])
+        const {address, currency, ein, email, keyword, phone, ssn, key, entries} : {address: string, currency: string, ein: string, email: string, keyword: string, phone: string, ssn: string, key:string, entries:entries[]} = req.body;
         
-        return next()
+        if (entries.length > 0){
+            const response = await db.query('UPDATE config SET currency = $1, email = $2, ein = $3, ssn = $4, phone = $5, keyword = $6 WHERE key= $7 returning *;', [currency, email, ein, ssn, phone, keyword, key])
+    
+            const query = 'DELETE FROM keyword WHERE key = $1';
+            
+            const deleteResponse = await db.query(query, [key])
 
+            const query2 = 'INSERT INTO keyword (keyword, "key", type) VALUES ($1, $2, $3) ON CONFLICT DO NOTHING;'
+            let values;
 
+            for (let i:number = 0; i < entries.length; i++){
+
+                values = [entries[i].keyword, key, entries[i].type];
+
+                let response = await db.query(query2, values)
+
+                }
+            }
+     
+        return next();
 
     },
 

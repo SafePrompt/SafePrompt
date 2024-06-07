@@ -4,6 +4,9 @@ const email:middleware = (req,res,next)=>{
 
     try{
 
+        const config = req.body.config;
+        if (!config.email) return next();
+
         const prompt:string = req.body.prompt;
 
         if (prompt.includes('@')){
