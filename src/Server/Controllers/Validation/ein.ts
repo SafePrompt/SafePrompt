@@ -4,6 +4,9 @@ const ein: middleware = (req, res, next) => {
 
     try{
 
+        const config = req.body.config;
+        if (!config.ein) return next();
+
         const prompt:string = res.locals.prompt;
 
         const unexclusiveEinFormat = /\d{2}-\d{7}/;

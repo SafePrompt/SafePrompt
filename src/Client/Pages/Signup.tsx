@@ -1,12 +1,15 @@
 import React, {useState} from 'react';
 import './Login.css';
 import axios from 'axios';
+import {useNavigate} from 'react-router-dom';
 
 interface SignupProps {
     orgFunc: (org: string) => void;
 }
 
 const Signup: React.FunctionComponent<SignupProps> = ({orgFunc}) => {
+
+    const navigate = useNavigate();
 
     const [admin, setAdmin] = useState(false);
     const [username, setUsername] = useState("");
@@ -15,18 +18,20 @@ const Signup: React.FunctionComponent<SignupProps> = ({orgFunc}) => {
 
     const handleAdmin = ()=>{
         setAdmin((adminState)=>!adminState)
-        
-
     }
-    console.log('admin', admin)
+  
 
   
 
   
     const handleSignup = async () =>{
+        try{
+
+        let response;
+
         if (admin){
 
-            let response = await axios({
+                response = await axios({
                 method: "post",
                 url: "http://localhost:3000/admin/signup",
                 headers: {
@@ -34,19 +39,43 @@ const Signup: React.FunctionComponent<SignupProps> = ({orgFunc}) => {
                 },
                 data: {
                   username: username,
-                  password: password
+                  password: password,
                 },
               });
-              
 
-              orgFunc(response.data)
+              if (response.status === 200) {
+                orgFunc(response.data);
+                navigate('/adminview')
+              }
             
 
         }else{
 
+            response = await axios({
+                method: "post",
+                url: "http://localhost:3000/worker/signup",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                data: {
+                  username: username,
+                  password: password,
+                  key: org
+                },
+              });
+
+
+              if (response.status === 200) {
+                orgFunc(response.data);
+                navigate('/main')
+        
+              }
+
         }
 
-
+    }catch(error){
+        console.log(error)
+    }
 
     }
 
@@ -86,7 +115,7 @@ const Signup: React.FunctionComponent<SignupProps> = ({orgFunc}) => {
                 <input value = {org} onChange = {(e)=>setOrg(e.target.value)}></input>
             </div>}
             <div className = 'buttonSection'>
-                <button>Create Account</button>
+                <button onClick = {handleSignup}>Create Account</button>
             </div>
         </div>
     </div>

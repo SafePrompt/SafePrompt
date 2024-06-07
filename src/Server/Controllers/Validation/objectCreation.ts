@@ -1,12 +1,22 @@
 import {Request, Response, NextFunction} from 'express'
 
-import middleware from '../../Types/middleware'
+import AsyncMiddleware from '../../Types/asyncMiddleware';
+import db from '../../Models/db';
 
-const objectCreation: middleware = (req, res, next)=>{
+const objectCreation = async (req: Request, res: Response, next: NextFunction)=>{
 
- try{
+    try{
+
+    
+
+
 
     const { prompt, key, user } = req.body as { prompt: string; key: string; user: string };
+
+    const configResponse = await db.query('SELECT * FROM config WHERE key = $1;',[key])
+
+    req.body.config = configResponse.rows[0];
+    
 
     if (typeof key !== 'string' || typeof prompt !== 'string' || typeof user !== 'string'){
         return res.status(400).send('Invalid request body');

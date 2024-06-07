@@ -20,4 +20,10 @@ router.post('/submit',
     res.sendStatus(200);
 })
 
+router.get('/request',
+    config.request,
+    (req: Request, res: Response)=>{
+    res.status(200).json(res.locals.config);
+})
+
 export default router

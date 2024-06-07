@@ -3,6 +3,9 @@ import middleware from '../../Types/middleware'
 const ssn: middleware = (req, res, next) => {
     try{
 
+        const config = req.body.config;
+        if (!config.ssn) return next();
+
         const prompt:string = res.locals.prompt;
 
         const numbersRegEx = /[123456789]/;
