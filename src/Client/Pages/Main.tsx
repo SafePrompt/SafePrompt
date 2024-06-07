@@ -5,8 +5,7 @@ import axios from "axios";
 
 interface Redact {
   prompt: string;
-  phone: string[];
-  email: string[];
+  [key: string]: string[] | string;
 }
 
 const Main: React.FC = () => {
@@ -75,12 +74,15 @@ const Main: React.FC = () => {
     const text = redact.prompt;
     let replacements: { [key: string]: string } = {};
 
-    redact.phone.forEach((phone, index) => {
-      replacements[phone] = `[Phone ${index + 1}]`;
-    });
-
-    redact.email.forEach((email, index) => {
-      replacements[email] = `[Email ${index + 1}]`;
+    Object.keys(redact).forEach((key) => {
+      if (key !== "prompt") {
+        const values = redact[key] as string[];
+        values.forEach((value, index) => {
+          replacements[value] = `[${
+            key.charAt(0).toUpperCase() + key.slice(1)
+          } ${index + 1}]`;
+        });
+      }
     });
 
     const escapedKeywords = Object.keys(replacements).map(escapeRegExp);
