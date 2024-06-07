@@ -121,11 +121,18 @@ const Main: React.FC = () => {
         <button onClick={handleCheckPrompt} className="check-prompt-btn">
           Check Prompt
         </button>
-        <div className="box output-box">
-          <div className="editable-output">
-            {redact && renderTextWithHighlights(redact)}
+        <div className="output-box-and-button">
+          <div className="box output-box">
+            <div className="editable-output">
+              {redact && renderTextWithHighlights(redact)}
+            </div>
           </div>
+          <button className="chatgpt-btn">
+            Send to ChatGPT
+          </button>
+
         </div>
+
       </div>
     </div>
   );
