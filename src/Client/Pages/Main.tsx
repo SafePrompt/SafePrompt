@@ -95,9 +95,7 @@ const Main: React.FC = () => {
 
     let newString = "";
 
-    // setRedactedText(newString);
-
-    return parts.map((part: any, index: any) => {
+    const highlightedText = parts.map((part: any, index: any) => {
       const replacement = replacements[part];
       if (replacement) {
         newString = newString.concat(replacement);
@@ -117,15 +115,18 @@ const Main: React.FC = () => {
       console.log("newString after part: ", newString);
       return <span key={index}>{part}</span>;
     });
+
+    return highlightedText; // Return the array of JSX elements directly
   };
 
   //write function to grab text and send it to
   const getChatgptResponse = async () => {
-    console.log(
-      "Submitting redacted prompt to ChatGPT. Prompt: ",
-      redactedText
-    );
     try {
+      console.log(
+        "Submitting redacted prompt to ChatGPT. Prompt: ",
+        redactedText
+      );
+      console.log("about to hit response");
       let response = await axios({
         method: "post",
         url: "http://localhost:3000/GPT/submit",
@@ -133,7 +134,7 @@ const Main: React.FC = () => {
           "Content-Type": "application/json",
         },
         data: {
-          prompt: redactedText,
+          prompt: 'how are you doing today',
         },
       });
 
@@ -151,6 +152,14 @@ const Main: React.FC = () => {
   // useEffect(() => {
   //   redact! ==  && setHtmlOutput(renderTextWithHighlights(redact));
   // }, [redact]);
+
+  useEffect(() => {
+    if (redact) {
+      const { highlightedText, newString } = renderTextWithHighlights(redact);
+      setHtmlOutput(highlightedText);
+      setRedactedText(newString);
+    }
+  }, [redact]);
 
   return (
     <div className="main-container">
