@@ -1,4 +1,5 @@
 import React from 'react';
+import './App.css'; 
 import Landing from './Pages/Landing';
 import Login from './Pages/Login';
 import Main from './Pages/Main';
@@ -76,6 +77,7 @@ const App: React.FunctionComponent = () => {
             <Routes>
                 <Route path="/" element={<Login configFunc = {setConfiguration} orgFunc={setOrg}/>} />
                 <Route path="/main" element={<Main />} />
+                <Route path="/landing" element={<Landing />} />
                 <Route path="/settings" element={<Settings />} />
                 <Route path="/prompts" element={<Prompts />} />
                 <Route path="/signup" element={<Signup orgFunc={setOrg} />} />

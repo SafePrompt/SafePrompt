@@ -19,7 +19,7 @@ const Main: React.FC = () => {
         },
         data: {
           user: "worker",
-          key: "320f2ded-28e8-4640-ad65-071a3687e087",
+          key: "4c874153-2b60-474a-85cb-6972d92f8e85",
           prompt: inputText,
         },
       });
@@ -53,6 +53,9 @@ const Main: React.FC = () => {
         <button onClick={handleCheckPrompt} className="check-prompt-btn">
           Check Prompt
         </button>
+        <div className="box output-box">
+          <textarea value={outputText} readOnly />
+        </div>
         <div className="box output-box">
           <textarea value={outputText} readOnly />
         </div>

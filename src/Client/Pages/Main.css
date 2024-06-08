@@ -1,10 +1,11 @@
-
+/* 
 .container {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: row;
+    flex-direction: column;
     height: 100vh;
+    background-color: aliceblue;
   }
   
   .box {
@@ -46,7 +47,7 @@
     flex-direction: column;
     padding: 10px;
     flex: 1; /* Ensures content takes up remaining space */
-  }
+  /* }
   
   .box {
     margin-bottom: 10px;
@@ -62,4 +63,4 @@
   }
   
       
-
+ */ 
