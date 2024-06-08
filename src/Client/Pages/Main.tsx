@@ -12,7 +12,10 @@ const Main: React.FC = () => {
   const [inputText, setInputText] = useState("");
   const [outputText, setOutputText] = useState("");
   const [chatgptResponse, setChatgptResponse] = useState("");
+  const [redactedText, setRedactedText] = useState("");
   const [redact, setRedact] = useState<Redact | null>(null);
+
+  const [htmlOutput, setHtmlOutput] = useState<any>(null);
 
   const validatePrompt = async () => {
     console.log("Submitting validation for prompt");
@@ -71,7 +74,7 @@ const Main: React.FC = () => {
     return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   };
 
-  const renderTextWithHighlights = (redact: Redact) => {
+  const renderTextWithHighlights = (redact: Redact | any) => {
     const text = redact.prompt;
     let replacements: { [key: string]: string } = {};
 
@@ -90,9 +93,14 @@ const Main: React.FC = () => {
     const regexPattern = `(${escapedKeywords.join("|")})`;
     const parts = text.split(new RegExp(regexPattern, "gi"));
 
-    return parts.map((part, index) => {
+    let newString = "";
+
+    // setRedactedText(newString);
+
+    return parts.map((part: any, index: any) => {
       const replacement = replacements[part];
       if (replacement) {
+        newString = newString.concat(replacement);
         return (
           <span
             key={index}
@@ -104,22 +112,28 @@ const Main: React.FC = () => {
           </span>
         );
       }
+      newString = newString.concat(part);
+
+      console.log("newString after part: ", newString);
       return <span key={index}>{part}</span>;
     });
   };
 
   //write function to grab text and send it to
   const getChatgptResponse = async () => {
-    console.log("Submitting redacted prompt to ChatGPT");
+    console.log(
+      "Submitting redacted prompt to ChatGPT. Prompt: ",
+      redactedText
+    );
     try {
       let response = await axios({
         method: "post",
-        url: "http://localhost:3000/submit",
+        url: "http://localhost:3000/GPT/submit",
         headers: {
           "Content-Type": "application/json",
         },
         data: {
-          prompt: outputText,
+          prompt: redactedText,
         },
       });
 
@@ -133,6 +147,10 @@ const Main: React.FC = () => {
   const submitToOpenai = async () => {
     await getChatgptResponse();
   };
+
+  // useEffect(() => {
+  //   redact! ==  && setHtmlOutput(renderTextWithHighlights(redact));
+  // }, [redact]);
 
   return (
     <div className="main-container">
