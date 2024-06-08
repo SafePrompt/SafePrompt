@@ -23,6 +23,8 @@ const worker = {
 
             const {username, password, key} : {username: string, password: string, key: string} = req.body;
 
+            res.locals.username = username;
+            
             const salt:string = bcrypt.genSaltSync(10);
             const hashPassword:string = bcrypt.hashSync(password, salt);
 

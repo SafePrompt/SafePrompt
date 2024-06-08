@@ -1,7 +1,7 @@
 import AsyncMiddleware from "../../Types/asyncMiddleware"
 import Middleware from "../../Types/middleware";
 import db from "../../Models/db";
-import jwt from 'jsonwebtoken'
+import jwt, { JwtPayload } from 'jsonwebtoken'
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -24,6 +24,7 @@ const token = {
 
     checkToken:  async (req,res,next)=>{
 
+
         console.log('before checking for jwt token in server: ')
 
 
@@ -42,24 +43,27 @@ const token = {
 
         console.log('jwt key', jwtKey)
 
-        const decoded = jwt.verify(jwtToken, jwtKey);
+        const decoded : JwtPayload | string = jwt.verify(jwtToken, jwtKey) as JwtPayload;
 
         console.log('jwt decoded: ', decoded)
 
-        // const { username, role } : {username: string, role: string} = decoded;
+        const username = decoded.username;
+        const role = decoded.role
 
-        // const admin:boolean = role === 'admin';
+        const admin:boolean = role === 'admin';
 
-        // const exists = await db.query('SELECT * FROM "user" WHERE username = $1 AND admin = $2', [username, admin])
-        // const row = exists.rows[0];
+        console.log('username: ', username, 'role: ', role)
 
-        // console.log('jwt exists in db: ', exists)
+        const exists = await db.query('SELECT * FROM "user" WHERE username = $1 AND admin = $2', [username, admin])
+        const row = exists.rows;
 
-        // if (row.length === 1){
+        console.log('row:', row)
 
-        //     res.status(200).json({})
-            
-        //     }
+        if (row.length === 1){
+
+            console.log('yes!')
+            return res.status(200).json({})
+            }
        
 
             
