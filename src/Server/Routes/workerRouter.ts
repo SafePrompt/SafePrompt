@@ -2,6 +2,8 @@ import express, {Request, Response} from 'express';
 import worker from '../Controllers/Auth/worker';
 import config from '../Controllers/Config/config';
 
+
+
 const router =  express.Router();
 
 router.post('/signup', worker.signup, (req,res)=>{
