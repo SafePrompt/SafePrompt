@@ -20,6 +20,7 @@ const worker = {
 
         try{
 
+            res.locals.role = 'worker';
 
             const {username, password, key} : {username: string, password: string, key: string} = req.body;
 

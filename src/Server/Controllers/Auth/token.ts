@@ -15,7 +15,9 @@ const token = {
 
         const username: string = res.locals.username;
 
-        const token: string = jwt.sign({ username: username, role: 'worker' }, jwtKey , { expiresIn: '48h' });
+        const role: string = res.locals.role;
+
+        const token: string = jwt.sign({ username: username, role: role }, jwtKey , { expiresIn: '48h' });
                   
         res.cookie('jwtToken',token, { maxAge: 345600000, httpOnly: true, sameSite: 'none', secure: true})
 
@@ -23,54 +25,42 @@ const token = {
     },
 
     checkToken:  async (req,res,next)=>{
+        try{
 
+            const jwtToken: string = req.cookies.jwtToken;
 
-        console.log('before checking for jwt token in server: ')
-
-
-        const jwtToken = req.cookies.jwtToken;
-
-
-        if (!jwtToken){
-            res.status(401).json({});
-        }
-        else{
-
-        interface decoded {
-            username: string,
-            role: string
-        } 
-
-        console.log('jwt key', jwtKey)
-
-        const decoded : JwtPayload | string = jwt.verify(jwtToken, jwtKey) as JwtPayload;
-
-        console.log('jwt decoded: ', decoded)
-
-        const username = decoded.username;
-        const role = decoded.role
-
-        const admin:boolean = role === 'admin';
-
-        console.log('username: ', username, 'role: ', role)
-
-        const exists = await db.query('SELECT * FROM "user" WHERE username = $1 AND admin = $2', [username, admin])
-        const row = exists.rows;
-
-        console.log('row:', row)
-
-        if (row.length === 1){
-
-            console.log('yes!')
-            return res.status(200).json({})
+            if (!jwtToken){
+                return res.status(401).json({});
             }
-       
+            else{
 
-            
+                interface decoded {
+                    username: string,
+                    role: string
+                } 
 
+                interface dbResponse {
+                    username: string,
+                    password: string,
+                    key: string,
+                    admin: boolean
+                }
+                const decoded : JwtPayload | string = jwt.verify(jwtToken, jwtKey) as JwtPayload;
+
+                const username: string = decoded.username;
+                const admin: boolean = decoded.role === 'admin';
+
+                const exists = await db.query('SELECT * FROM "user" WHERE username = $1 AND admin = $2', [username, admin]);
+                const row: dbResponse[] = exists.rows;
+
+                if (row.length === 1) return res.status(200).json({});    
+
+            }
+
+            return res.status(401).json({});
+        }catch(error){
+            return next(error)
         }
-
-        res.status(401).json({});
     }
 
 } as {setToken: Middleware, checkToken: AsyncMiddleware}

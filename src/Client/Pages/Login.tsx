@@ -93,6 +93,8 @@ const Login: React.FunctionComponent<LoginProps> = ({orgFunc, configFunc}) => {
 
     async function checkToken(){
 
+      try{
+
 
       const requestOptions = {
         method: 'get',
@@ -106,9 +108,15 @@ const Login: React.FunctionComponent<LoginProps> = ({orgFunc, configFunc}) => {
 
       const response = await axios(requestOptions);
 
-      console.log('axios check jwt response: ', response)
-      console.log('axios check jwt response status: ', response.status)
+
+
+    }catch(error){
+
     }
+
+    
+    }
+
 
 
 
@@ -118,7 +126,7 @@ const Login: React.FunctionComponent<LoginProps> = ({orgFunc, configFunc}) => {
 
         
         <div className = 'container'>
-          <button onClick = {checkToken}>checkToken</button>
+        <button onClick = {checkToken}>checkToken</button>
             
         <div className = 'inputSection'>
         <h2>Login</h2>

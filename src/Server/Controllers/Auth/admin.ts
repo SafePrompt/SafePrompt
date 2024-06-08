@@ -10,6 +10,8 @@ const admin = {
 
         try{
 
+            res.locals.role = 'admin';
+
             const {username, password} : {username: string, password: string} = req.body;
 
             const salt:string = bcrypt.genSaltSync(10);
