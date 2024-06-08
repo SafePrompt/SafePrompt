@@ -13,6 +13,11 @@ const objectCreation = async (req: Request, res: Response, next: NextFunction)=>
 
     const { prompt, key, user } = req.body as { prompt: string; key: string; user: string };
 
+    console.log('prompt, ', prompt)
+    console.log('key, ', key)
+    console.log('user, ', user)
+
+    
     const configResponse = await db.query('SELECT * FROM config WHERE key = $1;',[key])
 
     req.body.config = configResponse.rows[0];

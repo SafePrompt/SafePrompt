@@ -41,6 +41,7 @@ const Login: React.FunctionComponent<LoginProps> = ({orgFunc, configFunc}) => {
                   username: username,
                   password: password,
                 },
+                withCredentials: true,
               });
 
               if (response.status === 200) {
@@ -68,6 +69,7 @@ const Login: React.FunctionComponent<LoginProps> = ({orgFunc, configFunc}) => {
                   username: username,
                   password: password,
                 },
+                withCredentials: true,
               });
 
 
@@ -91,6 +93,9 @@ const Login: React.FunctionComponent<LoginProps> = ({orgFunc, configFunc}) => {
 
     }
 
+    
+
+
 
 
 
@@ -98,8 +103,7 @@ const Login: React.FunctionComponent<LoginProps> = ({orgFunc, configFunc}) => {
   return (
 
         
-        <div className = 'container'>
-            
+        <div className = 'container'>        
         <div className = 'inputSection'>
         <h2>Login</h2>
         {/* <h2>Login</h2> */}
@@ -110,7 +114,7 @@ const Login: React.FunctionComponent<LoginProps> = ({orgFunc, configFunc}) => {
             </div>
             <div className = 'inputField'>
                 <h3>Password</h3>
-                <input value = {password} onChange = {(e)=>setPassword(e.target.value)}></input>
+                <input type ='password' value = {password} onChange = {(e)=>setPassword(e.target.value)}></input>
             </div>
             <div className = 'radioField'>
                 <h3>Type:</h3>
