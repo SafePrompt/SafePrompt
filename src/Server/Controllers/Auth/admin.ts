@@ -10,7 +10,11 @@ const admin = {
 
         try{
 
+            res.locals.role = 'admin';
+
             const {username, password} : {username: string, password: string} = req.body;
+
+            res.locals.username = username;
 
             const salt:string = bcrypt.genSaltSync(10);
             const hashPassword:string = bcrypt.hashSync(password, salt)
@@ -40,7 +44,11 @@ const admin = {
     login: async (req, res, next) => {
         try{
 
+            res.locals.role = 'admin';
+
             const {username, password} : {username: string, password: string} = req.body;
+
+            res.locals.username = username;
 
             interface response {
                 username: string,

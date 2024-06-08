@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./Main.css";
+// import "./Main.css";
 import MenuBar from "../Components/MenuBar";
 import axios from "axios";
 
@@ -8,7 +8,12 @@ interface Redact {
   [key: string]: string[] | string;
 }
 
-const Main: React.FC = () => {
+interface MainProps {
+  orgKey: string
+  
+}
+
+const Main: React.FC<MainProps> = ({orgKey}) => {
   const [inputText, setInputText] = useState("");
   const [outputText, setOutputText] = useState("");
   const [chatgptResponse, setChatgptResponse] = useState("");
@@ -16,6 +21,8 @@ const Main: React.FC = () => {
   const [redact, setRedact] = useState<Redact | null>(null);
 
   const [htmlOutput, setHtmlOutput] = useState<any>(null);
+
+  console.log('orgKey', orgKey)
 
   const validatePrompt = async () => {
     console.log("Submitting validation for prompt");
@@ -28,7 +35,7 @@ const Main: React.FC = () => {
         },
         data: {
           user: "Rick",
-          key: "4c874153-2b60-474a-85cb-6972d92f8e85",
+          key: orgKey,
           prompt: inputText,
         },
       });
@@ -168,7 +175,7 @@ console.log('this is redacted text:', redactedText);
     <div className="main-container">
       <MenuBar />
       <div className="rows-container">
-        <div className="container">
+        <div className="input-output-container">
           <div className="box input-box">
             <textarea
               value={inputText}
@@ -190,7 +197,7 @@ console.log('this is redacted text:', redactedText);
             </button>
           </div>
         </div>
-        <div className="container">
+        <div className="chatgpt-container">
           <div className="box">{chatgptResponse}</div>
         </div>
       </div>

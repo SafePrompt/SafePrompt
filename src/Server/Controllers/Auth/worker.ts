@@ -5,6 +5,8 @@ import db from "../../Models/db";
 import {QueryResult} from 'pg';
 
 
+
+
 interface dbResponse {
     username: string,
     password: string,
@@ -17,9 +19,12 @@ const worker = {
     signup:  async(req,res,next)=>{
 
         try{
+            res.locals.role = 'worker';
 
             const {username, password, key} : {username: string, password: string, key: string} = req.body;
 
+            res.locals.username = username;
+            
             const salt:string = bcrypt.genSaltSync(10);
             const hashPassword:string = bcrypt.hashSync(password, salt);
 
@@ -36,6 +41,8 @@ const worker = {
 
                     await db.query('INSERT INTO "user" (username, password, key, admin) VALUES ($1, $2, $3, $4)', [username, hashPassword, key, false]);
                     res.locals.key = key;
+
+                    
                     return next()
 
                 } 
@@ -57,9 +64,11 @@ const worker = {
     login: async (req, res, next) => {
         try{
 
+            res.locals.role = 'worker';
+
             const {username, password} : {username: string, password: string} = req.body;
 
-            
+            res.locals.username = username;
 
             const queryResponse: QueryResult = await db.query('SELECT * FROM "user" WHERE username = $1', [username])
             const responseArr: dbResponse[] = queryResponse.rows;

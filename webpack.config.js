@@ -14,6 +14,17 @@ module.exports = {
         test: /\.css$/, 
         use: ['style-loader', 'css-loader'],
       },
+      {
+        test: /\.(png|jpe?g|gif|svg)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[path][name].[ext]',
+            },
+          },
+        ],
+      },
     ],
   },
   resolve: {
@@ -24,27 +35,16 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
   },
   mode: 'development',
-plugins: [
+  plugins: [
     new HtmlWebpackPlugin({
       title: 'SafePrompt',
       template: path.join(__dirname, 'index.html'),
     }),
   ],
   devServer: {
-    // static: {
-    //   directory: path.join(__dirname, '/build'),
-    //   publicPath: '/',
-    // },
     hot: true, // enables Hot Module Replacement
     historyApiFallback: true,
     compress: true,
     port: 8080,
-    // proxy: [
-    //   {
-    //     '/api': {
-    //       target: `http://localhost:${process.env.SERV_PORT}/`,
-    //     },
-    //   },
-    // ],
   },
 };

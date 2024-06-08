@@ -1,4 +1,5 @@
 import React from 'react';
+import './App.css'; 
 import Landing from './Pages/Landing';
 import Login from './Pages/Login';
 import Main from './Pages/Main';
@@ -31,7 +32,7 @@ const App: React.FunctionComponent = () => {
     
     const [inputText, setInputText] = useState('');
     const [outputText, setOutputText] = useState('');
-    const [orgKey, setOrgKey] = useState('');
+    const [orgKey, setOrgKey] = useState<string>('');
     const [config, setConfig] = useState<configInterface>({
         currency: false,
         ein: false,
@@ -74,8 +75,9 @@ const App: React.FunctionComponent = () => {
     return (
         <Router>
             <Routes>
-                <Route path="/" element={<Login configFunc = {setConfiguration} orgFunc={setOrg}/>} />
-                <Route path="/main" element={<Main />} />
+                <Route path="/Login" element={<Login configFunc = {setConfiguration} orgFunc={setOrg}/>} />
+                <Route path="/main" element={<Main orgKey={orgKey}/>} />
+                <Route path="/" element={<Landing />} />
                 <Route path="/settings" element={<Settings />} />
                 <Route path="/prompts" element={<Prompts />} />
                 <Route path="/signup" element={<Signup orgFunc={setOrg} />} />
