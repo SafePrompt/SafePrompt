@@ -182,7 +182,7 @@ console.log('this is redacted text:', redactedText);
           <div className="output-box-and-button">
             <div className="box output-box">
               <div className="editable-output">
-                {redact && renderTextWithHighlights(redact)}
+                {redact && htmlOutput}
               </div>
             </div>
             <button className="chatgpt-btn" onClick={submitToOpenai}>

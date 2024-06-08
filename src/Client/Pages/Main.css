@@ -60,7 +60,8 @@
 }
 
 .highlight {
-  background-color: rgb(255, 30, 0);
+  background-color: aquamarine;
+  font-weight: 800;
 }
 
 .editable {
