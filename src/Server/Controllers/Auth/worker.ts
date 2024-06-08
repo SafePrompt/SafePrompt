@@ -3,12 +3,7 @@ import bcrypt from 'bcryptjs';
 import crypto from 'crypto';
 import db from "../../Models/db";
 import {QueryResult} from 'pg';
-import jwt from 'jsonwebtoken'
-import dotenv from 'dotenv';
 
-dotenv.config();
-
-const jwtKey: string = process.env.JWT_KEY || '';
 
 
 
@@ -24,7 +19,7 @@ const worker = {
     signup:  async(req,res,next)=>{
 
         try{
-            console.log('jwt', jwtKey)
+
 
             const {username, password, key} : {username: string, password: string, key: string} = req.body;
 
@@ -45,10 +40,7 @@ const worker = {
                     await db.query('INSERT INTO "user" (username, password, key, admin) VALUES ($1, $2, $3, $4)', [username, hashPassword, key, false]);
                     res.locals.key = key;
 
-                    const token = jwt.sign({ username: username, role: 'worker' }, jwtKey , { expiresIn: '48h' });
-                  
-                    res.cookie('jwtToken',token, { maxAge: 345600000, httpOnly: true, sameSite: 'none',
-                    secure: true})
+                    
                     return next()
 
                 } 

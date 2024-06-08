@@ -5,6 +5,8 @@ import adminRouter from './Routes/adminRouter';
 import workerRouter from  './Routes/workerRouter';
 import configRouter from './Routes/configRouter';
 import GPT from './Routes/GPT';
+import token from './Controllers/Auth/token';
+import cookieParser from 'cookie-parser';
 
 import db from './Models/db';
 
@@ -15,6 +17,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(cookieParser())
 
 app.use('/admin', adminRouter);
 
@@ -25,6 +28,8 @@ app.use('/validate', validationRouter);
 app.use('/config',configRouter);
 
 app.use('/GPT', GPT);
+
+app.use('/checkToken', token.checkToken)
 
 
 //use this route to query database via postman

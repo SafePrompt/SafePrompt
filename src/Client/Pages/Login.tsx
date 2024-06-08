@@ -91,6 +91,25 @@ const Login: React.FunctionComponent<LoginProps> = ({orgFunc, configFunc}) => {
 
     }
 
+    async function checkToken(){
+
+
+      const requestOptions = {
+        method: 'get',
+        url: 'http://localhost:3000/checkToken',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      };
+
+
+      const response = await axios(requestOptions);
+
+      console.log('axios check jwt response: ', response)
+      console.log('axios check jwt response status: ', response.status)
+    }
+
 
 
 
@@ -99,6 +118,7 @@ const Login: React.FunctionComponent<LoginProps> = ({orgFunc, configFunc}) => {
 
         
         <div className = 'container'>
+          <button onClick = {checkToken}>checkToken</button>
             
         <div className = 'inputSection'>
         <h2>Login</h2>

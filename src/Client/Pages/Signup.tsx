@@ -41,6 +41,7 @@ const Signup: React.FunctionComponent<SignupProps> = ({orgFunc}) => {
                   username: username,
                   password: password,
                 },
+                withCredentials: true,
               });
 
               if (response.status === 200) {
