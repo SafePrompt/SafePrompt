@@ -31,7 +31,7 @@ const App: React.FunctionComponent = () => {
     
     const [inputText, setInputText] = useState('');
     const [outputText, setOutputText] = useState('');
-    const [orgKey, setOrgKey] = useState('');
+    const [orgKey, setOrgKey] = useState<string>('');
     const [config, setConfig] = useState<configInterface>({
         currency: false,
         ein: false,
@@ -75,7 +75,7 @@ const App: React.FunctionComponent = () => {
         <Router>
             <Routes>
                 <Route path="/" element={<Login configFunc = {setConfiguration} orgFunc={setOrg}/>} />
-                <Route path="/main" element={<Main />} />
+                <Route path="/main" element={<Main orgKey={orgKey} />} />
                 <Route path="/settings" element={<Settings />} />
                 <Route path="/prompts" element={<Prompts />} />
                 <Route path="/signup" element={<Signup orgFunc={setOrg} />} />

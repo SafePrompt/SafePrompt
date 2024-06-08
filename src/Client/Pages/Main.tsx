@@ -8,7 +8,12 @@ interface Redact {
   [key: string]: string[] | string;
 }
 
-const Main: React.FC = () => {
+interface MainProps {
+  orgKey: string
+  
+}
+
+const Main: React.FC<MainProps> = ({orgKey}) => {
   const [inputText, setInputText] = useState("");
   const [outputText, setOutputText] = useState("");
   const [chatgptResponse, setChatgptResponse] = useState("");
@@ -16,6 +21,8 @@ const Main: React.FC = () => {
   const [redact, setRedact] = useState<Redact | null>(null);
 
   const [htmlOutput, setHtmlOutput] = useState<any>(null);
+
+  console.log('orgKey', orgKey)
 
   const validatePrompt = async () => {
     console.log("Submitting validation for prompt");
@@ -28,7 +35,7 @@ const Main: React.FC = () => {
         },
         data: {
           user: "Rick",
-          key: "4c874153-2b60-474a-85cb-6972d92f8e85",
+          key: orgKey,
           prompt: inputText,
         },
       });
