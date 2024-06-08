@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./Main.css";
+// import "./Main.css";
 import MenuBar from "../Components/MenuBar";
 import axios from "axios";
 
@@ -167,19 +167,31 @@ console.log('this is redacted text:', redactedText);
   return (
     <div className="main-container">
       <MenuBar />
-      <div className="container">
-        <div className="box input-box">
-          <textarea
-            value={inputText}
-            onChange={(e) => setInputText(e.target.value)}
-            placeholder="Paste your prompt here"
-          />
+      <div className="rows-container">
+        <div className="container">
+          <div className="box input-box">
+            <textarea
+              value={inputText}
+              onChange={handleChange}
+              placeholder="Paste your prompt here"
+            />
+          </div>
+          <button onClick={handleCheckPrompt} className="check-prompt-btn">
+            Check Prompt
+          </button>
+          <div className="output-box-and-button">
+            <div className="box output-box">
+              <div className="editable-output">
+                {redact && htmlOutput}
+              </div>
+            </div>
+            <button className="chatgpt-btn" onClick={submitToOpenai}>
+              Send to ChatGPT
+            </button>
+          </div>
         </div>
-        <button onClick={handleCheckPrompt} className="check-prompt-btn">
-          Check Prompt
-        </button>
-        <div className="box output-box">
-          <textarea value={outputText} readOnly />
+        <div className="container">
+          <div className="box">{chatgptResponse}</div>
         </div>
       </div>
     </div>
