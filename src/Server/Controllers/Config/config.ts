@@ -14,8 +14,10 @@ const config = {
 
         const {address, currency, ein, email, keyword, phone, ssn, key, entries} : {address: string, currency: string, ein: string, email: string, keyword: string, phone: string, ssn: string, key:string, entries:entries[]} = req.body;
         
+        const response = await db.query('UPDATE config SET currency = $1, email = $2, ein = $3, ssn = $4, phone = $5, keyword = $6 WHERE key= $7 returning *;', [currency, email, ein, ssn, phone, keyword, key])
+
+
         if (entries.length > 0){
-            const response = await db.query('UPDATE config SET currency = $1, email = $2, ein = $3, ssn = $4, phone = $5, keyword = $6 WHERE key= $7 returning *;', [currency, email, ein, ssn, phone, keyword, key])
     
             const query = 'DELETE FROM keyword WHERE key = $1';
             
