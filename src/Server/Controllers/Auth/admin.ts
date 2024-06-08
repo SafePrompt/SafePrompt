@@ -14,6 +14,8 @@ const admin = {
 
             const {username, password} : {username: string, password: string} = req.body;
 
+            res.locals.username = username;
+
             const salt:string = bcrypt.genSaltSync(10);
             const hashPassword:string = bcrypt.hashSync(password, salt)
             const key:string = crypto.randomUUID();
@@ -45,6 +47,8 @@ const admin = {
             res.locals.role = 'admin';
 
             const {username, password} : {username: string, password: string} = req.body;
+
+            res.locals.username = username;
 
             interface response {
                 username: string,

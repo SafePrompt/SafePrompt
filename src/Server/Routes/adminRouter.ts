@@ -16,6 +16,7 @@ router.post('/signup',
 
 router.post('/login', 
     admin.login,
+    token.setToken,
     config.request,
     
 

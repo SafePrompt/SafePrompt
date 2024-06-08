@@ -41,6 +41,7 @@ const Login: React.FunctionComponent<LoginProps> = ({orgFunc, configFunc}) => {
                   username: username,
                   password: password,
                 },
+                withCredentials: true,
               });
 
               if (response.status === 200) {
@@ -68,6 +69,7 @@ const Login: React.FunctionComponent<LoginProps> = ({orgFunc, configFunc}) => {
                   username: username,
                   password: password,
                 },
+                withCredentials: true,
               });
 
 

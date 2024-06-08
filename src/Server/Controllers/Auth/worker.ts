@@ -68,7 +68,7 @@ const worker = {
 
             const {username, password} : {username: string, password: string} = req.body;
 
-            
+            res.locals.username = username;
 
             const queryResponse: QueryResult = await db.query('SELECT * FROM "user" WHERE username = $1', [username])
             const responseArr: dbResponse[] = queryResponse.rows;
