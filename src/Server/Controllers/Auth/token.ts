@@ -27,10 +27,12 @@ const token = {
         console.log('before checking for jwt token in server: ')
 
 
-        const jwt = req.cookies.jwtToken;
+        const jwtToken = req.cookies.jwtToken;
 
 
-        if (!jwt) return res.status(401).json({});
+        if (!jwtToken){
+            res.status(401).json({});
+        }
         else{
 
         interface decoded {
@@ -38,24 +40,26 @@ const token = {
             role: string
         } 
 
-        const decoded: decoded = jwt.verify(jwt,jwtKey);
+        console.log('jwt key', jwtKey)
+
+        const decoded = jwt.verify(jwtToken, jwtKey);
 
         console.log('jwt decoded: ', decoded)
 
-        const { username, role } : decoded = decoded;
+        // const { username, role } : {username: string, role: string} = decoded;
 
-        const admin:boolean = role === 'admin';
+        // const admin:boolean = role === 'admin';
 
-        const exists = await db.query('SELECT * FROM "user" WHERE username = $1 AND admin = $2', [username, admin])
-        const row = exists.rows[0];
+        // const exists = await db.query('SELECT * FROM "user" WHERE username = $1 AND admin = $2', [username, admin])
+        // const row = exists.rows[0];
 
-        console.log('jwt exists in db: ', exists)
+        // console.log('jwt exists in db: ', exists)
 
-        if (row.length === 1){
+        // if (row.length === 1){
 
-            res.status(200).json({})
+        //     res.status(200).json({})
             
-            }
+        //     }
        
 
             
