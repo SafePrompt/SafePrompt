@@ -93,31 +93,7 @@ const Login: React.FunctionComponent<LoginProps> = ({orgFunc, configFunc}) => {
 
     }
 
-    async function checkToken(){
-
-      try{
-
-
-      const requestOptions = {
-        method: 'get',
-        url: 'http://localhost:3000/checkToken',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        withCredentials: true,
-      };
-
-
-      const response = await axios(requestOptions);
-
-
-
-    }catch(error){
-
-    }
-
     
-    }
 
 
 
@@ -127,9 +103,7 @@ const Login: React.FunctionComponent<LoginProps> = ({orgFunc, configFunc}) => {
   return (
 
         
-        <div className = 'container'>
-        <button onClick = {checkToken}>checkToken</button>
-            
+        <div className = 'container'>        
         <div className = 'inputSection'>
         <h2>Login</h2>
         {/* <h2>Login</h2> */}
