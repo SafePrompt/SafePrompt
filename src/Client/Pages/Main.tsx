@@ -11,6 +11,7 @@ interface Redact {
 const Main: React.FC = () => {
   const [inputText, setInputText] = useState("");
   const [outputText, setOutputText] = useState("");
+  const [chatgptResponse, setChatgptResponse] = useState("");
   const [redact, setRedact] = useState<Redact | null>(null);
 
   const validatePrompt = async () => {
@@ -23,8 +24,8 @@ const Main: React.FC = () => {
           "Content-Type": "application/json",
         },
         data: {
-          user: "worker",
-          key: "320f2ded-28e8-4640-ad65-071a3687e087",
+          user: "Rick",
+          key: "4c874153-2b60-474a-85cb-6972d92f8e85",
           prompt: inputText,
         },
       });
@@ -107,32 +108,61 @@ const Main: React.FC = () => {
     });
   };
 
+  //write function to grab text and send it to
+  const getChatgptResponse = async () => {
+    console.log("Submitting redacted prompt to ChatGPT");
+    try {
+      let response = await axios({
+        method: "post",
+        url: "http://localhost:3000/submit",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: {
+          prompt: outputText,
+        },
+      });
+
+      console.log("Response from ChatGPT:", response.data);
+      setChatgptResponse(response.data);
+    } catch (err) {
+      console.log("Error fetching data:", err);
+    }
+  };
+
+  const submitToOpenai = async () => {
+    await getChatgptResponse();
+  };
+
   return (
     <div className="main-container">
       <MenuBar />
-      <div className="container">
-        <div className="box input-box">
-          <textarea
-            value={inputText}
-            onChange={handleChange}
-            placeholder="Paste your prompt here"
-          />
-        </div>
-        <button onClick={handleCheckPrompt} className="check-prompt-btn">
-          Check Prompt
-        </button>
-        <div className="output-box-and-button">
-          <div className="box output-box">
-            <div className="editable-output">
-              {redact && renderTextWithHighlights(redact)}
-            </div>
+      <div className="rows-container">
+        <div className="container">
+          <div className="box input-box">
+            <textarea
+              value={inputText}
+              onChange={handleChange}
+              placeholder="Paste your prompt here"
+            />
           </div>
-          <button className="chatgpt-btn">
-            Send to ChatGPT
+          <button onClick={handleCheckPrompt} className="check-prompt-btn">
+            Check Prompt
           </button>
-
+          <div className="output-box-and-button">
+            <div className="box output-box">
+              <div className="editable-output">
+                {redact && renderTextWithHighlights(redact)}
+              </div>
+            </div>
+            <button className="chatgpt-btn" onClick={submitToOpenai}>
+              Send to ChatGPT
+            </button>
+          </div>
         </div>
-
+        <div className="container">
+          <div className="box">{chatgptResponse}</div>
+        </div>
       </div>
     </div>
   );
