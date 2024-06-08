@@ -116,9 +116,12 @@ const Main: React.FC = () => {
       return <span key={index}>{part}</span>;
     });
 
-    return highlightedText; // Return the array of JSX elements directly
+    return [highlightedText, newString]; // Return the array of JSX elements directly
   };
 
+
+  const result =
+console.log('this is redacted text:', redactedText);
   //write function to grab text and send it to
   const getChatgptResponse = async () => {
     try {
@@ -134,7 +137,7 @@ const Main: React.FC = () => {
           "Content-Type": "application/json",
         },
         data: {
-          prompt: 'how are you doing today',
+          prompt: redactedText,
         },
       });
 
@@ -155,7 +158,7 @@ const Main: React.FC = () => {
 
   useEffect(() => {
     if (redact) {
-      const { highlightedText, newString } = renderTextWithHighlights(redact);
+      const [ highlightedText, newString ] = renderTextWithHighlights(redact);
       setHtmlOutput(highlightedText);
       setRedactedText(newString);
     }
