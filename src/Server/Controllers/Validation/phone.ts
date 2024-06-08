@@ -9,7 +9,8 @@ const phone: middleware = (req,res,next)=>{
 
     const config = req.body.config;
 
-    console.log('config, phone: ', config)
+    console.log('config, phone: ', config);
+    
     if (!config.phone) return next();
 
         console.log('this is the config from req.body.config', req.body.config)
