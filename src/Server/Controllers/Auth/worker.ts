@@ -19,7 +19,6 @@ const worker = {
     signup:  async(req,res,next)=>{
 
         try{
-
             res.locals.role = 'worker';
 
             const {username, password, key} : {username: string, password: string, key: string} = req.body;
@@ -64,6 +63,8 @@ const worker = {
 
     login: async (req, res, next) => {
         try{
+
+            res.locals.role = 'worker';
 
             const {username, password} : {username: string, password: string} = req.body;
 

@@ -42,6 +42,8 @@ const admin = {
     login: async (req, res, next) => {
         try{
 
+            res.locals.role = 'admin';
+
             const {username, password} : {username: string, password: string} = req.body;
 
             interface response {
