@@ -99,7 +99,7 @@ const Signup: React.FunctionComponent<SignupProps> = ({orgFunc}) => {
             </div>
             <div className = 'inputField'>
                 <h3>Password:</h3>
-                <input value = {password} onChange = {(e)=>setPassword(e.target.value)}></input>
+                <input type = 'password' value = {password} onChange = {(e)=>setPassword(e.target.value)}></input>
             </div>
             <div className = 'radioField'>
                 <h3>Type:</h3>

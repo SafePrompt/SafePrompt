@@ -32,7 +32,7 @@ const App: React.FunctionComponent = () => {
     
     const [inputText, setInputText] = useState('');
     const [outputText, setOutputText] = useState('');
-    const [orgKey, setOrgKey] = useState('');
+    const [orgKey, setOrgKey] = useState<string>('');
     const [config, setConfig] = useState<configInterface>({
         currency: false,
         ein: false,
