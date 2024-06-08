@@ -168,7 +168,7 @@ console.log('this is redacted text:', redactedText);
     <div className="main-container">
       <MenuBar />
       <div className="rows-container">
-        <div className="container">
+        <div className="input-output-container">
           <div className="box input-box">
             <textarea
               value={inputText}
@@ -190,7 +190,7 @@ console.log('this is redacted text:', redactedText);
             </button>
           </div>
         </div>
-        <div className="container">
+        <div className="chatgpt-container">
           <div className="box">{chatgptResponse}</div>
         </div>
       </div>
