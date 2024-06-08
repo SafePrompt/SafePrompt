@@ -76,7 +76,7 @@ const App: React.FunctionComponent = () => {
         <Router>
             <Routes>
                 <Route path="/Login" element={<Login configFunc = {setConfiguration} orgFunc={setOrg}/>} />
-                <Route path="/main" element={<Main />} />
+                <Route path="/main" element={<Main orgKey={orgKey}/>} />
                 <Route path="/" element={<Landing />} />
                 <Route path="/settings" element={<Settings />} />
                 <Route path="/prompts" element={<Prompts />} />
