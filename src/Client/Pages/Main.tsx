@@ -22,7 +22,6 @@ const Main: React.FC<MainProps> = ({orgKey}) => {
 
   const [htmlOutput, setHtmlOutput] = useState<any>(null);
 
-  console.log('orgKey', orgKey)
 
   const validatePrompt = async () => {
     console.log("Submitting validation for prompt");
@@ -40,10 +39,8 @@ const Main: React.FC<MainProps> = ({orgKey}) => {
         },
       });
 
-      console.log("Response:", response.data);
       setRedact(response.data);
     } catch (err) {
-      console.log("Error fetching data:", err);
     }
   };
 
@@ -54,7 +51,6 @@ const Main: React.FC<MainProps> = ({orgKey}) => {
   const handleCheckPrompt = async () => {
     await validatePrompt();
     setOutputText(inputText);
-    console.log(inputText);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -119,7 +115,6 @@ const Main: React.FC<MainProps> = ({orgKey}) => {
       }
       newString = newString.concat(part);
 
-      console.log("newString after part: ", newString);
       return <span key={index}>{part}</span>;
     });
 
@@ -127,8 +122,7 @@ const Main: React.FC<MainProps> = ({orgKey}) => {
   };
 
 
-  const result =
-console.log('this is redacted text:', redactedText);
+
   //write function to grab text and send it to
   const getChatgptResponse = async () => {
     try {
@@ -159,9 +153,7 @@ console.log('this is redacted text:', redactedText);
     await getChatgptResponse();
   };
 
-  // useEffect(() => {
-  //   redact! ==  && setHtmlOutput(renderTextWithHighlights(redact));
-  // }, [redact]);
+
 
   useEffect(() => {
     if (redact) {
@@ -171,36 +163,58 @@ console.log('this is redacted text:', redactedText);
     }
   }, [redact]);
 
+  // <div className="rows-container">
+  //       <div className="input-output-container">
+  //         <div className="box input-box">
+  //           <textarea
+  //             value={inputText}
+  //             onChange={handleChange}
+  //             placeholder="Paste your prompt here"
+  //           />
+  //         </div>
+  //         <button onClick={handleCheckPrompt} className="check-prompt-btn">
+  //           Check Prompt
+  //         </button>
+  //         <div className="output-box-and-button">
+  //           <div className="box output-box">
+  //             <div className="editable-output">
+  //               {redact && htmlOutput}
+  //             </div>
+  //           </div>
+  //           <button className="chatgpt-btn" onClick={submitToOpenai}>
+  //             Send to ChatGPT
+  //           </button>
+  //         </div>
+  //       </div>
+  //       <div className="chatgpt-container">
+  //         <div className="box">{chatgptResponse}</div>
+  //       </div>
+  //     </div>
+
   return (
     <div className="main-container">
-      <MenuBar />
-      <div className="rows-container">
-        <div className="input-output-container">
-          <div className="box input-box">
-            <textarea
-              value={inputText}
-              onChange={handleChange}
-              placeholder="Paste your prompt here"
-            />
+      {/* <MenuBar /> */}
+      <div id ='verticalContainer'>
+        <div id ='horizontalContainer'>
+          <textarea className = 'box' value={inputText} onChange={handleChange} placeholder="Paste your prompt here">
+
+          </textarea>
+          
+          <div className="box">
+          {redact && htmlOutput}
           </div>
-          <button onClick={handleCheckPrompt} className="check-prompt-btn">
-            Check Prompt
-          </button>
-          <div className="output-box-and-button">
-            <div className="box output-box">
-              <div className="editable-output">
-                {redact && htmlOutput}
-              </div>
-            </div>
-            <button className="chatgpt-btn" onClick={submitToOpenai}>
-              Send to ChatGPT
+        </div>
+        <div id = 'mainButtonSection'>
+            <button onClick={handleCheckPrompt} className="check-prompt-btn">
+              Check Prompt
             </button>
+            <button className="chatgpt-btn" onClick={submitToOpenai}>
+             Send to ChatGPT
+         </button>
           </div>
-        </div>
-        <div className="chatgpt-container">
-          <div className="box">{chatgptResponse}</div>
-        </div>
+           <div className="outputBox">{chatgptResponse}</div>
       </div>
+      
     </div>
   );
 };
