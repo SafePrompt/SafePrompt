@@ -67,7 +67,10 @@ button{
   font-family: "Open Sans", sans-serif;
   cursor: pointer;
   border: 1px solid #AED5FD;
-  color: #AED5FD;
+  color: #AED5FD; 
+  /* background-color: #12287A;
+  border: 1px solid #12287A; */ 
+
 
 }
 
@@ -98,11 +101,15 @@ button:hover{
   /* border: 1px solid #AED5FD; */
   border: 10px solid transparent;
   color: #AED5FD;
+  line-height: 28px;
   font-family: 'Lato', sans-serif;
   letter-spacing: 1%;
-  font-weight: 600;
+  font-weight: 400;
+  /* background-color: #12287A; */
+  /* box-shadow: 0 20px 25px -5px #000, 0 8px 10px -6px #000; */
+  /* border: 1px solid #AED5FD; */
+  overflow-x: scroll;
 
-  box-shadow: 0 20px 25px -5px #000, 0 8px 10px -6px #000;
 
 
 
