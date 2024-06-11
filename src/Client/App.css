@@ -6,19 +6,19 @@ body{
   align-items: center;
   justify-content: flex-start;
   color: white;
+  /* font-family: "Open Sans", sans-serif; */
 
 }
 
 
 
-#verticalContainer{
-  display: grid;
-  grid-template-rows: [top] 40% [topButton] 5% [bottomButton ]55% [bottom];
-  justify-items: center;
-  align-items: center;
-  height: 700px
 
-  /* width: auto; */
+
+#verticalContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
 #horizontalContainer{
@@ -43,12 +43,37 @@ body{
   border-radius: 10px;
   color: black;
   padding: 10px;
+  /* font-family: "Open Sans", sans-serif; */
+  font-size: 16px;
+  line-height: 20.39px;
+  color: black;
+  background-color: white;
+  box-shadow: 0 20px 25px -5px #000, 0 8px 10px -6px #000;
+  outline: none;
+  font-family: 'Lato', sans-serif;
+  letter-spacing: 1%;
+  font-weight: 600;
+
 }
 
 button{
-  height: 30px;
-  width: 130px;
-  border-radius: 15px;
+  height: 52px;
+  width: 201px;
+  border-radius: 4px;
+  padding: 12px, 24px, 12px, 24px;
+ 
+  font-size: 20px;
+  background-color: transparent;
+  font-family: "Open Sans", sans-serif;
+  cursor: pointer;
+  border: 1px solid #AED5FD;
+  color: #AED5FD;
+
+}
+
+button:hover{
+  background-color: #AED5FD;
+  color: #12287A
 
 }
 
@@ -60,22 +85,37 @@ button{
   height: 300px;
   margin: 15px;
   border-radius: 10px;
-  border: 10px solid white;
+  /* border: 10px solid #FFF0E2; */
   width: 900px;
   padding: 10px;
-  color: black
+  color: black;
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  background-color: #FFF0E2;
+  color: #AED5FD;
+  background-color: transparent;
+  font-family: "Open Sans", sans-serif;
+  /* border: 1px solid #AED5FD; */
+  border: 10px solid transparent;
+  color: #AED5FD;
+  font-family: 'Lato', sans-serif;
+  letter-spacing: 1%;
+  font-weight: 600;
+
+  box-shadow: 0 20px 25px -5px #000, 0 8px 10px -6px #000;
+
+
 
 
 
 }
 
 #mainButtonSection{
-  display: grid;
-  grid-template-columns:  [left] 50% [center ]50% [right];
-  justify-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   align-items: center;
-  height: 100%;
-  width: 270px;
-  /* width: 25%; */
+  gap: 10px;
+  padding: 20px;
 
 }
