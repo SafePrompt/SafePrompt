@@ -1,18 +1,25 @@
 body{
   background: radial-gradient(circle at bottom, #0d1e4a 0%, #000000 100%);
   height: 100vh;
+  /* width: 100vh; */
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   color: white;
-  /* padding: 10px */
-  /* font-family: "Open Sans", sans-serif; */
+  margin: 0px;
+  padding: 0px;
+ 
+}
 
+#root {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 
-
+/* Main */
 
 
 #verticalContainer{
@@ -32,12 +39,19 @@ body{
 
 }
 
+.mainContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* width: auto; */
+}
+
 .boxContainer{
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  /* height: 210px; */
 }
 
 h2{
@@ -48,7 +62,6 @@ h2{
   letter-spacing: 1px;
   font-family: 'Montserrat';
   color: #7B95B0;
-
   margin: 5px;
 
 }
@@ -117,11 +130,7 @@ h2{
 .highlight {
   background-color: #AED5FD;
   color: black;
-  /* border: 1px solid #7B95B0; */
   border-radius: 5px;
-  /* color: #12287A; */
-  /* background-color: black;
-  color: white; */
   font-weight: 800;
   margin: 8px;
   padding: 2px 6px 2px 6px;
@@ -137,15 +146,12 @@ button{
   width: 201px;
   border-radius: 4px;
   padding: 12px, 24px, 12px, 24px;
- 
   font-size: 20px;
   background-color: transparent;
   font-family: "Open Sans", sans-serif;
   cursor: pointer;
   border: 1px solid #AED5FD;
   color: #AED5FD; 
-   /* background-color: #12287A;
-  border: 1px solid #12287A;  */
 
 
 }
@@ -155,14 +161,17 @@ button{
   width: 201px;
   border-radius: 4px;
   padding: 12px, 24px, 12px, 24px;
- 
   font-size: 20px;
   background-color: transparent;
   font-family: "Open Sans", sans-serif;
   cursor: pointer;
   border: 1px solid #AED5FD;
   color: #AED5FD; 
-  text-align-last:center;
+  text-align-last:center
+  /* text-align-last:center;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none; */
 }
 
 
@@ -177,11 +186,6 @@ button:hover{
 #promptBox{
   user-select: none;
   background-color: transparent;
-  /* background-color: #12287A */
-
-  /* background-color: white;
-  color: black;
-  background-color: #FFF0E2 */
 
 }
 
@@ -223,4 +227,25 @@ button:hover{
   gap: 15px;
   padding: 30px;
 
+}
+
+/* nav */
+
+.nav{
+  width: 100%;
+  height: 40px;
+  background-color: #AED5FD;
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+  padding-right: 30px;
+  margin-right: -30px;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+  font-family: "Open Sans", sans-serif;
+  letter-spacing: .5px;
+  font-family: 'Montserrat';
+  font-size: 14px;
+  color: black;
+  font-weight: 500
 }

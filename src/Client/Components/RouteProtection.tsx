@@ -41,7 +41,7 @@ export default function RouteProtection(){
         return <div>Loading...</div>;
     } else {
         // Permission is loaded, render based on its value
-        return permission ? <Outlet /> : <Navigate to='/login' />;
+        return permission ? <Outlet /> : <Navigate to='/' />;
     }
 
 }

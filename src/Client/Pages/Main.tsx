@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 // import "./Main.css";
 import MenuBar from "../Components/MenuBar";
 import axios from "axios";
+// import Navigation from '../Components/Navigation'
 
 interface Redact {
   prompt: string;
@@ -163,36 +164,13 @@ const Main: React.FC<MainProps> = ({orgKey}) => {
     }
   }, [redact]);
 
-  // <div className="rows-container">
-  //       <div className="input-output-container">
-  //         <div className="box input-box">
-  //           <textarea
-  //             value={inputText}
-  //             onChange={handleChange}
-  //             placeholder="Paste your prompt here"
-  //           />
-  //         </div>
-  //         <button onClick={handleCheckPrompt} className="check-prompt-btn">
-  //           Check Prompt
-  //         </button>
-  //         <div className="output-box-and-button">
-  //           <div className="box output-box">
-  //             <div className="editable-output">
-  //               {redact && htmlOutput}
-  //             </div>
-  //           </div>
-  //           <button className="chatgpt-btn" onClick={submitToOpenai}>
-  //             Send to ChatGPT
-  //           </button>
-  //         </div>
-  //       </div>
-  //       <div className="chatgpt-container">
-  //         <div className="box">{chatgptResponse}</div>
-  //       </div>
-  //     </div>
+
 
   return (
-    <div className="main-container">
+
+ 
+    <div className="mainContainer">
+
       {/* <MenuBar /> */}
       <div id ='verticalContainer'>
         <div id ='horizontalContainer'>
@@ -230,6 +208,7 @@ const Main: React.FC<MainProps> = ({orgKey}) => {
           </div>
       
     </div>
+
   );
 };
 
