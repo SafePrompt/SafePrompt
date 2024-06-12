@@ -196,24 +196,38 @@ const Main: React.FC<MainProps> = ({orgKey}) => {
       {/* <MenuBar /> */}
       <div id ='verticalContainer'>
         <div id ='horizontalContainer'>
-          <textarea className = 'box' value={inputText} onChange={handleChange} placeholder="Paste your prompt here">
+          <div className = 'boxContainer'>
+          <h2>PROMPT</h2>
+            <textarea className = 'box' id = 'inputBox' value={inputText} onChange={handleChange} placeholder="Paste your prompt here">
 
-          </textarea>
-          
-          <div className="box">
-          {redact && htmlOutput}
+            </textarea>
+            <div className = 'circleButton' id = 'circleLeft'>{}</div>
+            <div className = 'circleButton' id = 'circleRight'>{}</div>
+
+          </div>
+          <div className = 'boxContainer'>
+          <h2>SAFEPROMPT</h2>
+            <div className="box" id = 'promptBox'>
+            {redact ? htmlOutput : 'SafePrompt will redact here'}
+            </div>
           </div>
         </div>
         <div id = 'mainButtonSection'>
+          <select name='History' className = 'dropdown'>
+            <option value = '--History--'>Prompt</option>
+          </select>
             <button onClick={handleCheckPrompt} className="check-prompt-btn">
               Check Prompt
             </button>
             <button className="chatgpt-btn" onClick={submitToOpenai}>
              Send to ChatGPT
          </button>
+        </div>
+        <div className = 'bottomContainer'>
+          <h2>RESPONSE</h2>
+          <div className="outputBox">{chatgptResponse}</div>
           </div>
-           <div className="outputBox">{chatgptResponse}</div>
-      </div>
+          </div>
       
     </div>
   );

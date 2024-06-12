@@ -12,6 +12,7 @@ const query: middleware = (req, res, next) => {
         model: "gpt-3.5-turbo",
     })
     .then((response: any) => {
+        
         console.log('reached response from chatGPT. Response: ', response.choices[0].message.content)
         res.locals.response = response.choices[0].message.content
         return next()
