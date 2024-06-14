@@ -1,141 +1,145 @@
-import React, {useState} from 'react';
-import {useNavigate} from 'react-router-dom'
-import axios from 'axios';
-import './Login.css';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import "./Login.css";
 
 interface LoginProps {
     orgFunc: (org: string) => void;
     configFunc: (conf: any) => void;
 }
 
-const Login: React.FunctionComponent<LoginProps> = ({orgFunc, configFunc}) => {
-
+const Login: React.FunctionComponent<LoginProps> = ({
+    orgFunc,
+    configFunc,
+}) => {
     const navigate = useNavigate();
 
-    const handleSignup = ()=>navigate('/signup');
+    const handleSignup = () => navigate("/signup");
 
     const [admin, setAdmin] = useState(false);
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
-    const [message, setMessage] = useState('')
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [message, setMessage] = useState("");
 
-    const handleAdmin = ()=>{
-        setAdmin((adminState)=>!adminState)
-    }
+    const handleAdmin = () => {
+        setAdmin((adminState) => !adminState);
+    };
 
+    const handleLogin = async () => {
+        try {
+            let response;
 
-    const handleLogin = async () =>{
-        try{
-
-        let response;
-
-        if (admin){
-
+            if (admin) {
                 response = await axios({
-                method: "post",
-                url: "http://localhost:3000/admin/login",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                data: {
-                  username: username,
-                  password: password,
-                },
-                withCredentials: true,
-              });
+                    method: "post",
+                    url: "http://localhost:3000/admin/login",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    data: {
+                        username: username,
+                        password: password,
+                    },
+                    withCredentials: true,
+                });
 
-              if (response.status === 200) {
-                orgFunc(response.data.key);
-                configFunc(response.data.config);
-                setMessage('')
-                navigate('/adminview')
-                
-                
-        
-              } else {
-                setMessage('Invalid Username/Password')
-              }
-            
+                if (response.status === 200) {
+                    orgFunc(response.data.key);
+                    configFunc(response.data.config);
+                    setMessage("");
+                    navigate("/adminview");
+                } else {
+                    setMessage("Invalid Username/Password");
+                }
+            } else {
+                response = await axios({
+                    method: "post",
+                    url: "http://localhost:3000/worker/login",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    data: {
+                        username: username,
+                        password: password,
+                    },
+                    withCredentials: true,
+                });
 
-        }else{
-
-            response = await axios({
-                method: "post",
-                url: "http://localhost:3000/worker/login",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                data: {
-                  username: username,
-                  password: password,
-                },
-                withCredentials: true,
-              });
-
-
-              if (response.status === 200) {
-                orgFunc(response.data.key);
-                configFunc(response.data.config);
-                setMessage('')
-                navigate('/main')
-               
-        
-              }else {
-                setMessage('Invalid Username/Password')
-              }
-
+                if (response.status === 200) {
+                    orgFunc(response.data.key);
+                    configFunc(response.data.config);
+                    setMessage("");
+                    navigate("/main");
+                } else {
+                    setMessage("Invalid Username/Password");
+                }
+            }
+        } catch (error) {
+            setMessage("Invalid Username/Password");
         }
+    };
 
-    }catch(error){
-        setMessage('Invalid Username/Password')
-        
-    }
+    return (
+        <div className="container">
+            <div className="inputContainer">
+                <h2>Login</h2>
+                <div className="inputSection">
+                    {/* <h2>Login</h2> */}
+                    {/* <div className = 'nav'>Admin</div> */}
+                    <div className="inputField">
+                        <h3>Username</h3>
+                        <input
+                            value={username}
+                            onChange={(e) =>
+                                setUsername(e.target.value)
+                            }></input>
+                    </div>
+                    <div className="inputField">
+                        <h3>Password</h3>
+                        <input
+                            type="password"
+                            value={password}
+                            onChange={(e) =>
+                                setPassword(e.target.value)
+                            }></input>
+                    </div>
+                    <div className="radioField">
+                        <h3>Type:</h3>
+                        <div>
+                            <div>
+                                <input
+                                    type="radio"
+                                    name="adminSelect"
+                                    id="worker"
+                                    checked={!admin}
+                                    onChange={handleAdmin}></input>
+                                <label htmlFor="worker">Employee</label>
+                            </div>
 
-    }
-
-    
-
-
-
-
-
-
-  return (
-
-        
-        <div className = 'container'>        
-        <div className = 'inputSection'>
-        <h2>Login</h2>
-        {/* <h2>Login</h2> */}
-        {/* <div className = 'nav'>Admin</div> */}
-            <div className = 'inputField'>
-                <h3>Username</h3>
-                <input value =  {username} onChange = {(e)=>setUsername(e.target.value)}></input>
-            </div>
-            <div className = 'inputField'>
-                <h3>Password</h3>
-                <input type ='password' value = {password} onChange = {(e)=>setPassword(e.target.value)}></input>
-            </div>
-            <div className = 'radioField'>
-                <h3>Type:</h3>
-                <div>
-                    <input type = 'radio' name='adminSelect' id = 'worker' checked = {!admin} onChange = {handleAdmin}></input>
-                    <label htmlFor='worker' >Employee</label>
+                            <div>
+                                <input
+                                    type="radio"
+                                    name="adminSelect"
+                                    id="admin"
+                                    checked={admin}
+                                    onChange={handleAdmin}></input>
+                                <label htmlFor="admin">Admin</label>
+                            </div>
+                        </div>
+                    </div>
+                    {/* <p>{message}</p> */}
+                    <div className="buttonSection">
+                        <button className="button2" onClick={handleLogin}>
+                            Login
+                        </button>
+                        <button className="button2" onClick={handleSignup}>
+                            Create Account
+                        </button>
+                    </div>
                 </div>
-                <div>
-                <input type = 'radio' name='adminSelect' id = 'admin' checked = {admin} onChange = {handleAdmin}></input>
-                <label htmlFor='admin'>Admin</label>
-                </div>
-            </div>
-            <p>{message}</p>
-            <div className = 'buttonSection'>
-                <button onClick = {handleLogin}>Login</button>
-                <button onClick = {handleSignup}>Create Account</button>
-
             </div>
         </div>
-    </div>
-  )
-}
+    );
+};
 
 export default Login;

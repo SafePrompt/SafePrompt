@@ -1,13 +1,12 @@
-import React, {useState} from 'react';
-import axios from 'axios';
-import {useNavigate} from 'react-router-dom';
+import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 interface SignupProps {
     orgFunc: (org: string) => void;
 }
 
-const Signup: React.FunctionComponent<SignupProps> = ({orgFunc}) => {
-
+const Signup: React.FunctionComponent<SignupProps> = ({ orgFunc }) => {
     const navigate = useNavigate();
 
     const [admin, setAdmin] = useState(false);
@@ -15,112 +14,115 @@ const Signup: React.FunctionComponent<SignupProps> = ({orgFunc}) => {
     const [password, setPassword] = useState("");
     const [org, setOrg] = useState("");
 
-    const handleAdmin = ()=>{
-        setAdmin((adminState)=>!adminState)
-    }
-  
+    const handleAdmin = () => {
+        setAdmin((adminState) => !adminState);
+    };
 
-  
+    const handleSignup = async () => {
+        try {
+            let response;
 
-  
-    const handleSignup = async () =>{
-        try{
-
-        let response;
-
-        if (admin){
-
+            if (admin) {
                 response = await axios({
-                method: "post",
-                url: "http://localhost:3000/admin/signup",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                data: {
-                  username: username,
-                  password: password,
-                },
-                withCredentials: true,
-              });
+                    method: "post",
+                    url: "http://localhost:3000/admin/signup",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    data: {
+                        username: username,
+                        password: password,
+                    },
+                    withCredentials: true,
+                });
 
-              if (response.status === 200) {
-                orgFunc(response.data);
-                navigate('/adminview')
-              }
-            
+                if (response.status === 200) {
+                    orgFunc(response.data);
+                    navigate("/adminview");
+                }
+            } else {
+                response = await axios({
+                    method: "post",
+                    url: "http://localhost:3000/worker/signup",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    data: {
+                        username: username,
+                        password: password,
+                        key: org,
+                    },
+                    withCredentials: true,
+                });
 
-        }else{
-
-            response = await axios({
-                method: "post",
-                url: "http://localhost:3000/worker/signup",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                data: {
-                  username: username,
-                  password: password,
-                  key: org
-                },
-                withCredentials: true
-              });
-
-
-              if (response.status === 200) {
-                orgFunc(response.data);
-                navigate('/main')
-        
-              }
-
+                if (response.status === 200) {
+                    orgFunc(response.data);
+                    navigate("/main");
+                }
+            }
+        } catch (error) {
+            console.log(error);
         }
+    };
 
-    }catch(error){
-        console.log(error)
-    }
+    console.log("admin", admin);
 
-    }
-
-    console.log('admin', admin)
-
-
-
-  return (
-
-        
-        <div className = 'container'>
-           
-        <div className = 'inputSection'>
-        <h2>Create Account</h2>
-        {/* <div className = 'nav'>Admin</div> */}
-            <div className = 'inputField'>
-                <h3>Username:</h3>
-                <input value = {username} onChange = {(e)=>setUsername(e.target.value)}></input>
-            </div>
-            <div className = 'inputField'>
-                <h3>Password:</h3>
-                <input type = 'password' value = {password} onChange = {(e)=>setPassword(e.target.value)}></input>
-            </div>
-            <div className = 'radioField'>
-                <h3>Type:</h3>
-                <div>
-                    <input type = 'radio' name='adminSelect' id = 'worker' checked = {!admin} onChange = {handleAdmin}></input>
-                    <label htmlFor='worker' >Employee</label>
+    return (
+        <div className="container">
+            <h2>Create Account</h2>
+            <div className="inputSection">
+                {/* <div className = 'nav'>Admin</div> */}
+                <div className="inputField">
+                    <h3>Username:</h3>
+                    <input
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}></input>
                 </div>
-                <div>
-                <input type = 'radio' name='adminSelect' id = 'admin' checked = {admin} onChange = {handleAdmin}></input>
-                <label htmlFor='admin'>Admin</label>
+                <div className="inputField">
+                    <h3>Password:</h3>
+                    <input
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}></input>
                 </div>
-            </div>
-            {!admin && <div className = 'inputOrg'>
-                <h3>Organization Key:</h3>
-                <input value = {org} onChange = {(e)=>setOrg(e.target.value)}></input>
-            </div>}
-            <div className = 'buttonSection'>
-                <button onClick = {handleSignup}>Create Account</button>
+                <div className="radioField">
+                    <h3>Type:</h3>
+                    <div>
+                        <div>
+                            <input
+                                type="radio"
+                                name="adminSelect"
+                                id="worker"
+                                checked={!admin}
+                                onChange={handleAdmin}></input>
+                            <label htmlFor="worker">Employee</label>
+                        </div>
+                        <div>
+                            <input
+                                type="radio"
+                                name="adminSelect"
+                                id="admin"
+                                checked={admin}
+                                onChange={handleAdmin}></input>
+                            <label htmlFor="admin">Admin</label>
+                        </div>
+                    </div>
+                </div>
+                {!admin && (
+                    <div className="inputOrg">
+                        <h3>Organization Key:</h3>
+                        <input
+                            value={org}
+                            onChange={(e) => setOrg(e.target.value)}></input>
+                    </div>
+                )}
+                <div className="buttonSection">
+                    <button onClick={handleSignup}>Create Account</button>
+                    <button onClick={handleSignup}>Return</button>
+                </div>
             </div>
         </div>
-    </div>
-  )
-}
+    );
+};
 
 export default Signup;

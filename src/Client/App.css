@@ -1,255 +1,406 @@
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
-body{
-  background: radial-gradient(circle at bottom, #0d1e4a 0%, #000000 100%);
-  height: 100vh;
-  /* width: 100vh; */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  color: white;
-  margin: 0px;
-  padding: 0px;
- 
+body {
+    background: radial-gradient(circle at bottom, #0d1e4a 0%, #000000 100%);
+    height: 100vh;
+    /* width: 100vh; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    color: white;
+    margin: 0px;
+    padding: 0px;
+    font-family: "Open Sans", sans-serif;
+    animation-duration: 1s;
 }
 
 #root {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
 }
-
 
 /* Main */
 
-
-#verticalContainer{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
+#verticalContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
 }
 
-#horizontalContainer{
-  display: grid;
-  grid-template-columns: [left] 50% [center ]50% [right];
-  justify-items: center;
-  align-items: center;
-  width: auto;
-  
-
+#horizontalContainer {
+    display: grid;
+    grid-template-columns: [left] 50% [center]50% [right];
+    justify-items: center;
+    align-items: center;
+    width: auto;
 }
 
-.mainContainer{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  /* width: auto; */
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* width: auto; */
 }
 
-.boxContainer{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
+.boxContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
 }
 
-h2{
-  font-family: 'Oswald';
-  font-weight: 400;
-  font-size: 17px;
-  line-height: 26px;
-  letter-spacing: 1px;
-  font-family: 'Montserrat';
-  color: #7B95B0;
-  margin: 5px;
-
+h2 {
+    font-family: "Oswald";
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 26px;
+    letter-spacing: 1px;
+    font-family: "Montserrat";
+    color: #7b95b0;
+    margin: 5px;
 }
 
 .box {
-  width: 480px;
-  height: 200px;
-  border: 3px solid #87A3BF;
-  resize: none;
-  margin-left: 15px;
-  margin-right: 15px;
-  margin-top: 0px;
-  overflow-y: scroll;
-  border-radius: 10px;
-  padding: 20px;
-  font-size: 16px;
-  line-height: 27px;
-  color: white;
-  background-color: #444B61;
-  box-shadow: 0 20px 25px -5px #000, 0 8px 10px -6px #000;
-  outline: none;
-  font-family: 'Lato', sans-serif;
-  letter-spacing: 1%;
-  font-weight:500;
-  position: relative;
-  z-index: 2
-
+    width: 480px;
+    height: 200px;
+    border: 3px solid #87a3bf;
+    resize: none;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-top: 0px;
+    overflow-y: scroll;
+    border-radius: 10px;
+    padding: 20px;
+    font-size: 16px;
+    line-height: 27px;
+    color: white;
+    background-color: #444b61;
+    box-shadow: 0 20px 25px -5px #000, 0 8px 10px -6px #000;
+    outline: none;
+    font-family: "Lato", sans-serif;
+    letter-spacing: 1%;
+    font-weight: 500;
+    position: relative;
+    z-index: 2;
 }
 
-.circleButton{
-  height: 30px;
-  width: 30px;
-  position: absolute;
-  border-radius: 13px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: black;
-  z-index: 1;
-  cursor: pointer;
-  box-shadow: 0 20px 25px -5px #000, 0 8px 10px -6px #000;
-  user-select: none;
+.circleButton {
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    border-radius: 13px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    z-index: 1;
+    cursor: pointer;
+    box-shadow: 0 20px 25px -5px #000, 0 8px 10px -6px #000;
+    user-select: none;
 }
 
-#circleLeft:hover{
-  background-color: #AED5FD
+#circleLeft:hover {
+    background-color: #aed5fd;
 }
 
-#circleRight:hover{
-  background-color: #AED5FD
+#circleRight:hover {
+    background-color: #aed5fd;
 }
 
-#circleLeft{
-  margin-top: 125px;
-  margin-left: -485px;
-  background-color: white;
-
+#circleLeft {
+    margin-top: 125px;
+    margin-left: -485px;
+    background-color: white;
 }
 
-#circleRight{
-  margin-top: 125px;
-  margin-left: 485px;
-  background-color: white;
+#circleRight {
+    margin-top: 125px;
+    margin-left: 485px;
+    background-color: white;
 }
 
 .highlight {
-  background-color: #AED5FD;
-  color: black;
-  border-radius: 5px;
-  font-weight: 800;
-  margin: 8px;
-  padding: 2px 6px 2px 6px;
-  box-shadow: 0 20px 25px -20px #000, 0 8px 10px -10px #000;
-  user-select: auto;
-  cursor: pointer;
+    background-color: #aed5fd;
+    color: black;
+    border-radius: 5px;
+    font-weight: 800;
+    margin: 8px;
+    padding: 2px 6px 2px 6px;
+    box-shadow: 0 20px 25px -20px #000, 0 8px 10px -10px #000;
+    user-select: auto;
+    cursor: pointer;
 }
 
-
-
-button{
-  height: 52px;
-  width: 201px;
-  border-radius: 4px;
-  padding: 12px, 24px, 12px, 24px;
-  font-size: 20px;
-  background-color: transparent;
-  font-family: "Open Sans", sans-serif;
-  cursor: pointer;
-  border: 1px solid #AED5FD;
-  color: #AED5FD; 
-
-
+button {
+    height: 52px;
+    width: 201px;
+    border-radius: 4px;
+    padding: 12px, 24px, 12px, 24px;
+    font-size: 20px;
+    background-color: transparent;
+    font-family: "Open Sans", sans-serif;
+    cursor: pointer;
+    border: 1px solid #aed5fd;
+    color: #aed5fd;
 }
 
-.dropdown{
-  height: 52px;
-  width: 201px;
-  border-radius: 4px;
-  padding: 12px, 24px, 12px, 24px;
-  font-size: 20px;
-  background-color: transparent;
-  font-family: "Open Sans", sans-serif;
-  cursor: pointer;
-  border: 1px solid #AED5FD;
-  color: #AED5FD; 
-  text-align-last:center
-  /* text-align-last:center;
+.dropdown {
+    height: 52px;
+    width: 201px;
+    border-radius: 4px;
+    padding: 12px, 24px, 12px, 24px;
+    font-size: 20px;
+    background-color: transparent;
+    font-family: "Open Sans", sans-serif;
+    cursor: pointer;
+    border: 1px solid #aed5fd;
+    color: #aed5fd;
+    text-align-last: center;
+    /* text-align-last:center;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none; */
 }
 
-
-
-button:hover{
-  background-color: #AED5FD;
-  color: #12287A;
-
-
+button:hover {
+    background-color: #aed5fd;
+    color: #12287a;
 }
 
-#promptBox{
-  user-select: none;
-  background-color: transparent;
-
+#promptBox {
+    user-select: none;
+    background-color: transparent;
 }
 
-.outputBox{
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  height: 250px;
-  border-radius: 10px;
-  width: 880px;
-  padding: 20px;
-  font-size: 16px;
-  background-color: #293147;
-  font-family: "Open Sans", sans-serif;
-  border: 2px solid #96B7D8;
-  color: white;
-  line-height: 28px;
-  font-family: 'Lato', sans-serif;
-  letter-spacing: 1%;
-  font-weight: 400;
-  box-shadow: 0 20px 25px -5px #000, 0 8px 10px -6px #000;
-  overflow-x: scroll;
-
+.outputBox {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: 250px;
+    border-radius: 10px;
+    width: 880px;
+    padding: 20px;
+    font-size: 16px;
+    background-color: #293147;
+    font-family: "Open Sans", sans-serif;
+    border: 2px solid #96b7d8;
+    color: white;
+    line-height: 28px;
+    font-family: "Lato", sans-serif;
+    letter-spacing: 1%;
+    font-weight: 400;
+    box-shadow: 0 20px 25px -5px #000, 0 8px 10px -6px #000;
+    overflow-x: scroll;
 }
 
-.bottomContainer{
-  margin-top: -10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
+.bottomContainer {
+    margin-top: -10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
 }
 
-#mainButtonSection{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 15px;
-  padding: 30px;
-
+#mainButtonSection {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    padding: 30px;
 }
 
 /* nav */
+#logo {
+    width: 30px;
+}
 
-.nav{
-  width: 100%;
-  height: 40px;
-  background-color: #AED5FD;
-  flex-direction: row;
-  display: flex;
-  align-items: center;
-  padding-right: 30px;
-  margin-right: -30px;
-  justify-content: flex-end;
-  margin-bottom: 10px;
-  font-family: "Open Sans", sans-serif;
-  letter-spacing: .5px;
-  font-family: 'Montserrat';
-  font-size: 14px;
-  color: black;
-  font-weight: 500
+.nav {
+    width: 100%;
+    height: 50px;
+    background-color: #aed5fd;
+    flex-direction: row;
+    display: flex;
+    align-items: center;
+    padding-right: 30px;
+    padding-left: 30px;
+    /* margin-right: -30px; */
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-family: "Open Sans", sans-serif;
+    letter-spacing: 0.5px;
+    font-family: "Montserrat";
+    font-size: 14px;
+    color: black;
+    font-weight: 500;
+
+    background-color: #12287a;
+    /* border-bottom: 1px solid white; */
+    background-color: transparent;
+    color: white;
+}
+
+.navList {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    list-style-type: none;
+}
+
+.navList > li {
+    cursor: pointer;
+}
+
+/* login */
+
+.container {
+    width: 100%;
+    height: 100%;
+    /* height: 100vh; */
+    padding-top: 100px;
+    /* height: 100% - 10px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0px;
+}
+
+.container > h2,
+.inputContainer > h2 {
+    font-size: 20px;
+}
+
+.inputContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    /* height: 400px; */
+}
+
+.inputSection {
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 300px;
+    /* height: 400px; */
+    /* background-color: pink; */
+}
+
+.inputSection > h2 {
+    font-size: 40px;
+}
+
+.inputField {
+    width: 330px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.inputField > h3 {
+    font-size: 18px;
+    font-family: "Montserrat";
+    font-weight: 400;
+}
+
+.inputField > input {
+    height: 42px;
+    width: 200px;
+    border-radius: 4px;
+    padding: 12px, 24px, 12px, 24px;
+    font-size: 16px;
+    background-color: black;
+    font-family: "Open Sans", sans-serif;
+    cursor: pointer;
+    border: 1px solid #aed5fd;
+    color: #aed5fd;
+}
+
+input:focus {
+    outline: none;
+    cursor: text;
+}
+
+input:hover {
+    cursor: text;
+    border: 1px solid white;
+}
+
+.radioField {
+    width: 330px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.radioField > div {
+    width: 200px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    /* gap: 20px; */
+    /* padding: 10px; */
+}
+.radioField > h3 {
+    font-size: 18px;
+    font-family: "Montserrat";
+    font-weight: 400;
+}
+
+.button2 {
+    background-color: #12287a;
+    color: white;
+    border: none;
+}
+
+.inputOrg {
+    width: 270px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.inputOrg > input {
+    height: 42px;
+    width: 330px;
+    border-radius: 4px;
+    padding: 12px, 24px, 12px, 24px;
+    font-size: 16px;
+    background-color: black;
+    font-family: "Open Sans", sans-serif;
+    cursor: pointer;
+    border: 1px solid #aed5fd;
+    color: #aed5fd;
+}
+
+.inputOrg > h3 {
+    font-size: 18px;
+    font-family: "Montserrat";
+    font-weight: 400;
+}
+
+.buttonSection {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
 }
