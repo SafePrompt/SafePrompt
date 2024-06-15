@@ -101,12 +101,12 @@ const Main: React.FC<MainProps> = ({ orgKey }) => {
 
         console.log("redact Keyword", redact.keyword);
 
-        if (redact.keyword.length > 0) {
-            for (let el of redact.keyword) {
-                keywordCache[el.type] = 1;
-            }
-        }
-        console.log("keywordCache: ", keywordCache);
+        // if (redact.keyword.length > 0) {
+        //     for (let el of redact.keyword) {
+        //         keywordCache[el.type] = 1;
+        //     }
+        // }
+        // console.log("keywordCache: ", keywordCache);
 
         console.log("replacements: ", replacements);
 
@@ -123,7 +123,7 @@ const Main: React.FC<MainProps> = ({ orgKey }) => {
                 return (
                     <span
                         key={index}
-                        contentEditable
+                        // contentEditable
                         onKeyDown={(e) => handleKeyDown(e, part)}
                         className="highlight editable">
                         {replacement}
