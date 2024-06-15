@@ -16,7 +16,7 @@ const Navigation: React.FunctionComponent<LoggedInProps> = ({ loggedIn }) => {
             </div>
             <ul className="navList">
                 <li onClick={() => navigate("/adminview")}>Admin</li>
-                <li onClick={() => navigate("/")}>
+                <li onClick={() => navigate("/login")}>
                     {loggedIn ? "Logout" : "Login"}
                 </li>
                 {/* <img id="logo" src={SafePromptLogo} /> */}

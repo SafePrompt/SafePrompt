@@ -62,7 +62,12 @@ const token = {
                 );
                 const row: dbResponse[] = exists.rows;
 
-                if (row.length === 1) return res.status(200).json({});
+                console.log("this is the row: ", row);
+
+                res.locals.key = row[0].key;
+
+                if (row.length === 1) return next();
+                // return res.status(200).json({ orgKey: row[0].key });
             }
 
             return res.status(401).json({});

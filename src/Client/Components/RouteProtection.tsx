@@ -4,9 +4,15 @@ import React, { useState, useEffect } from "react";
 
 interface RouteProtectionProps {
     children: React.ReactNode;
+    setConfig: (conf: any) => void; // Example type, adjust as per your actual types
+    setOrgKey: (orgKey: string) => void; // Example type, adjust as per your actual types
 }
 
-const RouteProtection: React.FC<RouteProtectionProps> = ({ children }) => {
+const RouteProtection: React.FC<RouteProtectionProps> = ({
+    children,
+    setConfig,
+    setOrgKey,
+}) => {
     const [permission, setPermission] = useState<boolean | null>(null);
 
     useEffect(() => {
@@ -23,10 +29,12 @@ const RouteProtection: React.FC<RouteProtectionProps> = ({ children }) => {
                     }
                 );
 
-                console.log("Response:", response);
+                console.log("Response.data:", response.data);
 
                 if (response.status === 200) {
                     setPermission(true);
+                    setOrgKey(response.data.orgKey);
+                    setConfig(response.data.config);
                 } else {
                     setPermission(false);
                 }
@@ -42,7 +50,7 @@ const RouteProtection: React.FC<RouteProtectionProps> = ({ children }) => {
     if (permission === null) {
         return <div>Loading...</div>;
     } else if (permission === false) {
-        return <Navigate to="/" />;
+        return <Navigate to="/login" />;
     } else {
         return <>{children}</>;
     }

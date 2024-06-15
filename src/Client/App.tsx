@@ -65,7 +65,7 @@ const App: React.FunctionComponent = () => {
                 <Navigation loggedIn={loggedIn} />
                 <Routes>
                     <Route
-                        path="/"
+                        path="/login"
                         element={
                             <Login
                                 key="Login"
@@ -79,10 +79,12 @@ const App: React.FunctionComponent = () => {
                         element={<Signup key="Signup" orgFunc={setOrg} />}
                     />
                     <Route
-                        path="/main"
+                        path="/"
                         index
                         element={
-                            <RouteProtection>
+                            <RouteProtection
+                                setOrgKey={setOrgKey}
+                                setConfig={setConfig}>
                                 <Main key="Main" orgKey={orgKey} />
                             </RouteProtection>
                         }
@@ -90,7 +92,9 @@ const App: React.FunctionComponent = () => {
                     <Route
                         path="/adminview"
                         element={
-                            <RouteProtection>
+                            <RouteProtection
+                                setOrgKey={setOrgKey}
+                                setConfig={setConfig}>
                                 <AdminView
                                     key="AdminView"
                                     initialEntries={config.entries}

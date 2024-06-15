@@ -69,7 +69,7 @@ const Login: React.FunctionComponent<LoginProps> = ({
                     orgFunc(response.data.key);
                     configFunc(response.data.config);
                     setMessage("");
-                    navigate("/main");
+                    navigate("/");
                 } else {
                     setMessage("Invalid Username/Password");
                 }
