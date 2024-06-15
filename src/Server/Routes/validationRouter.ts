@@ -15,6 +15,7 @@ import currency from "../Controllers/Validation/currency";
 import dictionary from "../Controllers/Validation/dictionary";
 import ssn from "../Controllers/Validation/ssn";
 import ein from "../Controllers/Validation/ein";
+import storage from "../Controllers/Storage/storage";
 
 //query storage
 
@@ -24,6 +25,7 @@ router.post(
     "/",
 
     objectCreation,
+    storage.storePrompt,
     phone,
     email,
     currency,
