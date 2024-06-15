@@ -218,7 +218,8 @@ button:hover {
 
 /* nav */
 #logo {
-    width: 30px;
+    width: 24px;
+    cursor: pointer;
 }
 
 .nav {
@@ -230,7 +231,6 @@ button:hover {
     align-items: center;
     padding-right: 30px;
     padding-left: 30px;
-    /* margin-right: -30px; */
     justify-content: space-between;
     margin-bottom: 10px;
     font-family: "Open Sans", sans-serif;
@@ -239,11 +239,25 @@ button:hover {
     font-size: 14px;
     color: black;
     font-weight: 500;
-
-    background-color: #12287a;
-    /* border-bottom: 1px solid white; */
     background-color: transparent;
     color: white;
+    user-select: none;
+}
+
+#logoSection {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+}
+
+#logoSection > h1 {
+    font-family: "Unica One";
+    font-size: 22px;
+    color: #aed5fd;
+    letter-spacing: 3%;
+    cursor: pointer;
 }
 
 .navList {
@@ -274,8 +288,12 @@ button:hover {
     margin: 0px;
 }
 
+.inputHeader {
+    margin-bottom: 20px;
+}
+
 .container > h2,
-.inputContainer > h2 {
+.inputSection > h2 {
     font-size: 20px;
 }
 
@@ -290,17 +308,24 @@ button:hover {
 .inputSection {
     width: 200px;
     display: flex;
+    gap: 10px;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    height: 300px;
+    /* background-color: pink; */
+    /* height: 300px; */
     /* height: 400px; */
     /* background-color: pink; */
 }
 
-.inputSection > h2 {
-    font-size: 40px;
+.radius {
+    cursor: pointer !important;
+    margin: 2px;
 }
+
+/* .inputSection > h2 {
+    font-size: 40px;
+} */
 
 .inputField {
     width: 330px;
@@ -308,6 +333,8 @@ button:hover {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+
+    /* background-color: pink; */
 }
 
 .inputField > h3 {
@@ -368,6 +395,27 @@ input:hover {
     background-color: #12287a;
     color: white;
     border: none;
+    width: 330px;
+}
+
+.footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 40px;
+    letter-spacing: 1%;
+    width: 330px;
+    /* border: 1px solid white; */
+}
+
+.link {
+    color: #aed5fd;
+    color: #7b95b0;
+    cursor: pointer;
+    font-family: "Montserrat";
+    font-weight: 400;
 }
 
 .inputOrg {

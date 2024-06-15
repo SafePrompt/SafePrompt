@@ -82,8 +82,8 @@ const Login: React.FunctionComponent<LoginProps> = ({
     return (
         <div className="container">
             <div className="inputContainer">
-                <h2>Login</h2>
                 <div className="inputSection">
+                    <h2 className="inputHeader">Login</h2>
                     {/* <h2>Login</h2> */}
                     {/* <div className = 'nav'>Admin</div> */}
                     <div className="inputField">
@@ -108,6 +108,7 @@ const Login: React.FunctionComponent<LoginProps> = ({
                         <div>
                             <div>
                                 <input
+                                    className="radius"
                                     type="radio"
                                     name="adminSelect"
                                     id="worker"
@@ -118,6 +119,7 @@ const Login: React.FunctionComponent<LoginProps> = ({
 
                             <div>
                                 <input
+                                    className="radius"
                                     type="radio"
                                     name="adminSelect"
                                     id="admin"
@@ -132,10 +134,19 @@ const Login: React.FunctionComponent<LoginProps> = ({
                         <button className="button2" onClick={handleLogin}>
                             Login
                         </button>
-                        <button className="button2" onClick={handleSignup}>
+                        {/* <button
+                            id="button2"
+                            className="button2"
+                            onClick={handleSignup}>
                             Create Account
-                        </button>
+                        </button> */}
                     </div>
+                </div>
+                <div className="footer">
+                    <div>Don't have an account?</div>
+                    <a className="link" onClick={handleSignup}>
+                        Sign Up
+                    </a>
                 </div>
             </div>
         </div>
