@@ -72,7 +72,6 @@ const Signup: React.FunctionComponent<SignupProps> = ({ orgFunc }) => {
             <div className="inputContainer">
                 <div className="inputSection">
                     <h2 className="inputHeader">Create Account</h2>
-                    {/* <div className = 'nav'>Admin</div> */}
                     <div className="inputField">
                         <h3>Username</h3>
                         <input

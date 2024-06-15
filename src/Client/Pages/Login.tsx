@@ -84,8 +84,6 @@ const Login: React.FunctionComponent<LoginProps> = ({
             <div className="inputContainer">
                 <div className="inputSection">
                     <h2 className="inputHeader">Login</h2>
-                    {/* <h2>Login</h2> */}
-                    {/* <div className = 'nav'>Admin</div> */}
                     <div className="inputField">
                         <h3>Username</h3>
                         <input
@@ -129,17 +127,10 @@ const Login: React.FunctionComponent<LoginProps> = ({
                             </div>
                         </div>
                     </div>
-                    {/* <p>{message}</p> */}
                     <div className="buttonSection">
                         <button className="button2" onClick={handleLogin}>
                             Login
                         </button>
-                        {/* <button
-                            id="button2"
-                            className="button2"
-                            onClick={handleSignup}>
-                            Create Account
-                        </button> */}
                     </div>
                 </div>
                 <div className="footer">

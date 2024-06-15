@@ -90,9 +90,7 @@ const Main: React.FC<MainProps> = ({ orgKey }) => {
                 });
             }
         });
-        // interface KeywordCache {
-        //     [Key : string] : Number
-        // }
+
         interface KeywordCache {
             [key: string]: number;
         }
@@ -100,13 +98,6 @@ const Main: React.FC<MainProps> = ({ orgKey }) => {
         const keywordCache: KeywordCache = {};
 
         console.log("redact Keyword", redact.keyword);
-
-        // if (redact.keyword.length > 0) {
-        //     for (let el of redact.keyword) {
-        //         keywordCache[el.type] = 1;
-        //     }
-        // }
-        // console.log("keywordCache: ", keywordCache);
 
         console.log("replacements: ", replacements);
 
