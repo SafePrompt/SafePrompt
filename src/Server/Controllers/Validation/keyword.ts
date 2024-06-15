@@ -5,14 +5,6 @@ import AsyncMiddleware from "../../Types/asyncMiddleware";
 import Keyword from "../../Types/db";
 import { Query, QueryResult } from "pg";
 
-/*
-NOTE: we still need to build functionality to populate an organization's keywords in db.
-
-database finds organization specific keywords by organization key.
-
-hardcoded organization key:  "awef23fsdf28$123r",
-*/
-
 const keyword: AsyncMiddleware = async (req, res, next) => {
     try {
         const config = req.body.config;
@@ -77,11 +69,27 @@ const keyword: AsyncMiddleware = async (req, res, next) => {
                 }
             }
 
+            const filteredFailed = failed.filter((f) => f.type !== null) as {
+                found: string;
+                type: string;
+            }[];
+
             //if there are any failed characters, add them to response object
 
-            if (failed.length > 0) {
-                res.locals.object = { ...res.locals.object, keyword: failed };
+            if (filteredFailed.length > 0) {
+                console.log("filteredFailed: ", filteredFailed);
+
+                for (let i: number = 0; i < filteredFailed.length; i++) {
+                    if (filteredFailed[i].type !== "null") {
+                        const type = filteredFailed[i].type.toLowerCase();
+                        if (!res.locals.object[type]) {
+                            res.locals.object[type] = [];
+                        }
+                        res.locals.object[type].push(filteredFailed[i].found);
+                    }
+                }
             }
+            // res.locals.object = { ...res.locals.object, keyword: failed };
         }
 
         return next();
