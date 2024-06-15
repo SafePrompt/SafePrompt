@@ -4,14 +4,16 @@ import React, { useState, useEffect } from "react";
 
 interface RouteProtectionProps {
     children: React.ReactNode;
-    setConfig: (conf: any) => void; // Example type, adjust as per your actual types
-    setOrgKey: (orgKey: string) => void; // Example type, adjust as per your actual types
+    setConfig: (conf: any) => void;
+    setOrgKey: (orgKey: string) => void;
+    setGlobalUsername: (globalUsername: string | null) => void;
 }
 
 const RouteProtection: React.FC<RouteProtectionProps> = ({
     children,
     setConfig,
     setOrgKey,
+    setGlobalUsername,
 }) => {
     const [permission, setPermission] = useState<boolean | null>(null);
 
@@ -35,6 +37,7 @@ const RouteProtection: React.FC<RouteProtectionProps> = ({
                     setPermission(true);
                     setOrgKey(response.data.orgKey);
                     setConfig(response.data.config);
+                    setGlobalUsername(response.data.username);
                 } else {
                     setPermission(false);
                 }

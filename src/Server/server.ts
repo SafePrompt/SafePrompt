@@ -8,6 +8,7 @@ import GPT from "./Routes/GPT";
 import token from "./Controllers/Auth/token";
 import cookieParser from "cookie-parser";
 import config from "./Controllers/Config/config";
+import storageRouter from "./Routes/storageRouter";
 
 import db from "./Models/db";
 
@@ -27,6 +28,8 @@ app.use("/validate", validationRouter);
 
 app.use("/config", configRouter);
 
+app.use("/storage", storageRouter);
+
 app.use("/GPT", GPT);
 
 app.use(
@@ -37,6 +40,7 @@ app.use(
         res.status(200).json({
             orgKey: res.locals.key,
             config: res.locals.config,
+            username: res.locals.username,
         });
     }
 );

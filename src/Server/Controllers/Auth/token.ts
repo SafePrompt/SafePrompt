@@ -65,9 +65,9 @@ const token = {
                 console.log("this is the row: ", row);
 
                 res.locals.key = row[0].key;
+                res.locals.username = username;
 
                 if (row.length === 1) return next();
-                // return res.status(200).json({ orgKey: row[0].key });
             }
 
             return res.status(401).json({});

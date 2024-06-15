@@ -11,9 +11,10 @@ interface Redact {
 
 interface MainProps {
     orgKey: string;
+    username: string | null;
 }
 
-const Main: React.FC<MainProps> = ({ orgKey }) => {
+const Main: React.FC<MainProps> = ({ orgKey, username }) => {
     const [inputText, setInputText] = useState("");
     const [outputText, setOutputText] = useState("");
     const [chatgptResponse, setChatgptResponse] = useState("");
@@ -32,7 +33,7 @@ const Main: React.FC<MainProps> = ({ orgKey }) => {
                     "Content-Type": "application/json",
                 },
                 data: {
-                    user: "Rick",
+                    user: username,
                     key: orgKey,
                     prompt: inputText,
                 },
@@ -180,7 +181,7 @@ const Main: React.FC<MainProps> = ({ orgKey }) => {
                             id="inputBox"
                             value={inputText}
                             onChange={handleChange}
-                            placeholder="Paste your prompt here"></textarea>
+                            placeholder="Write your prompt here"></textarea>
                         <div className="circleButton" id="circleLeft">
                             {}
                         </div>

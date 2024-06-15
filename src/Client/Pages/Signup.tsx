@@ -4,9 +4,13 @@ import { useNavigate } from "react-router-dom";
 
 interface SignupProps {
     orgFunc: (org: string) => void;
+    setGlobalUsername: (username: string | null) => void;
 }
 
-const Signup: React.FunctionComponent<SignupProps> = ({ orgFunc }) => {
+const Signup: React.FunctionComponent<SignupProps> = ({
+    orgFunc,
+    setGlobalUsername,
+}) => {
     const navigate = useNavigate();
 
     const [admin, setAdmin] = useState(false);
@@ -39,6 +43,7 @@ const Signup: React.FunctionComponent<SignupProps> = ({ orgFunc }) => {
                 if (response.status === 200) {
                     orgFunc(response.data);
                     navigate("/adminview");
+                    setGlobalUsername(username);
                 }
             } else {
                 response = await axios({
@@ -57,7 +62,8 @@ const Signup: React.FunctionComponent<SignupProps> = ({ orgFunc }) => {
 
                 if (response.status === 200) {
                     orgFunc(response.data);
-                    navigate("/main");
+                    navigate("/");
+                    setGlobalUsername(username);
                 }
             }
         } catch (error) {

@@ -6,11 +6,13 @@ import "./Login.css";
 interface LoginProps {
     orgFunc: (org: string) => void;
     configFunc: (conf: any) => void;
+    setGlobalUsername: (username: string | null) => void;
 }
 
 const Login: React.FunctionComponent<LoginProps> = ({
     orgFunc,
     configFunc,
+    setGlobalUsername,
 }) => {
     const navigate = useNavigate();
 
@@ -48,6 +50,7 @@ const Login: React.FunctionComponent<LoginProps> = ({
                     configFunc(response.data.config);
                     setMessage("");
                     navigate("/adminview");
+                    setGlobalUsername(username);
                 } else {
                     setMessage("Invalid Username/Password");
                 }
@@ -70,6 +73,7 @@ const Login: React.FunctionComponent<LoginProps> = ({
                     configFunc(response.data.config);
                     setMessage("");
                     navigate("/");
+                    setGlobalUsername(username);
                 } else {
                     setMessage("Invalid Username/Password");
                 }
