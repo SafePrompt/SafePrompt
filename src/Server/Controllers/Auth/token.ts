@@ -1,68 +1,75 @@
 import AsyncMiddleware from "../../Types/asyncMiddleware";
 import Middleware from "../../Types/middleware";
 import db from "../../Models/db";
-import jwt, { JwtPayload } from 'jsonwebtoken';
-import dotenv from 'dotenv';
+import jwt, { JwtPayload } from "jsonwebtoken";
+import dotenv from "dotenv";
 
 dotenv.config();
 
-const jwtKey: string = process.env.JWT_KEY || '';
+const jwtKey: string = process.env.JWT_KEY || "";
 
 const token = {
-
-    
-    setToken:  (req,res,next)=>{
-
+    setToken: (req, res, next) => {
         const username: string = res.locals.username;
 
         const role: string = res.locals.role;
 
-        const token: string = jwt.sign({ username: username, role: role }, jwtKey , { expiresIn: '48h' });
-                  
-        res.cookie('jwtToken',token, { maxAge: 345600000, httpOnly: true, sameSite: 'none', secure: true})
+        const token: string = jwt.sign(
+            { username: username, role: role },
+            jwtKey,
+            { expiresIn: "48h" }
+        );
+
+        res.cookie("jwtToken", token, {
+            maxAge: 345600000,
+            httpOnly: true,
+            sameSite: "none",
+            secure: true,
+        });
 
         return next();
     },
 
-    checkToken:  async (req,res,next)=>{
-        try{
-
+    checkToken: async (req, res, next) => {
+        try {
             const jwtToken: string = req.cookies.jwtToken;
 
-            if (!jwtToken){
+            if (!jwtToken) {
                 return res.status(401).json({});
-            }
-            else{
-
+            } else {
                 interface decoded {
-                    username: string,
-                    role: string
-                } 
+                    username: string;
+                    role: string;
+                }
 
                 interface dbResponse {
-                    username: string,
-                    password: string,
-                    key: string,
-                    admin: boolean
+                    username: string;
+                    password: string;
+                    key: string;
+                    admin: boolean;
                 }
-                const decoded : JwtPayload | string = jwt.verify(jwtToken, jwtKey) as JwtPayload;
+                const decoded: JwtPayload | string = jwt.verify(
+                    jwtToken,
+                    jwtKey
+                ) as JwtPayload;
 
                 const username: string = decoded.username;
-                const admin: boolean = decoded.role === 'admin';
+                const admin: boolean = decoded.role === "admin";
 
-                const exists = await db.query('SELECT * FROM "user" WHERE username = $1 AND admin = $2', [username, admin]);
+                const exists = await db.query(
+                    'SELECT * FROM "user" WHERE username = $1 AND admin = $2',
+                    [username, admin]
+                );
                 const row: dbResponse[] = exists.rows;
 
-                if (row.length === 1) return res.status(200).json({});    
-
+                if (row.length === 1) return res.status(200).json({});
             }
 
             return res.status(401).json({});
-        }catch(error){
-            return next(error)
+        } catch (error) {
+            return next(error);
         }
-    }
+    },
+} as { setToken: Middleware; checkToken: AsyncMiddleware };
 
-} as {setToken: Middleware, checkToken: AsyncMiddleware}
-
-export default token
+export default token;
