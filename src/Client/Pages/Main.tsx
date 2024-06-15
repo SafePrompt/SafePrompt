@@ -80,7 +80,8 @@ const Main: React.FC<MainProps> = ({ orgKey }) => {
         let replacements: { [key: string]: string } = {};
 
         Object.keys(redact).forEach((key) => {
-            if (key !== "prompt") {
+            console.log("key: ", key);
+            if (key !== "prompt" && key !== "keyword") {
                 const values = redact[key] as string[];
                 values.forEach((value, index) => {
                     replacements[value] = `[${
@@ -89,6 +90,25 @@ const Main: React.FC<MainProps> = ({ orgKey }) => {
                 });
             }
         });
+        // interface KeywordCache {
+        //     [Key : string] : Number
+        // }
+        interface KeywordCache {
+            [key: string]: number;
+        }
+
+        const keywordCache: KeywordCache = {};
+
+        console.log("redact Keyword", redact.keyword);
+
+        if (redact.keyword.length > 0) {
+            for (let el of redact.keyword) {
+                keywordCache[el.type] = 1;
+            }
+        }
+        console.log("keywordCache: ", keywordCache);
+
+        console.log("replacements: ", replacements);
 
         const escapedKeywords = Object.keys(replacements).map(escapeRegExp);
         const regexPattern = `(${escapedKeywords.join("|")})`;

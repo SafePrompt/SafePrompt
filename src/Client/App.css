@@ -5,7 +5,6 @@
 body {
     background: radial-gradient(circle at bottom, #0d1e4a 0%, #000000 100%);
     height: 100vh;
-    /* width: 100vh; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -45,7 +44,6 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* width: auto; */
 }
 
 .boxContainer {
@@ -162,10 +160,6 @@ button {
     border: 1px solid #aed5fd;
     color: #aed5fd;
     text-align-last: center;
-    /* text-align-last:center;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none; */
 }
 
 button:hover {
@@ -249,7 +243,7 @@ button:hover {
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    gap: 20px;
+    gap: 10px;
 }
 
 #logoSection > h1 {
@@ -278,9 +272,7 @@ button:hover {
 .container {
     width: 100%;
     height: 100%;
-    /* height: 100vh; */
     padding-top: 100px;
-    /* height: 100% - 10px; */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -302,7 +294,6 @@ button:hover {
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    /* height: 400px; */
 }
 
 .inputSection {
@@ -312,20 +303,12 @@ button:hover {
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    /* background-color: pink; */
-    /* height: 300px; */
-    /* height: 400px; */
-    /* background-color: pink; */
 }
 
 .radius {
     cursor: pointer !important;
     margin: 2px;
 }
-
-/* .inputSection > h2 {
-    font-size: 40px;
-} */
 
 .inputField {
     width: 330px;

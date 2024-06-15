@@ -70,14 +70,10 @@ const AdminView: React.FunctionComponent<AdminViewProps> = ({
             if (selectedFilters.includes("Phone")) initial.phone = true;
             if (selectedFilters.includes("Keyword(s)")) initial.keyword = true;
 
-            console.log("initial:", initial);
-
             const response = axios.post(
                 "http://localhost:3000/config/submit",
                 initial
             );
-
-            console.log("after response from initial");
         }
 
         submitConfig();
