@@ -105,8 +105,8 @@ const App: React.FunctionComponent = () => {
                         index
                         element={
                             <RouteProtection
-                                setPermission={setPermission}
-                                permission={permission}
+                                // setPermission={setPermission}
+                                // permission={permission}
                                 setLoggedIn={setLoggedIn}
                                 setAdmin={setAdmin}
                                 setStorage={setStorage}
@@ -128,8 +128,8 @@ const App: React.FunctionComponent = () => {
                         element={
                             <AdminRouteProtection
                                 // <AdminRouteProtection
-                                setPermission={setPermission}
-                                permission={permission}
+                                // setPermission={setPermission}
+                                // permission={permission}
                                 setLoggedIn={setLoggedIn}
                                 setAdmin={setAdmin}
                                 setStorage={setStorage}

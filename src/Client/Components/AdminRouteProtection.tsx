@@ -10,8 +10,8 @@ interface RouteProtectionProps {
     setStorage: (storage: any) => void;
     setAdmin: (admin: boolean) => void;
     setLoggedIn: (loggedIn: boolean) => void;
-    setPermission: (permission: boolean | null) => void;
-    permission: boolean | null;
+    // setPermission: (permission: boolean | null) => void;
+    // permission: boolean | null;
 }
 
 const RouteProtection: React.FC<RouteProtectionProps> = ({
@@ -22,10 +22,10 @@ const RouteProtection: React.FC<RouteProtectionProps> = ({
     setStorage,
     setAdmin,
     setLoggedIn,
-    setPermission,
-    permission,
+    // setPermission,
+    // permission,
 }) => {
-    // const [permission, setPermission] = useState<boolean | null>(null);
+    const [permission, setPermission] = useState<boolean | null>(null);
 
     useEffect(() => {
         const fetchTokenStatus = async () => {
@@ -78,10 +78,10 @@ const RouteProtection: React.FC<RouteProtectionProps> = ({
     if (permission === null) {
         return <div>Loading...</div>;
     } else if (permission === false) {
-        setPermission(null);
-        return <Navigate to="/login" />;
+        // setPermission(null);
+        return <Navigate to="/" />;
     } else {
-        setPermission(null);
+        // setPermission(null);
         return <>{children}</>;
     }
 };
