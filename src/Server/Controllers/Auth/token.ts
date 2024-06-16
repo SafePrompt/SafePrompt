@@ -66,6 +66,7 @@ const token = {
 
                 res.locals.key = row[0].key;
                 res.locals.username = username;
+                res.locals.admin = admin;
 
                 if (row.length === 1) return next();
             }

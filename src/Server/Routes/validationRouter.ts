@@ -35,7 +35,7 @@ router.post(
     keyword,
 
     (req: Request, res: Response) => {
-        res.send(res.locals.object);
+        res.send({ object: res.locals.object, prompts: res.locals.prompts });
     }
 );
 

@@ -13,9 +13,15 @@ interface MainProps {
     orgKey: string;
     username: string | null;
     storage: string[];
+    setStorage: (storage: string[]) => void;
 }
 
-const Main: React.FC<MainProps> = ({ orgKey, username, storage }) => {
+const Main: React.FC<MainProps> = ({
+    orgKey,
+    username,
+    storage = [],
+    setStorage,
+}) => {
     const [inputText, setInputText] = useState("");
     const [outputText, setOutputText] = useState("");
     const [chatgptResponse, setChatgptResponse] = useState("");
@@ -26,9 +32,14 @@ const Main: React.FC<MainProps> = ({ orgKey, username, storage }) => {
 
     console.log("storage in main: ", storage);
 
-    const options = storage.map((prompt) => {
-        return <option value={prompt}>{prompt}</option>;
-    });
+    const options =
+        storage.length > 0
+            ? storage.map((prompt, index) => (
+                  <option key={index} value={prompt}>
+                      {prompt}
+                  </option>
+              ))
+            : [];
 
     const handleSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setInputText(event.target.value);
@@ -50,7 +61,8 @@ const Main: React.FC<MainProps> = ({ orgKey, username, storage }) => {
                 },
             });
 
-            setRedact(response.data);
+            setRedact(response.data.object);
+            setStorage(response.data.prompts);
         } catch (err) {}
     };
 
@@ -214,7 +226,7 @@ const Main: React.FC<MainProps> = ({ orgKey, username, storage }) => {
                         name="History"
                         className="dropdown"
                         onChange={(e) => handleSelect(e)}>
-                        <option value="--History--">Prompt</option>
+                        <option>Prompt</option>
                         {[options]}
                     </select>
                     <button

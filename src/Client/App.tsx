@@ -30,6 +30,8 @@ const App: React.FunctionComponent = () => {
     const [globalUsername, setGlobalUsername] = useState<string | null>(null);
     const [orgKey, setOrgKey] = useState<string>("");
     const [storage, setStorage] = useState<string[]>([]);
+    const [admin, setAdmin] = useState<boolean>(false);
+
     const [config, setConfig] = useState<configInterface>({
         currency: false,
         ein: false,
@@ -62,7 +64,7 @@ const App: React.FunctionComponent = () => {
     return (
         <div>
             <Router>
-                <Navigation loggedIn={loggedIn} />
+                <Navigation admin={admin} loggedIn={loggedIn} />
                 <Routes>
                     <Route
                         path="/login"
@@ -91,11 +93,13 @@ const App: React.FunctionComponent = () => {
                         index
                         element={
                             <RouteProtection
+                                setAdmin={setAdmin}
                                 setStorage={setStorage}
                                 setOrgKey={setOrgKey}
                                 setConfig={setConfig}
                                 setGlobalUsername={setGlobalUsername}>
                                 <Main
+                                    setStorage={setStorage}
                                     key="Main"
                                     orgKey={orgKey}
                                     storage={storage}
@@ -108,6 +112,7 @@ const App: React.FunctionComponent = () => {
                         path="/adminview"
                         element={
                             <RouteProtection
+                                setAdmin={setAdmin}
                                 setStorage={setStorage}
                                 setOrgKey={setOrgKey}
                                 setConfig={setConfig}

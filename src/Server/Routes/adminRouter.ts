@@ -12,7 +12,7 @@ router.post(
     config.initialize,
     token.setToken,
     (req, res) => {
-        res.status(200).json({ key: res.locals.key });
+        res.status(200).json({ key: res.locals.key, admin: true });
     }
 );
 
@@ -27,6 +27,7 @@ router.post(
             key: res.locals.key,
             config: res.locals.config,
             prompts: res.locals.prompts,
+            admin: true,
         });
     }
 );

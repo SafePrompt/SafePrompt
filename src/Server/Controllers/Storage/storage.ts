@@ -14,12 +14,25 @@ const storage = {
             const prompt: string = res.locals.prompt;
             const key: string = res.locals.key;
 
-            console.log("about to store prompt");
-
+            // const response = await db.query(
+            //     "INSERT INTO storage (username, prompt, key) VALUES ($1, $2, $3)",
+            //     [username, prompt, key]
+            // );
             const response = await db.query(
-                "INSERT INTO storage (username, prompt, key) VALUES ($1, $2, $3)",
+                `WITH inserted AS (
+                    INSERT INTO storage (username, prompt, key)
+                    VALUES ($1, $2, $3)
+                    RETURNING *
+                )
+                SELECT prompt FROM storage WHERE username = $1 AND key = $3`,
                 [username, prompt, key]
             );
+
+            if (response.rows.length > 0) {
+                res.locals.prompts = response.rows
+                    .map((prompt) => prompt.prompt)
+                    .reverse();
+            }
 
             console.log(response);
             return next();
@@ -40,9 +53,9 @@ const storage = {
             );
 
             if (response.rows.length > 0) {
-                res.locals.prompts = response.rows.map(
-                    (prompt) => prompt.prompt
-                );
+                res.locals.prompts = response.rows
+                    .map((prompt) => prompt.prompt)
+                    .reverse();
             }
 
             console.log(response.rows);

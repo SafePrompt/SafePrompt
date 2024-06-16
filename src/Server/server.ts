@@ -44,6 +44,7 @@ app.use(
             config: res.locals.config,
             username: res.locals.username,
             prompts: res.locals.prompts,
+            admin: res.locals.admin,
         });
     }
 );

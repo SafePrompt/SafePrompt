@@ -193,6 +193,11 @@ button:hover {
     overflow-x: scroll;
 }
 
+select option {
+    background: blue;
+    color: white;
+}
+
 .bottomContainer {
     margin-top: -10px;
     display: flex;
