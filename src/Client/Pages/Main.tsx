@@ -44,16 +44,6 @@ const Main: React.FC<MainProps> = ({
             : [];
 
     const handleLeft = () => {
-        // const prompt = inputText;
-        // if (storage.includes(prompt)) {
-        //     for (let i: number = 0; i < storage.length; i++) {
-        //         if (storage[i] === "prompt") {
-        //             if (storage[i - 1]) setInputText(storage[i - 1]);
-        //         }
-        //     }
-        // } else {
-        //     setInputText(storage[0]);
-        // }
         if (index + 1 >= storage.length) setInputText(storage[index]);
         else {
             setInputText(storage[index + 1]);
@@ -62,16 +52,6 @@ const Main: React.FC<MainProps> = ({
     };
 
     const handleRight = () => {
-        // const prompt = inputText;
-        // if (storage.includes(prompt)) {
-        //     for (let i: number = 0; i < storage.length; i++) {
-        //         if (storage[i] === "prompt") {
-        //             if (storage[i - 1]) setInputText(storage[i - 1]);
-        //         }
-        //     }
-        // } else {
-        //     setInputText(storage[0]);
-        // }
         if (index - 1 <= 0) setInputText(storage[index]);
         else {
             setInputText(storage[index - 1]);
@@ -147,7 +127,6 @@ const Main: React.FC<MainProps> = ({
         let replacements: { [key: string]: string } = {};
 
         Object.keys(redact).forEach((key) => {
-            console.log("key: ", key);
             if (key !== "prompt" && key !== "keyword") {
                 const values = redact[key] as string[];
                 values.forEach((value, index) => {
@@ -163,10 +142,6 @@ const Main: React.FC<MainProps> = ({
         }
 
         const keywordCache: KeywordCache = {};
-
-        console.log("redact Keyword", redact.keyword);
-
-        console.log("replacements: ", replacements);
 
         const escapedKeywords = Object.keys(replacements).map(escapeRegExp);
         const regexPattern = `(${escapedKeywords.join("|")})`;
@@ -199,11 +174,6 @@ const Main: React.FC<MainProps> = ({
     //write function to grab text and send it to
     const getChatgptResponse = async () => {
         try {
-            console.log(
-                "Submitting redacted prompt to ChatGPT. Prompt: ",
-                redactedText
-            );
-            console.log("about to hit response");
             let response = await axios({
                 method: "post",
                 url: "http://localhost:3000/GPT/submit",
@@ -215,11 +185,8 @@ const Main: React.FC<MainProps> = ({
                 },
             });
 
-            console.log("Response from ChatGPT:", response.data);
             setChatgptResponse(response.data);
-        } catch (err) {
-            console.log("Error fetching data:", err);
-        }
+        } catch (err) {}
     };
 
     const submitToOpenai = async () => {
@@ -237,7 +204,6 @@ const Main: React.FC<MainProps> = ({
 
     return (
         <div className="mainContainer">
-            {/* <MenuBar /> */}
             <div id="verticalContainer">
                 <div id="horizontalContainer">
                     <div className="boxContainer">
@@ -272,6 +238,8 @@ const Main: React.FC<MainProps> = ({
                 </div>
                 <div id="mainButtonSection">
                     <select
+                        // value={storage[index]}
+                        
                         name="History"
                         className="dropdown"
                         onChange={(e) => handleSelect(e)}>
