@@ -6,7 +6,7 @@ import Signup from "./Pages/Signup";
 import AdminView from "./Pages/AdminView";
 import Navigation from "./Components/Navigation";
 import RouteProtection from "./Components/RouteProtection";
-import AdminRouteProtection from "./Components/RouteProtection";
+import AdminRouteProtection from "./Components/AdminRouteProtection";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -63,6 +63,8 @@ const App: React.FunctionComponent = () => {
     function setConfiguration(conf: any) {
         setConfig(conf);
     }
+
+    console.log("admin status: ", admin);
 
     return (
         <div>
@@ -125,6 +127,7 @@ const App: React.FunctionComponent = () => {
                         path="/adminview"
                         element={
                             <AdminRouteProtection
+                                // <AdminRouteProtection
                                 setPermission={setPermission}
                                 permission={permission}
                                 setLoggedIn={setLoggedIn}
@@ -132,6 +135,7 @@ const App: React.FunctionComponent = () => {
                                 setStorage={setStorage}
                                 setOrgKey={setOrgKey}
                                 setConfig={setConfig}
+                                // admin={admin}
                                 setGlobalUsername={setGlobalUsername}>
                                 <AdminView
                                     key="AdminView"

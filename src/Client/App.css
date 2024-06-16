@@ -7,6 +7,8 @@ input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
     -webkit-box-shadow: 0 0 0 30px black inset !important;
+    -webkit-text-fill-color: #aed5fd;
+    -webkit-font-family: "Open Sans", sans-serif;
 }
 
 body {
