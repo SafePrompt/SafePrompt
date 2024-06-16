@@ -25,6 +25,7 @@ const token = {
             httpOnly: true,
             sameSite: "none",
             secure: true,
+            path: "/",
         });
 
         return next();
@@ -76,6 +77,35 @@ const token = {
             return next(error);
         }
     },
-} as { setToken: Middleware; checkToken: AsyncMiddleware };
+
+    removeToken: (req, res, next) => {
+        try {
+            // res.cookie("jwtToken", "token", {
+            //     maxAge: 1,
+            //     httpOnly: true,
+            //     sameSite: "none",
+            //     secure: true,
+            // });
+
+            console.log("about to clear cookie");
+            res.clearCookie("jwtToken", {
+                httpOnly: true,
+                sameSite: "none",
+                secure: true,
+                path: "/",
+            });
+
+            console.log("Cookie after clearing:", req.cookies.jwtToken);
+
+            return next();
+        } catch (error) {
+            return next(error);
+        }
+    },
+} as {
+    setToken: Middleware;
+    checkToken: AsyncMiddleware;
+    removeToken: Middleware;
+};
 
 export default token;

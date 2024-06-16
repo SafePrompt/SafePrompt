@@ -64,7 +64,11 @@ const App: React.FunctionComponent = () => {
     return (
         <div>
             <Router>
-                <Navigation admin={admin} loggedIn={loggedIn} />
+                <Navigation
+                    setLoggedIn={setLoggedIn}
+                    admin={admin}
+                    loggedIn={loggedIn}
+                />
                 <Routes>
                     <Route
                         path="/login"

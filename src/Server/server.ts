@@ -33,6 +33,10 @@ app.use("/storage", storageRouter);
 
 app.use("/GPT", GPT);
 
+app.get("/logout", token.removeToken, (req: Request, res: Response) => {
+    res.status(200).json({});
+});
+
 app.use(
     "/checkToken",
     token.checkToken,
