@@ -41,9 +41,9 @@ const RouteProtection: React.FC<RouteProtectionProps> = ({
                     }
                 );
 
-                console.log("Response.data:", response.data);
+                console.log("Response.data.admin:", response.data.admin);
 
-                if (response.status === 200) {
+                if (response.status === 200 && response.data.admin) {
                     setPermission(true);
                     setOrgKey(response.data.orgKey);
                     setConfig(response.data.config);
@@ -68,9 +68,11 @@ const RouteProtection: React.FC<RouteProtectionProps> = ({
     if (permission === null) {
         return <div>Loading...</div>;
     } else if (permission === false) {
+        console.log("about to navigate");
         setPermission(null);
-        return <Navigate to="/login" />;
+        return <Navigate to="/" />;
     } else {
+        console.log("about to render child");
         return <>{children}</>;
     }
 };
