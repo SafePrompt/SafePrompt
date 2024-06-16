@@ -27,8 +27,13 @@ const Main: React.FC<MainProps> = ({ orgKey, username, storage }) => {
     console.log("storage in main: ", storage);
 
     const options = storage.map((prompt) => {
-        return <option>{prompt}</option>;
+        return <option value={prompt}>{prompt}</option>;
     });
+
+    const handleSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setInputText(event.target.value);
+    };
+
     const validatePrompt = async () => {
         console.log("Submitting validation for prompt");
         try {
@@ -205,7 +210,10 @@ const Main: React.FC<MainProps> = ({ orgKey, username, storage }) => {
                     </div>
                 </div>
                 <div id="mainButtonSection">
-                    <select name="History" className="dropdown">
+                    <select
+                        name="History"
+                        className="dropdown"
+                        onChange={(e) => handleSelect(e)}>
                         <option value="--History--">Prompt</option>
                         {[options]}
                     </select>
