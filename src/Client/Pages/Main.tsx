@@ -27,10 +27,12 @@ const Main: React.FC<MainProps> = ({
     const [chatgptResponse, setChatgptResponse] = useState("");
     const [redactedText, setRedactedText] = useState("");
     const [redact, setRedact] = useState<Redact | null>(null);
+    const [index, setIndex] = useState<number>(0);
 
     const [htmlOutput, setHtmlOutput] = useState<any>(null);
 
     console.log("storage in main: ", storage);
+    console.log("index", index);
 
     const options =
         storage.length > 0
@@ -41,7 +43,48 @@ const Main: React.FC<MainProps> = ({
               ))
             : [];
 
+    const handleLeft = () => {
+        // const prompt = inputText;
+        // if (storage.includes(prompt)) {
+        //     for (let i: number = 0; i < storage.length; i++) {
+        //         if (storage[i] === "prompt") {
+        //             if (storage[i - 1]) setInputText(storage[i - 1]);
+        //         }
+        //     }
+        // } else {
+        //     setInputText(storage[0]);
+        // }
+        if (index + 1 >= storage.length) setInputText(storage[index]);
+        else {
+            setInputText(storage[index + 1]);
+            setIndex((i: number) => i + 1);
+        }
+    };
+
+    const handleRight = () => {
+        // const prompt = inputText;
+        // if (storage.includes(prompt)) {
+        //     for (let i: number = 0; i < storage.length; i++) {
+        //         if (storage[i] === "prompt") {
+        //             if (storage[i - 1]) setInputText(storage[i - 1]);
+        //         }
+        //     }
+        // } else {
+        //     setInputText(storage[0]);
+        // }
+        if (index - 1 <= 0) setInputText(storage[index]);
+        else {
+            setInputText(storage[index - 1]);
+            setIndex((i: number) => i - 1);
+        }
+    };
+
     const handleSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        const i: number = storage.findIndex(
+            (ind) => ind === event.target.value
+        );
+        setIndex(i);
+
         setInputText(event.target.value);
     };
 
@@ -205,10 +248,16 @@ const Main: React.FC<MainProps> = ({
                             value={inputText}
                             onChange={handleChange}
                             placeholder="Write your prompt here"></textarea>
-                        <div className="circleButton" id="circleLeft">
+                        <div
+                            className="circleButton"
+                            onClick={handleLeft}
+                            id="circleLeft">
                             {}
                         </div>
-                        <div className="circleButton" id="circleRight">
+                        <div
+                            className="circleButton"
+                            onClick={handleRight}
+                            id="circleRight">
                             {}
                         </div>
                     </div>
@@ -226,7 +275,7 @@ const Main: React.FC<MainProps> = ({
                         name="History"
                         className="dropdown"
                         onChange={(e) => handleSelect(e)}>
-                        <option>Prompt</option>
+                        <option></option>
                         {[options]}
                     </select>
                     <button
