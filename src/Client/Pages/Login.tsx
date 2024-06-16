@@ -7,12 +7,14 @@ interface LoginProps {
     orgFunc: (org: string) => void;
     configFunc: (conf: any) => void;
     setGlobalUsername: (username: string | null) => void;
+    setStorage: (storage: any) => void;
 }
 
 const Login: React.FunctionComponent<LoginProps> = ({
     orgFunc,
     configFunc,
     setGlobalUsername,
+    setStorage,
 }) => {
     const navigate = useNavigate();
 
@@ -49,6 +51,7 @@ const Login: React.FunctionComponent<LoginProps> = ({
                     orgFunc(response.data.key);
                     configFunc(response.data.config);
                     setMessage("");
+                    setStorage(response.data.prompts);
                     navigate("/adminview");
                     setGlobalUsername(username);
                 } else {
@@ -72,6 +75,7 @@ const Login: React.FunctionComponent<LoginProps> = ({
                     orgFunc(response.data.key);
                     configFunc(response.data.config);
                     setMessage("");
+                    setStorage(response.data.prompts);
                     navigate("/");
                     setGlobalUsername(username);
                 } else {

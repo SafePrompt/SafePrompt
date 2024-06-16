@@ -7,6 +7,7 @@ interface RouteProtectionProps {
     setConfig: (conf: any) => void;
     setOrgKey: (orgKey: string) => void;
     setGlobalUsername: (globalUsername: string | null) => void;
+    setStorage: (storage: any) => void;
 }
 
 const RouteProtection: React.FC<RouteProtectionProps> = ({
@@ -14,6 +15,7 @@ const RouteProtection: React.FC<RouteProtectionProps> = ({
     setConfig,
     setOrgKey,
     setGlobalUsername,
+    setStorage,
 }) => {
     const [permission, setPermission] = useState<boolean | null>(null);
 
@@ -38,6 +40,7 @@ const RouteProtection: React.FC<RouteProtectionProps> = ({
                     setOrgKey(response.data.orgKey);
                     setConfig(response.data.config);
                     setGlobalUsername(response.data.username);
+                    setStorage(response.data.prompts);
                 } else {
                     setPermission(false);
                 }

@@ -9,6 +9,7 @@ import token from "./Controllers/Auth/token";
 import cookieParser from "cookie-parser";
 import config from "./Controllers/Config/config";
 import storageRouter from "./Routes/storageRouter";
+import storage from "./Controllers/Storage/storage";
 
 import db from "./Models/db";
 
@@ -35,12 +36,14 @@ app.use("/GPT", GPT);
 app.use(
     "/checkToken",
     token.checkToken,
+    storage.getPrompts,
     config.request,
     (req: Request, res: Response) => {
         res.status(200).json({
             orgKey: res.locals.key,
             config: res.locals.config,
             username: res.locals.username,
+            prompts: res.locals.prompts,
         });
     }
 );

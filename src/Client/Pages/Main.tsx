@@ -12,9 +12,10 @@ interface Redact {
 interface MainProps {
     orgKey: string;
     username: string | null;
+    storage: string[];
 }
 
-const Main: React.FC<MainProps> = ({ orgKey, username }) => {
+const Main: React.FC<MainProps> = ({ orgKey, username, storage }) => {
     const [inputText, setInputText] = useState("");
     const [outputText, setOutputText] = useState("");
     const [chatgptResponse, setChatgptResponse] = useState("");
@@ -23,6 +24,11 @@ const Main: React.FC<MainProps> = ({ orgKey, username }) => {
 
     const [htmlOutput, setHtmlOutput] = useState<any>(null);
 
+    console.log("storage in main: ", storage);
+
+    const options = storage.map((prompt) => {
+        return <option>{prompt}</option>;
+    });
     const validatePrompt = async () => {
         console.log("Submitting validation for prompt");
         try {
@@ -201,6 +207,7 @@ const Main: React.FC<MainProps> = ({ orgKey, username }) => {
                 <div id="mainButtonSection">
                     <select name="History" className="dropdown">
                         <option value="--History--">Prompt</option>
+                        {[options]}
                     </select>
                     <button
                         onClick={handleCheckPrompt}

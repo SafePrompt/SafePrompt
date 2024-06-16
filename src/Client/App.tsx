@@ -26,12 +26,10 @@ const App: React.FunctionComponent = () => {
         ssn: boolean;
     }
 
-    interface storage {}
-
     const [loggedIn, setLoggedIn] = useState<boolean>(false);
     const [globalUsername, setGlobalUsername] = useState<string | null>(null);
     const [orgKey, setOrgKey] = useState<string>("");
-    const [storage, setStorage] = useState<storage[] | null>(null);
+    const [storage, setStorage] = useState<string[]>([]);
     const [config, setConfig] = useState<configInterface>({
         currency: false,
         ein: false,
@@ -52,8 +50,6 @@ const App: React.FunctionComponent = () => {
     if (config.phone) settings.push("Phone");
     if (config.email) settings.push("Email");
     if (config.keyword) settings.push("Keyword(s)");
-
-    console.log("globalUsername: ", globalUsername);
 
     function setOrg(org: string) {
         setOrgKey(org);
@@ -76,6 +72,7 @@ const App: React.FunctionComponent = () => {
                                 configFunc={setConfiguration}
                                 orgFunc={setOrg}
                                 setGlobalUsername={setGlobalUsername}
+                                setStorage={setStorage}
                             />
                         }
                     />
@@ -94,12 +91,14 @@ const App: React.FunctionComponent = () => {
                         index
                         element={
                             <RouteProtection
+                                setStorage={setStorage}
                                 setOrgKey={setOrgKey}
                                 setConfig={setConfig}
                                 setGlobalUsername={setGlobalUsername}>
                                 <Main
                                     key="Main"
                                     orgKey={orgKey}
+                                    storage={storage}
                                     username={globalUsername}
                                 />
                             </RouteProtection>
@@ -109,6 +108,7 @@ const App: React.FunctionComponent = () => {
                         path="/adminview"
                         element={
                             <RouteProtection
+                                setStorage={setStorage}
                                 setOrgKey={setOrgKey}
                                 setConfig={setConfig}
                                 setGlobalUsername={setGlobalUsername}>

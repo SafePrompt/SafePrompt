@@ -28,15 +28,28 @@ const storage = {
         }
     },
     getPrompts: async (req, res, next) => {
-        const username: string = res.locals.user;
+        try {
+            const key: string = res.locals.key;
 
-        const response = await db.query(
-            "SELECT prompt FROM storage WHERE USERNAME = $1",
-            [username]
-        );
+            const username: string = res.locals.username;
 
-        console.log(response.rows);
-        return next();
+            console.log("about to query for prompts");
+            const response = await db.query(
+                'SELECT prompt FROM storage WHERE username = $1 AND "key" = $2',
+                [username, key]
+            );
+
+            if (response.rows.length > 0) {
+                res.locals.prompts = response.rows.map(
+                    (prompt) => prompt.prompt
+                );
+            }
+
+            console.log(response.rows);
+            return next();
+        } catch (error) {
+            return next(error);
+        }
     },
 } as {
     storePrompt: AsyncMiddleware;

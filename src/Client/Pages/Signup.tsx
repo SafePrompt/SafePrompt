@@ -41,7 +41,7 @@ const Signup: React.FunctionComponent<SignupProps> = ({
                 });
 
                 if (response.status === 200) {
-                    orgFunc(response.data);
+                    orgFunc(response.data.key);
                     navigate("/adminview");
                     setGlobalUsername(username);
                 }
@@ -61,7 +61,7 @@ const Signup: React.FunctionComponent<SignupProps> = ({
                 });
 
                 if (response.status === 200) {
-                    orgFunc(response.data);
+                    orgFunc(response.data.key);
                     navigate("/");
                     setGlobalUsername(username);
                 }
