@@ -31,6 +31,7 @@ const App: React.FunctionComponent = () => {
     const [orgKey, setOrgKey] = useState<string>("");
     const [storage, setStorage] = useState<string[]>([]);
     const [admin, setAdmin] = useState<boolean>(false);
+    const [permission, setPermission] = useState<boolean | null>(null);
 
     const [config, setConfig] = useState<configInterface>({
         currency: false,
@@ -65,6 +66,7 @@ const App: React.FunctionComponent = () => {
         <div>
             <Router>
                 <Navigation
+                    permission={permission}
                     setLoggedIn={setLoggedIn}
                     admin={admin}
                     loggedIn={loggedIn}
@@ -74,6 +76,7 @@ const App: React.FunctionComponent = () => {
                         path="/login"
                         element={
                             <Login
+                                setLoggedIn={setLoggedIn}
                                 key="Login"
                                 configFunc={setConfiguration}
                                 orgFunc={setOrg}
@@ -86,6 +89,7 @@ const App: React.FunctionComponent = () => {
                         path="/signup"
                         element={
                             <Signup
+                                setLoggedIn={setLoggedIn}
                                 key="Signup"
                                 orgFunc={setOrg}
                                 setGlobalUsername={setGlobalUsername}
@@ -97,6 +101,9 @@ const App: React.FunctionComponent = () => {
                         index
                         element={
                             <RouteProtection
+                                setPermission={setPermission}
+                                permission={permission}
+                                setLoggedIn={setLoggedIn}
                                 setAdmin={setAdmin}
                                 setStorage={setStorage}
                                 setOrgKey={setOrgKey}
@@ -116,6 +123,9 @@ const App: React.FunctionComponent = () => {
                         path="/adminview"
                         element={
                             <RouteProtection
+                                setPermission={setPermission}
+                                permission={permission}
+                                setLoggedIn={setLoggedIn}
                                 setAdmin={setAdmin}
                                 setStorage={setStorage}
                                 setOrgKey={setOrgKey}

@@ -8,6 +8,7 @@ interface LoggedInProps {
     loggedIn: boolean;
     admin: boolean;
     setLoggedIn: (LoggedIn: boolean) => void;
+    permission: boolean | null;
 }
 
 const Navigation: React.FunctionComponent<LoggedInProps> = ({
@@ -17,18 +18,20 @@ const Navigation: React.FunctionComponent<LoggedInProps> = ({
 }) => {
     const navigate = useNavigate();
 
-    const handleLogIn = async () => {
-        setLoggedIn(!loggedIn);
-        // await axios.get("http://localhost:3000/logout");
+    const handleLogIn = async (login: boolean) => {
+        if (login) {
+            setLoggedIn(false);
+            // await axios.get("http://localhost:3000/logout");
 
-        await axios({
-            method: "GET",
-            url: "http://localhost:3000/logout",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            withCredentials: true,
-        });
+            await axios({
+                method: "GET",
+                url: "http://localhost:3000/logout",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                withCredentials: true,
+            });
+        }
 
         navigate("/login");
     };
@@ -40,9 +43,16 @@ const Navigation: React.FunctionComponent<LoggedInProps> = ({
                 <h1>safePrompt</h1>
             </div>
             <ul className="navList">
-                {admin && <li onClick={() => navigate("/adminview")}>Admin</li>}
-                {loggedIn && <li onClick={handleLogIn}>Log Out</li>}
-                {!loggedIn && <li onClick={handleLogIn}>Log In</li>}
+                {admin && loggedIn && (
+                    <li onClick={() => navigate("/")}>Query</li>
+                )}
+                {admin && loggedIn && (
+                    <li onClick={() => navigate("/adminview")}>Settings</li>
+                )}
+                {loggedIn && <li onClick={() => handleLogIn(true)}>Log Out</li>}
+                {!loggedIn && (
+                    <li onClick={() => handleLogIn(false)}>Log In</li>
+                )}
             </ul>
         </nav>
     );

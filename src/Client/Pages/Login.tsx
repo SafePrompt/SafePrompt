@@ -8,6 +8,7 @@ interface LoginProps {
     configFunc: (conf: any) => void;
     setGlobalUsername: (username: string | null) => void;
     setStorage: (storage: any) => void;
+    setLoggedIn: (loggedIn: boolean) => void;
 }
 
 const Login: React.FunctionComponent<LoginProps> = ({
@@ -15,6 +16,7 @@ const Login: React.FunctionComponent<LoginProps> = ({
     configFunc,
     setGlobalUsername,
     setStorage,
+    setLoggedIn,
 }) => {
     const navigate = useNavigate();
 
@@ -52,8 +54,9 @@ const Login: React.FunctionComponent<LoginProps> = ({
                     configFunc(response.data.config);
                     setMessage("");
                     setStorage(response.data.prompts);
-                    navigate("/adminview");
+                    navigate("/");
                     setGlobalUsername(username);
+                    setLoggedIn(true);
                 } else {
                     setMessage("Invalid Username/Password");
                 }
@@ -78,6 +81,7 @@ const Login: React.FunctionComponent<LoginProps> = ({
                     setStorage(response.data.prompts);
                     navigate("/");
                     setGlobalUsername(username);
+                    setLoggedIn(true);
                 } else {
                     setMessage("Invalid Username/Password");
                 }

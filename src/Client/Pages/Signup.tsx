@@ -5,11 +5,13 @@ import { useNavigate } from "react-router-dom";
 interface SignupProps {
     orgFunc: (org: string) => void;
     setGlobalUsername: (username: string | null) => void;
+    setLoggedIn: (loggedIn: boolean) => void;
 }
 
 const Signup: React.FunctionComponent<SignupProps> = ({
     orgFunc,
     setGlobalUsername,
+    setLoggedIn,
 }) => {
     const navigate = useNavigate();
 
@@ -44,6 +46,7 @@ const Signup: React.FunctionComponent<SignupProps> = ({
                     orgFunc(response.data.key);
                     navigate("/adminview");
                     setGlobalUsername(username);
+                    setLoggedIn(true);
                 }
             } else {
                 response = await axios({
@@ -64,6 +67,7 @@ const Signup: React.FunctionComponent<SignupProps> = ({
                     orgFunc(response.data.key);
                     navigate("/");
                     setGlobalUsername(username);
+                    setLoggedIn(true);
                 }
             }
         } catch (error) {

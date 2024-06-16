@@ -9,6 +9,9 @@ interface RouteProtectionProps {
     setGlobalUsername: (globalUsername: string | null) => void;
     setStorage: (storage: any) => void;
     setAdmin: (admin: boolean) => void;
+    setLoggedIn: (loggedIn: boolean) => void;
+    setPermission: (permission: boolean | null) => void;
+    permission: boolean | null;
 }
 
 const RouteProtection: React.FC<RouteProtectionProps> = ({
@@ -18,8 +21,11 @@ const RouteProtection: React.FC<RouteProtectionProps> = ({
     setGlobalUsername,
     setStorage,
     setAdmin,
+    setLoggedIn,
+    setPermission,
+    permission,
 }) => {
-    const [permission, setPermission] = useState<boolean | null>(null);
+    // const [permission, setPermission] = useState<boolean | null>(null);
 
     useEffect(() => {
         const fetchTokenStatus = async () => {
@@ -44,6 +50,7 @@ const RouteProtection: React.FC<RouteProtectionProps> = ({
                     setGlobalUsername(response.data.username);
                     setAdmin(response.data.admin);
                     setStorage(response.data.prompts);
+                    setLoggedIn(true);
                 } else {
                     setPermission(false);
                 }
