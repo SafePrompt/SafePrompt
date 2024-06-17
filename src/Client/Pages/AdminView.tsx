@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./AdminView.css";
 import axios from "axios";
+import copy from "../../Assets/copypastevector.png";
+import { useNavigate } from "react-router-dom";
 
 interface entries {
     keyword: string;
@@ -36,6 +38,7 @@ const AdminView: React.FunctionComponent<AdminViewProps> = ({
     settings,
     initialEntries,
 }) => {
+    const navigate = useNavigate();
     const filters: string[] = [
         "Currency",
         "Email",
@@ -87,8 +90,6 @@ const AdminView: React.FunctionComponent<AdminViewProps> = ({
         );
     };
 
-    console.log("entries state: ", entries);
-
     interface keyword {
         type: string;
         keyword: string;
@@ -106,21 +107,37 @@ const AdminView: React.FunctionComponent<AdminViewProps> = ({
         }
     };
 
+    const copyToClipboard = async (text: string) => {
+        try {
+            await navigator.clipboard.writeText(text);
+            // alert(`Copied to clipboard!`);
+        } catch (err) {
+            console.error("Failed to copy: ", err);
+            alert("Failed to copy to clipboard. Please try again manually.");
+        }
+    };
+
     const handleDelete = (index: number) => {
         setEntries(entries.filter((_, i) => i !== index));
     };
 
     return (
         <div className="mainContainer">
-            <h2>Admin View</h2>
+            <h2>SETTINGS</h2>
             <div className="adminSplitScreen">
                 <div className="leftSection">
                     <h3>Organization Key</h3>
                     <div className="orgAndButton">
                         <input className="orgKey" value={org} readOnly></input>
-                        <div className="copy"></div>
+                        <div
+                            className="copy"
+                            onClick={() => copyToClipboard(org)}
+                            style={{ backgroundImage: `url(${copy})` }}></div>
                     </div>
-                    <button className="button2" id="workerButton">
+                    <button
+                        className="button2"
+                        id="workerButton"
+                        onClick={() => navigate("/signup")}>
                         Create Worker Account
                     </button>
                     <h3>Redaction Settings</h3>
