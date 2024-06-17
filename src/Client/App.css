@@ -493,7 +493,7 @@ input:hover {
     border: none;
 
     background-color: white;
-    background-color: #444b61;
+    background-color: black;
 }
 
 .orgAndButton {
@@ -567,6 +567,7 @@ input:hover {
     cursor: pointer;
     border: 1px solid #aed5fd;
     color: #aed5fd;
+    cursor: text;
 }
 
 .entry-item {
@@ -604,6 +605,7 @@ input:hover {
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
+    margin-left: 20px;
     width: 100%;
 }
 
@@ -611,12 +613,16 @@ input:hover {
     width: 100px;
     height: 30px;
     font-size: 16px;
+    background-color: #12287a;
+    color: white;
+    border: none;
 }
 
 .entryHeader {
     display: grid;
     margin-bottom: 20px;
-    width: 200px;
+    width: 100%;
+    /* width: 200px; */
     margin: 0px;
     grid-template-columns: [left] 39%[leftCenter] 25% [rightCenter] 40% [right];
 }
@@ -624,9 +630,10 @@ input:hover {
 .entryColumn {
     display: flex;
     flex-direction: column;
+    width: 400px;
     gap: 5px;
     height: 500px;
-    background-color: pink;
+
     overflow-y: scroll;
     overflow-x: hidden;
 }
