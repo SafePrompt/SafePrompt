@@ -465,7 +465,12 @@ input:hover {
     grid-template-columns: [left]50%[center] 50%[right];
     width: 900px;
     height: 600px;
-    filter: drop-shadow(5px 5px 5px rgb(0, 0, 0, 30%));
+    box-shadow: 0 20px 20px -20px #000, 0 20px 20px -6px #000;
+
+    /* filter: drop-shadow(5px 5px 5px rgb(0, 0, 0, 30%)); */
+    /* border: 4px solid #7b95b0; */
+    /* border-radius: 20px; */
+
     /* box-shadow: 0 10px 15px -2px #000, 0 8px 10px -3px #000; */
 }
 
@@ -484,8 +489,13 @@ input:hover {
     background-color: black;
 
     background-color: transparent;
-    background-color: #1e1e27;
+    /* background-color: #1e1e27; */
+    /* background-color: black; */
     color: white;
+    border-left: 3px solid #667b92;
+    border-top: 3px solid #667b92;
+    border-bottom: 3px solid #667b92;
+    /* border: 3px solid black; */
 }
 
 .leftSection > h3 {
@@ -496,7 +506,7 @@ input:hover {
 
 .rightSection {
     box-sizing: border-box; /* Ensure it respects box-sizing */
-
+    border: 4px solid white;
     background-color: green;
     display: flex;
     flex-direction: column;
@@ -508,6 +518,10 @@ input:hover {
     background-color: white;
     background-color: black;
     background-color: #3f3f56;
+    /* border: 4px solid #7b95b0; */
+    background-color: #1e1e27;
+    background-color: transparent;
+    border: 3px solid #667b92;
     border-radius: 0px 20px 20px 0px;
 }
 
@@ -539,8 +553,9 @@ input:hover {
 
     background-size: 20px;
     background-repeat: no-repeat;
+    box-shadow: 0 2px 2px -5px #000, 0 2px 5px -6px #000;
 
-    filter: drop-shadow(5px 5px 5px rgb(0, 0, 0, 10%));
+    /* filter: drop-shadow(5px 5px 5px rgb(0, 0, 0, 10%)); */
 }
 
 .copy:hover {
@@ -562,9 +577,13 @@ input:hover {
 }
 
 #workerButton {
+    /* font-size: 18px !important; */
+    /* background-color: #3f3f56; */
     width: 100%;
     font-size: 20px;
-    filter: drop-shadow(5px 5px 5px rgb(0, 0, 0, 10%));
+    box-shadow: 0 2px 2px -5px #000, 0 2px 5px -6px #000;
+
+    /* filter: drop-shadow(5px 5px 5px rgb(0, 0, 0, 30%)); */
 }
 
 .filterList {
@@ -654,11 +673,16 @@ input:hover {
     border: none;
     background-color: white;
     color: black;
-    filter: drop-shadow(5px 5px 5px rgb(0, 0, 0, 10%));
+    box-shadow: 0 2px 2px -5px #000, 0 2px 5px -6px #000;
+    background-color: black;
+    background-color: #12287a;
+    color: white;
+    /* filter: drop-shadow(5px 5px 5px rgb(0, 0, 0, 10%)); */
 }
 
 .entryHeader {
     display: grid;
+    text-decoration: underline;
     /* margin-bottom: 20px; */
 
     width: 100%;
@@ -675,6 +699,7 @@ input:hover {
     width: 400px;
     gap: 5px;
     height: 500px;
+    color: #aed5fd;
 
     overflow-y: scroll;
     overflow-x: hidden;

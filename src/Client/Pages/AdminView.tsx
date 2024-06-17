@@ -155,7 +155,7 @@ const AdminView: React.FunctionComponent<AdminViewProps> = ({
                             </li>
                         ))}
                     </ul>
-                    <h3>Add Keyword and Type:</h3>
+                    <h3>Add Keyword and Category:</h3>
                     <form className="keywordForm" onSubmit={handleSubmit}>
                         <div className="filterLine">
                             <input
@@ -177,7 +177,7 @@ const AdminView: React.FunctionComponent<AdminViewProps> = ({
                             type="submit"
                             className="button2"
                             id="workerButton">
-                            Submit
+                            Add
                         </button>
                     </form>
                 </div>
@@ -226,70 +226,6 @@ const AdminView: React.FunctionComponent<AdminViewProps> = ({
                     )}
                 </div>
             </div>
-
-            {/* <h3>Organization Key</h3>
-            <input className="orgKey" value={org} readOnly></input>
-            <h3>Filters:</h3>
-            <ul className="no-bullets">
-                {filters.map((filter) => (
-                    <li key={filter} className="filter-item">
-                        <label>
-                            <input
-                                type="checkbox"
-                                value={filter}
-                                checked={selectedFilters.includes(filter)}
-                                onChange={() => handleFilterChange(filter)}
-                            />{" "}
-                            {filter}
-                        </label>
-                    </li>
-                ))}
-            </ul>
-            <p>Selected filters: {selectedFilters.join(", ") || "None"}</p>
-
-            <h3>Add Keyword and Type:</h3>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>
-                        Keyword:
-                        <input
-                            type="text"
-                            value={keyword}
-                            onChange={(e) => setKeyword(e.target.value)}
-                            placeholder="Enter keyword"
-                        />
-                    </label>
-                </div>
-                <div>
-                    <label>
-                        Type:
-                        <input
-                            type="text"
-                            value={type}
-                            onChange={(e) => setType(e.target.value)}
-                            placeholder="Enter type"
-                        />
-                    </label>
-                </div>
-                <button type="submit">Submit</button>
-            </form>
-
-            {entries.length > 0 && (
-                <>
-                    <h3>Entries:</h3>
-                    <ul className="no-bullets">
-                        {entries.map((entry, index) => (
-                            <li key={index} className="entry-item">
-                                Keyword: <strong>{entry.keyword}</strong>, Type:{" "}
-                                <strong>{entry.type}</strong>
-                                <button onClick={() => handleDelete(index)}>
-                                    Delete
-                                </button>
-                            </li>
-                        ))}
-                    </ul>
-                </>
-            )} */}
         </div>
     );
 };
