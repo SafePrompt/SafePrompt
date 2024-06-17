@@ -89,6 +89,11 @@ const AdminView: React.FunctionComponent<AdminViewProps> = ({
 
     console.log("entries state: ", entries);
 
+    interface keyword {
+        type: string;
+        keyword: string;
+    }
+
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         if (keyword.trim() && type.trim()) {
@@ -106,9 +111,94 @@ const AdminView: React.FunctionComponent<AdminViewProps> = ({
     };
 
     return (
-        <div>
+        <div className="mainContainer">
             <h2>Admin View</h2>
-            <h3>Organization Key</h3>
+            <div className="adminSplitScreen">
+                <div className="leftSection">
+                    <h3>Organization Key</h3>
+                    <div className="orgAndButton">
+                        <input className="orgKey" value={org} readOnly></input>
+                        <div className="copy"></div>
+                    </div>
+                    <button className="button2" id="workerButton">
+                        Create Worker Account
+                    </button>
+                    <h3>Redaction Settings</h3>
+                    <ul className="filterList">
+                        {filters.map((filter) => (
+                            <li key={filter} className="filterItem">
+                                <input
+                                    className="filterCheckbox"
+                                    type="checkbox"
+                                    value={filter}
+                                    checked={selectedFilters.includes(filter)}
+                                    onChange={() => handleFilterChange(filter)}
+                                />{" "}
+                                {filter}
+                            </li>
+                        ))}
+                    </ul>
+                    <h3>Add Keyword and Type:</h3>
+                    <form className="keywordForm" onSubmit={handleSubmit}>
+                        <div className="filterLine">
+                            <input
+                                type="text"
+                                value={keyword}
+                                onChange={(e) => setKeyword(e.target.value)}
+                                placeholder="Enter Keyword"
+                            />
+                        </div>
+                        <div className="filterLine">
+                            <input
+                                type="text"
+                                value={type}
+                                onChange={(e) => setType(e.target.value)}
+                                placeholder="Enter Category"
+                            />
+                        </div>
+                        <button
+                            type="submit"
+                            className="button2"
+                            id="workerButton">
+                            Submit
+                        </button>
+                    </form>
+                </div>
+
+                <div className="rightSection">
+                    <div className="entryHeader">
+                        <h3>Keyword</h3>
+                        <h3>Category</h3>
+                    </div>
+                    {entries.length > 0 && (
+                        <ul className="filterList">
+                            <div className="entryColumn">
+                                {entries.map((entry, index) => (
+                                    <li key={index} className="entry-item">
+                                        <div className="keywordEntry">
+                                            {entry.keyword}
+                                        </div>
+                                        <div className="typeEntry">
+                                            {entry.type}
+                                        </div>
+                                        <div className="deleteEntry">
+                                            <button
+                                                className="deleteButton"
+                                                onClick={() =>
+                                                    handleDelete(index)
+                                                }>
+                                                Delete
+                                            </button>
+                                        </div>
+                                    </li>
+                                ))}
+                            </div>
+                        </ul>
+                    )}
+                </div>
+            </div>
+
+            {/* <h3>Organization Key</h3>
             <input className="orgKey" value={org} readOnly></input>
             <h3>Filters:</h3>
             <ul className="no-bullets">
@@ -170,7 +260,7 @@ const AdminView: React.FunctionComponent<AdminViewProps> = ({
                         ))}
                     </ul>
                 </>
-            )}
+            )} */}
         </div>
     );
 };
