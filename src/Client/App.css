@@ -582,8 +582,13 @@ input:hover {
     width: 100%;
     font-size: 20px;
     box-shadow: 0 2px 2px -5px #000, 0 2px 5px -6px #000;
-
+    /* background-color: #444b61; */
     /* filter: drop-shadow(5px 5px 5px rgb(0, 0, 0, 30%)); */
+}
+
+#workerButton:hover {
+    background-color: #aed5fd;
+    color: #12287a;
 }
 
 .filterList {

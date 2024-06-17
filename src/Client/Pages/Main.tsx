@@ -239,11 +239,11 @@ const Main: React.FC<MainProps> = ({
                 <div id="mainButtonSection">
                     <select
                         // value={storage[index]}
-                        
+
                         name="History"
                         className="dropdown"
                         onChange={(e) => handleSelect(e)}>
-                        <option></option>
+                        <option>History</option>
                         {[options]}
                     </select>
                     <button
