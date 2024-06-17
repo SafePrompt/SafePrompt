@@ -190,25 +190,37 @@ const AdminView: React.FunctionComponent<AdminViewProps> = ({
                     {entries.length > 0 && (
                         <ul className="filterList">
                             <div className="entryColumn">
-                                {entries.map((entry, index) => (
-                                    <li key={index} className="entry-item">
-                                        <div className="keywordEntry">
-                                            {entry.keyword}
-                                        </div>
-                                        <div className="typeEntry">
-                                            {entry.type}
-                                        </div>
-                                        <div className="deleteEntry">
-                                            <button
-                                                className="deleteButton"
-                                                onClick={() =>
-                                                    handleDelete(index)
-                                                }>
-                                                Delete
-                                            </button>
-                                        </div>
-                                    </li>
-                                ))}
+                                {entries
+                                    .sort((a, b) => {
+                                        // Compare by type first
+                                        if (a.type < b.type) return -1;
+                                        if (a.type > b.type) return 1;
+
+                                        // If types are the same, compare by keyword
+                                        if (a.keyword < b.keyword) return -1;
+                                        if (a.keyword > b.keyword) return 1;
+
+                                        return 0; // Objects are equal
+                                    })
+                                    .map((entry, index) => (
+                                        <li key={index} className="entry-item">
+                                            <div className="keywordEntry">
+                                                {entry.keyword}
+                                            </div>
+                                            <div className="typeEntry">
+                                                {entry.type}
+                                            </div>
+                                            <div className="deleteEntry">
+                                                <button
+                                                    className="deleteButton"
+                                                    onClick={() =>
+                                                        handleDelete(index)
+                                                    }>
+                                                    Delete
+                                                </button>
+                                            </div>
+                                        </li>
+                                    ))}
                             </div>
                         </ul>
                     )}
