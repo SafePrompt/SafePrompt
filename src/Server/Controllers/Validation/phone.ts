@@ -10,14 +10,7 @@ const phone: middleware = (req, res, next) => {
     try {
         const config = res.locals.config;
 
-        console.log("config, phone: ", config);
-
         if (!config.phone) return next();
-
-        console.log(
-            "this is the config from req.body.config",
-            res.locals.config
-        );
 
         let prompt: string = res.locals.prompt;
         const failed: string[] = [];
@@ -34,6 +27,7 @@ const phone: middleware = (req, res, next) => {
         const phone10: RegExp = /\+\d{1} \d{3}-\d{3}-\d{4}/;
         const phone11: RegExp = /\+\d{1} \(\d{3}\) \d{3} \d{4}/;
         const phone12: RegExp = /\+\d{12}/;
+        const phone13: RegExp = /\(\d{3}\) \d{3}-\d{4}/;
 
         if (
             phone1.test(prompt) ||
@@ -47,7 +41,8 @@ const phone: middleware = (req, res, next) => {
             phone9.test(prompt) ||
             phone10.test(prompt) ||
             phone11.test(prompt) ||
-            phone12.test(prompt)
+            phone12.test(prompt) ||
+            phone13.test(prompt)
         ) {
             let i: number = 0;
             const startExp: RegExp = /[1234567890+(]/;
@@ -64,7 +59,8 @@ const phone: middleware = (req, res, next) => {
                 phone9.test(prompt) ||
                 phone10.test(prompt) ||
                 phone11.test(prompt) ||
-                phone12.test(prompt)
+                phone12.test(prompt) ||
+                phone13.test(prompt)
             ) {
                 if (startExp.test(prompt[i])) {
                     if (phone1.test(prompt.slice(i, i + 10))) {
@@ -114,6 +110,10 @@ const phone: middleware = (req, res, next) => {
                     } else if (phone12.test(prompt.slice(i, i + 13))) {
                         failed.push(prompt.slice(i, i + 13));
                         prompt = prompt.slice(i + 13);
+                        i = 0;
+                    } else if (phone13.test(prompt.slice(i, i + 14))) {
+                        failed.push(prompt.slice(i, i + 14));
+                        prompt = prompt.slice(i + 14);
                         i = 0;
                     } else {
                         i++;

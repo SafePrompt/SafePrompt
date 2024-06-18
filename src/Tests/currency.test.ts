@@ -169,4 +169,21 @@ describe("Currency Unit Test", () => {
         expect(res.locals!.object).toEqual({ currency: ["₧5.000"] });
         expect(next).toHaveBeenCalled();
     });
+
+    it("Should remove accidental phone numbers", () => {
+        res.locals!.prompt =
+            "string $1234567890 with more";
+        res.locals!.object = { phone: ["1234567890"] };
+
+        currency(
+            req as Request,
+            res as Response,
+            next as unknown as NextFunction
+        );
+        expect(res.locals!.object).toEqual({
+            currency: ["$1234567890"],
+            phone: [],
+        });
+        expect(next).toHaveBeenCalled();
+    });
 });
