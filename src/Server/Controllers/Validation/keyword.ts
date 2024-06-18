@@ -7,7 +7,7 @@ import { Query, QueryResult } from "pg";
 
 const keyword: AsyncMiddleware = async (req, res, next) => {
     try {
-        const config = req.body.config;
+        const config = res.locals.config;
         if (!config.keyword) return next();
 
         const prompt: string = res.locals.prompt;

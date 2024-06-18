@@ -4,7 +4,7 @@ const ein: middleware = (req, res, next) => {
 
     try{
 
-        const config = req.body.config;
+        const config = res.locals.config;
         if (!config.ein) return next();
 
         const prompt:string = res.locals.prompt;

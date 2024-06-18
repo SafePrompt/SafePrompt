@@ -7,7 +7,7 @@ const phone: middleware = (req,res,next)=>{
 
     try{
 
-    const config = req.body.config;
+    const config = res.locals.config;
 
     console.log('config, phone: ', config);
     

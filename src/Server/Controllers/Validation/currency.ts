@@ -2,7 +2,7 @@ import middleware from "../../Types/middleware";
 
 const currency: middleware = (req, res, next) => {
     try {
-        const config = req.body.config;
+        const config = res.locals.config;
         if (!config.currency) return next();
 
         let prompt: string = res.locals.prompt;

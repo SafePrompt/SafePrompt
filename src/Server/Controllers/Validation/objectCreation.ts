@@ -24,7 +24,7 @@ const objectCreation = async (
             [key]
         );
 
-        req.body.config = configResponse.rows[0];
+        res.locals.config = configResponse.rows[0];
 
         if (
             typeof key !== "string" ||
