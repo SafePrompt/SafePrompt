@@ -2,7 +2,7 @@ import { beforeEach, describe, it, expect, jest } from "@jest/globals";
 import currency from "../Server/Controllers/Validation/currency";
 import { Request, Response, NextFunction } from "express";
 
-describe("Currency Middleware", () => {
+describe("Currency Unit Test", () => {
     let req: Partial<Request>;
     let res: Partial<Response>;
     let next: jest.Mock<NextFunction>;
@@ -24,6 +24,17 @@ describe("Currency Middleware", () => {
 
     it("Should not modify res.locals.object when no currency is found", () => {
         res.locals!.prompt = "a string sans numbers";
+        currency(
+            req as Request,
+            res as Response,
+            next as unknown as NextFunction
+        );
+        expect(res.locals!.object).toEqual({});
+        expect(next).toHaveBeenCalled();
+    });
+    it("Should not modify res.locals.object when config.currency is false", () => {
+        res.locals!.config.currency = false;
+        res.locals!.prompt = "a string with $1000 numbers";
         currency(
             req as Request,
             res as Response,
@@ -130,7 +141,6 @@ describe("Currency Middleware", () => {
         expect(res.locals!.object).toEqual({ currency: ["$13.00", "$5"] });
         expect(next).toHaveBeenCalled();
     });
-    
 
     //$€¥£₹₽₩₺₪₫฿₴₦₵₣₤₧₱ƒ₲₡₭₸₮៛؋₿
     it("Should detect foreign currencies", () => {
