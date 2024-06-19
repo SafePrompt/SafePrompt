@@ -1,22 +1,18 @@
-import middleware from '../../Types/middleware'
+import middleware from "../../Types/middleware";
 
-const email:middleware = (req,res,next)=>{
-
-    try{
-
+const email: middleware = (req, res, next) => {
+    try {
         const config = res.locals.config;
         if (!config.email) return next();
 
-        const prompt:string = req.body.prompt;
+        const prompt: string = res.locals.prompt;
 
-        if (prompt.includes('@')){
-
+        if (prompt.includes("@")) {
             const failed: string[] = [];
 
-            const words :string[] = prompt.split(" ");
+            const words: string[] = prompt.split(" ");
 
-            for (let i:number = 0; i < words.length; i++){
-
+            for (let i: number = 0; i < words.length; i++) {
                 /*
                 check all strings to see if any are email addresses:
 
@@ -29,24 +25,28 @@ const email:middleware = (req,res,next)=>{
 
                 */
 
-                if (words[i].includes('@') && !/[^a-zA-Z@.]+/.test(words[i]) && words[i][0]!== '@' && words[i][words[i].length-1] !== '@' && words[i].includes('.')){
-                    failed.push(words[i])
+                if (
+                    words[i].includes("@") &&
+                    !/[^a-zA-Z@.]+/.test(words[i]) &&
+                    words[i][0] !== "@" &&
+                    words[i][words[i].length - 1] !== "@" &&
+                    words[i].includes(".")
+                ) {
+                    failed.push(words[i]);
                 }
-
             }
 
             //if any email addresses exist, place them on the response object
-            if (words.length > 0){
-                res.locals.object = {...res.locals.object, email: failed}
+            if (words.length > 0) {
+                res.locals.object = { ...res.locals.object, email: failed };
             }
-            return next()
-
+            return next();
         } else {
-            return next()
+            return next();
         }
-    }catch(error){
-        return next(error)
+    } catch (error) {
+        return next(error);
     }
-}
+};
 
 export default email;
