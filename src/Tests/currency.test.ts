@@ -171,8 +171,7 @@ describe("Currency Unit Test", () => {
     });
 
     it("Should remove accidental phone numbers", () => {
-        res.locals!.prompt =
-            "string $1234567890 with more";
+        res.locals!.prompt = "string $1234567890 with more";
         res.locals!.object = { phone: ["1234567890"] };
 
         currency(
