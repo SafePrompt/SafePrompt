@@ -185,4 +185,12 @@ describe("Currency Unit Test", () => {
         });
         expect(next).toHaveBeenCalled();
     });
+
+    it("Should pass blank object if currency config is disabled", () => {
+        res.locals!.config.currency = false;
+        res.locals!.prompt = "181-233-8232 hello this string ends with";
+        currency(req as Request, res as Response, next as unknown as NextFunction);
+        expect(res.locals!.object).toEqual({});
+        expect(next).toHaveBeenCalled();
+    });
 });

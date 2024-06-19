@@ -2,7 +2,7 @@ import { beforeEach, describe, it, expect, jest } from "@jest/globals";
 import phone from "../Server/Controllers/Validation/phone";
 import { Request, Response, NextFunction } from "express";
 
-describe("Phone Unit Tests", () => {
+describe("Phone Unit Test", () => {
     let req: Partial<Request>;
     let res: Partial<Response>;
     let next: jest.Mock<NextFunction>;
@@ -95,11 +95,11 @@ describe("Phone Unit Tests", () => {
         expect(next).toHaveBeenCalled();
     });
 
-    // it("should not identify $1234567890 as phone number", () => {
-    //     res.locals!.prompt =
-    //         "At $1234567890 little overpriced.";
-    //     phone(req as Request, res as Response, next as unknown as NextFunction);
-    //     expect(res.locals!.object).toEqual({});
-    //     expect(next).toHaveBeenCalled();
-    // });
+    it("Should pass blank object if phone config is disabled", () => {
+        res.locals!.config.phone = false;
+        res.locals!.prompt = "181-233-8232 hello this string ends with";
+        phone(req as Request, res as Response, next as unknown as NextFunction);
+        expect(res.locals!.object).toEqual({});
+        expect(next).toHaveBeenCalled();
+    });
 });
