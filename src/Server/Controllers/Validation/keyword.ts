@@ -19,6 +19,8 @@ const keyword: AsyncMiddleware = async (req, res, next) => {
             `SELECT * FROM keyword WHERE key = $1`,
             [key]
         );
+
+        console.log("results:", results);
         const keywordsFull: Keyword[] = results.rows;
 
         //remove all unnecessary data
