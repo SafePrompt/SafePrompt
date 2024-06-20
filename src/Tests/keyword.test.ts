@@ -101,8 +101,6 @@ describe("Keyword Unit Test", () => {
             next as unknown as NextFunction
         );
 
-        console.log(res.locals!.object);
-        console.log(res.locals!.key);
         expect(res.locals!.object).toEqual({
             keyword: [{ found: "Los Angeles", type: "Location" }],
         });

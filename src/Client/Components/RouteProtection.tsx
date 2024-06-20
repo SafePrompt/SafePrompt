@@ -30,7 +30,6 @@ const RouteProtection: React.FC<RouteProtectionProps> = ({
     useEffect(() => {
         const fetchTokenStatus = async () => {
             try {
-                console.log("Attempting to fetch token status...");
                 const response = await axios.get(
                     "http://localhost:3000/checkToken",
                     {
@@ -40,8 +39,6 @@ const RouteProtection: React.FC<RouteProtectionProps> = ({
                         withCredentials: true,
                     }
                 );
-
-                console.log("Response.data:", response.data);
 
                 if (response.status === 200) {
                     setPermission(true);
@@ -55,15 +52,12 @@ const RouteProtection: React.FC<RouteProtectionProps> = ({
                     setPermission(false);
                 }
             } catch (error) {
-                console.error("Error checking token:", error);
                 setPermission(false);
             }
         };
 
         fetchTokenStatus();
     }, []);
-
-    console.log("permission status:", permission);
 
     if (permission === null) {
         return <div>Loading...</div>;

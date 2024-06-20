@@ -70,12 +70,8 @@ const Signup: React.FunctionComponent<SignupProps> = ({
                     setLoggedIn(true);
                 }
             }
-        } catch (error) {
-            console.log(error);
-        }
+        } catch (error) {}
     };
-
-    console.log("admin", admin);
 
     return (
         <div className="container">

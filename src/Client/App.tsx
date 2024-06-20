@@ -64,8 +64,6 @@ const App: React.FunctionComponent = () => {
         setConfig(conf);
     }
 
-    console.log("admin status: ", admin);
-
     return (
         <div>
             <Router>

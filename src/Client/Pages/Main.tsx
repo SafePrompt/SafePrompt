@@ -31,9 +31,6 @@ const Main: React.FC<MainProps> = ({
 
     const [htmlOutput, setHtmlOutput] = useState<any>(null);
 
-    console.log("storage in main: ", storage);
-    console.log("index", index);
-
     const options =
         storage.length > 0
             ? storage.map((prompt, index) => (
@@ -69,7 +66,6 @@ const Main: React.FC<MainProps> = ({
     };
 
     const validatePrompt = async () => {
-        console.log("Submitting validation for prompt");
         try {
             let response = await axios({
                 method: "post",

@@ -20,7 +20,6 @@ const keyword: AsyncMiddleware = async (req, res, next) => {
             [key]
         );
 
-        console.log("results:", results);
         const keywordsFull: Keyword[] = results.rows;
 
         //remove all unnecessary data
@@ -79,8 +78,6 @@ const keyword: AsyncMiddleware = async (req, res, next) => {
             //if there are any failed characters, add them to response object
 
             if (filteredFailed.length > 0) {
-                console.log("filteredFailed: ", filteredFailed);
-
                 for (let i: number = 0; i < filteredFailed.length; i++) {
                     if (filteredFailed[i].type !== "null") {
                         const type = filteredFailed[i].type.toLowerCase();
@@ -91,7 +88,6 @@ const keyword: AsyncMiddleware = async (req, res, next) => {
                     }
                 }
             }
-            // res.locals.object = { ...res.locals.object, keyword: failed };
         }
 
         return next();

@@ -63,8 +63,6 @@ const token = {
                 );
                 const row: dbResponse[] = exists.rows;
 
-                console.log("this is the row: ", row);
-
                 res.locals.key = row[0].key;
                 res.locals.username = username;
                 res.locals.admin = admin;
@@ -87,15 +85,12 @@ const token = {
             //     secure: true,
             // });
 
-            console.log("about to clear cookie");
             res.clearCookie("jwtToken", {
                 httpOnly: true,
                 sameSite: "none",
                 secure: true,
                 path: "/",
             });
-
-            console.log("Cookie after clearing:", req.cookies.jwtToken);
 
             return next();
         } catch (error) {

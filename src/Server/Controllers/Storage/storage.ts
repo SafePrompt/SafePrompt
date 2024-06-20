@@ -34,7 +34,6 @@ const storage = {
                     .reverse();
             }
 
-            console.log(response);
             return next();
         } catch (error) {
             return next(error);
@@ -46,7 +45,6 @@ const storage = {
 
             const username: string = res.locals.username;
 
-            console.log("about to query for prompts");
             const response = await db.query(
                 'SELECT prompt FROM storage WHERE username = $1 AND "key" = $2',
                 [username, key]
@@ -58,7 +56,6 @@ const storage = {
                     .reverse();
             }
 
-            console.log(response.rows);
             return next();
         } catch (error) {
             return next(error);
