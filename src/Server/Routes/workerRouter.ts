@@ -1,17 +1,35 @@
-import express, {Request, Response} from 'express';
-import worker from '../Controllers/Auth/worker';
+import express, { Request, Response } from "express";
+import worker from "../Controllers/Auth/worker";
+import config from "../Controllers/Config/config";
+import token from "../Controllers/Auth/token";
+import storage from "../Controllers/Storage/storage";
 
-const router =  express.Router();
+const router = express.Router();
 
-router.post('/signup', worker.signup, (req,res)=>{
-        res.status(200).json(res.locals.key)
-    }),
+router.post(
+    "/signup",
+    worker.signup,
+    token.setToken,
 
-router.post('/login', worker.login, (req,res)=>{
-        res.status(200).json(res.locals.key)
-    })
+    (req, res) => {
+        res.status(200).json({ key: res.locals.key, admin: false });
+    }
+),
+    router.post(
+        "/login",
+        worker.login,
+        config.request,
+        token.setToken,
+        storage.getPrompts,
 
-    
+        (req, res) => {
+            res.status(200).json({
+                key: res.locals.key,
+                config: res.locals.config,
+                prompts: res.locals.prompts,
+                admin: false,
+            });
+        }
+    );
 
-
-export default router
+export default router;

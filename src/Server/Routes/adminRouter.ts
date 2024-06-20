@@ -1,27 +1,35 @@
-import express, {Request, Response} from 'express';
-import admin from '../Controllers/Auth/admin';
+import express, { Request, Response } from "express";
+import admin from "../Controllers/Auth/admin";
+import config from "../Controllers/Config/config";
+import token from "../Controllers/Auth/token";
+import storage from "../Controllers/Storage/storage";
 
-const router =  express.Router();
+const router = express.Router();
 
-router.post('/signup', 
+router.post(
+    "/signup",
     admin.signup,
+    config.initialize,
+    token.setToken,
+    (req, res) => {
+        res.status(200).json({ key: res.locals.key, admin: true });
+    }
+);
 
-
-    (req,res)=>{
-    res.status(200).json(res.locals.key)
-   
-})
-
-router.post('/login', 
+router.post(
+    "/login",
     admin.login,
+    token.setToken,
+    config.request,
+    storage.getPrompts,
+    (req, res) => {
+        res.status(200).json({
+            key: res.locals.key,
+            config: res.locals.config,
+            prompts: res.locals.prompts,
+            admin: true,
+        });
+    }
+);
 
-
-    (req,res)=>{
-    res.status(200).json(res.locals.key)
-   
-})
-
-
-export default router
-
-
+export default router;

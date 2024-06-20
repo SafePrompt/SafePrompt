@@ -1,28 +1,44 @@
-import {Request, Response, NextFunction} from 'express'
+import { Request, Response, NextFunction } from "express";
 
-import middleware from '../../Types/middleware'
+import AsyncMiddleware from "../../Types/asyncMiddleware";
+import db from "../../Models/db";
 
-const objectCreation: middleware = (req, res, next)=>{
+const objectCreation = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+    try {
+        const { prompt, key, user } = req.body as {
+            prompt: string;
+            key: string;
+            user: string;
+        };
 
- try{
+        const configResponse = await db.query(
+            "SELECT * FROM config WHERE key = $1;",
+            [key]
+        );
 
-    const { prompt, key, user } = req.body as { prompt: string; key: string; user: string };
+        res.locals.config = configResponse.rows[0];
 
-    if (typeof key !== 'string' || typeof prompt !== 'string' || typeof user !== 'string'){
-        return res.status(400).send('Invalid request body');
+        if (
+            typeof key !== "string" ||
+            typeof prompt !== "string" ||
+            typeof user !== "string"
+        ) {
+            return res.status(400).send("Invalid request body");
+        }
+
+        res.locals.object = { prompt: prompt };
+        res.locals.user = user;
+        res.locals.key = key;
+        res.locals.prompt = prompt;
+
+        return next();
+    } catch (error) {
+        return next(error);
     }
-
-    res.locals.object = {prompt: prompt}
-    res.locals.user = user
-    res.locals.key = key
-    res.locals.prompt = prompt
-
-    return next()
-
-    } catch(error){
-        return next(error)
-    }
-}
-
+};
 
 export default objectCreation;

@@ -1,44 +1,37 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import "./Login.css";
+import { useNavigate } from "react-router-dom";
 
-interface LoginProps {
+interface SignupProps {
     orgFunc: (org: string) => void;
-    configFunc: (conf: any) => void;
     setGlobalUsername: (username: string | null) => void;
-    setStorage: (storage: any) => void;
     setLoggedIn: (loggedIn: boolean) => void;
 }
 
-const Login: React.FunctionComponent<LoginProps> = ({
+const Signup: React.FunctionComponent<SignupProps> = ({
     orgFunc,
-    configFunc,
     setGlobalUsername,
-    setStorage,
     setLoggedIn,
 }) => {
     const navigate = useNavigate();
 
-    const handleSignup = () => navigate("/signup");
-
     const [admin, setAdmin] = useState(false);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [message, setMessage] = useState("");
+    const [org, setOrg] = useState("");
 
     const handleAdmin = () => {
         setAdmin((adminState) => !adminState);
     };
 
-    const handleLogin = async () => {
+    const handleSignup = async () => {
         try {
             let response;
 
             if (admin) {
                 response = await axios({
                     method: "post",
-                    url: "http://localhost:3000/admin/login",
+                    url: "http://localhost:3000/admin/signup",
                     headers: {
                         "Content-Type": "application/json",
                     },
@@ -51,51 +44,40 @@ const Login: React.FunctionComponent<LoginProps> = ({
 
                 if (response.status === 200) {
                     orgFunc(response.data.key);
-                    configFunc(response.data.config);
-                    setMessage("");
-                    setStorage(response.data.prompts);
-                    navigate("/");
+                    navigate("/adminview");
                     setGlobalUsername(username);
                     setLoggedIn(true);
-                } else {
-                    setMessage("Invalid Username/Password");
                 }
             } else {
                 response = await axios({
                     method: "post",
-                    url: "http://localhost:3000/worker/login",
+                    url: "http://localhost:3000/worker/signup",
                     headers: {
                         "Content-Type": "application/json",
                     },
                     data: {
                         username: username,
                         password: password,
+                        key: org,
                     },
                     withCredentials: true,
                 });
 
                 if (response.status === 200) {
                     orgFunc(response.data.key);
-                    configFunc(response.data.config);
-                    setMessage("");
-                    setStorage(response.data.prompts);
                     navigate("/");
                     setGlobalUsername(username);
                     setLoggedIn(true);
-                } else {
-                    setMessage("Invalid Username/Password");
                 }
             }
-        } catch (error) {
-            setMessage("Invalid Username/Password");
-        }
+        } catch (error) {}
     };
 
     return (
         <div className="container">
             <div className="inputContainer">
                 <div className="inputSection">
-                    <h2 className="inputHeader">Login</h2>
+                    <h2 className="inputHeader">Create Account</h2>
                     <div className="inputField">
                         <h3>Username</h3>
                         <input
@@ -113,6 +95,16 @@ const Login: React.FunctionComponent<LoginProps> = ({
                                 setPassword(e.target.value)
                             }></input>
                     </div>
+                    {!admin && (
+                        <div className="inputField">
+                            <h3> Org Key:</h3>
+                            <input
+                                value={org}
+                                onChange={(e) =>
+                                    setOrg(e.target.value)
+                                }></input>
+                        </div>
+                    )}
                     <div className="radioField">
                         <h3>Type:</h3>
                         <div>
@@ -126,7 +118,6 @@ const Login: React.FunctionComponent<LoginProps> = ({
                                     onChange={handleAdmin}></input>
                                 <label htmlFor="worker">Employee</label>
                             </div>
-
                             <div>
                                 <input
                                     className="radius"
@@ -140,15 +131,15 @@ const Login: React.FunctionComponent<LoginProps> = ({
                         </div>
                     </div>
                     <div className="buttonSection">
-                        <button className="button2" onClick={handleLogin}>
-                            Login
+                        <button className="button2" onClick={handleSignup}>
+                            Create Account
                         </button>
                     </div>
                 </div>
                 <div className="footer">
-                    <div>Don't have an account?</div>
-                    <a className="link" onClick={handleSignup}>
-                        Sign Up
+                    <div>Have an account?</div>
+                    <a className="link" onClick={() => navigate("/")}>
+                        Log In
                     </a>
                 </div>
             </div>
@@ -156,4 +147,4 @@ const Login: React.FunctionComponent<LoginProps> = ({
     );
 };
 
-export default Login;
+export default Signup;
